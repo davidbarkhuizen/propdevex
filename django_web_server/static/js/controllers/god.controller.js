@@ -1,7 +1,6 @@
 function GodController($rootScope, $scope, $http, $timeout) {
 
 	$scope.model = new DataModel();
-	$scope.gpxEditor = new GPXEditor($scope.model);
 
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// VIEWS	
@@ -60,41 +59,6 @@ function GodController($rootScope, $scope, $http, $timeout) {
 			}
 		}
 	};
-
-	// Controller Element Doc Ids
-	//
-	$scope.fileInputId = 'ImportGpxFileInput';
-
-	// -------------------------------------------------------------------
-	// DEBUG
-
-	var debugSummaryElement = document.getElementById('DebugSummary');
-	var debugTraceElement = document.getElementById('DebugTrace');
-	var dummyRoot = document.createElement('div');
-
-	$scope.globalDebug = function(raw_html) {
-
-		debugSummaryElement.innerHTML = '';
-		debugTraceElement.innerHTML = '';
-		
-		dummyRoot.innerHTML = raw_html;
-
-		var summaryE = dummyRoot
-			.querySelector("#summary");
-
-		debugSummaryElement.innerHTML = summaryE.innerHTML;
-
-		var traceE = dummyRoot
-			.querySelector("#traceback");
-
-		debugTraceElement.innerHTML = traceE.innerHTML;
-
-		$scope.view = Views.DEBUG;
-	};
-
-	$rootScope.$on(Event.DEBUG_ERROR, function(evt, error) {
-		$scope.globalDebug(error);
-	});
 
 	// WINDOW / LAYOUT ----------------------------------------
 

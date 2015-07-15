@@ -1,4 +1,4 @@
-MEDIA_ROOT = '~/data/websites/gpxmapsnet/media_root/'
+MEDIA_ROOT = '~/data/websites/propdevex/media_root/'
 MEDIA_URL = '/MEDIA/'
 
 """
@@ -43,7 +43,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'middleware.xhttpmethodoverride.XHttpMethodOverride'
 )
 
 ROOT_URLCONF = 'webserver.urls'
@@ -52,13 +51,11 @@ WSGI_APPLICATION = 'webserver.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gpxmapsnet',
-        'USER' : 'orm',
-        'PASSWORD' : 'password',
-        'HOST' : 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '~/data/websites/propdevex/propdevex.sqlite3',
     }
 }
 

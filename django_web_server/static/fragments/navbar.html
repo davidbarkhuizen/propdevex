@@ -1,69 +1,35 @@
 <div id='navbar' class='navbar' >
 	<div class='navbar-inner'>
 		<div style='float:left;'>
-			<span style='color:yellow;'>gpxmaps.net</span>
-			&nbsp;			
+			<span style='color:yellow;'>Fisher Roeland</span>
+			
+			&nbsp;
+
 			<a href='#' 
 				ng-click="gotoView(Views.HOME);"
 				ng-class="view == Views.HOME ? 'nav-active' : 'nav-inactive'"
 				>home</a>
 			
-			<span class='nav-inactive'>|</span>
-
 			<a href='#' 
-				ng-click="gotoView(Views.IMPORT);"
-				ng-class="view == Views.IMPORT ? 'nav-active' : 'nav-inactive'"
-				>import</a>
-			
-			<a href='#' 
-				ng-click="gotoView(Views.GPX_DATABASE);"
-				ng-class="view == Views.GPX_DATABASE ? 'nav-active' : 'nav-inactive'"
 				class='underline'
-				>my gpx</a>	
-
-			<span class='nav-inactive'>|</span>					
-
-			<a href='#' 
-				ng-click="gotoView(Views.GPX);"
-				ng-class="view == Views.GPX ? 'nav-active' : 'nav-inactive'"
-				>gpx</a>
-
-			<a href='#' 
-				ng-click="gotoView(Views.MAP);"
-				ng-class="view == Views.MAP ? 'nav-active' : 'nav-inactive'"
-				>map</a>
+				ng-click="gotoView(Views.CATEGORY);"
+				ng-class="view == Views.CATEGORY ? 'nav-active' : 'nav-inactive'"
+				>by category</a>
 			
 			<a href='#' 
-				ng-click="gotoView(Views.TRACK);"
-				ng-class="view == Views.TRACK ? 'nav-active' : 'nav-inactive'"
-				>track</a>
+				ng-click="gotoView(Views.PROPERTIES);"
+				ng-class="view == Views.PROPERTIES ? 'nav-active' : 'nav-inactive'"
+				class='underline'
+				>all properties</a>	
 
-			<a href='#' 
-				ng-click="gotoView(Views.WAYPOINT);"
-				ng-class="view == Views.WAYPOINT ? 'nav-active' : 'nav-inactive'"
-				>waypoint</a>
-
-			<a href='#' 
-				ng-click="gotoView(Views.ELEVATION);"
-				ng-class="view == Views.ELEVATION ? 'nav-active' : 'nav-inactive'"
-				>elevation</a>
-			
-			<a href='#' 
-				ng-click="gotoView(Views.EXPORT);"
-				ng-class="view == Views.EXPORT ? 'nav-active' : 'nav-inactive'"
-				>export</a>
-
-			<a href='#' 
-				ng-click="gotoView(Views.HELP);"
-				ng-class="view == Views.HELP ? 'nav-active' : 'nav-inactive'"
-				>help</a>
 		</div>
 
 		<div style='float:right;'>
 			<a href='#' 
-				ng-click="gotoView(Views.USER);"
-				ng-class="view == Views.USER ? 'nav-active' : 'nav-inactive'"
-				>user</a>
+				ng-click="gotoView(Views.CONTACT);"
+				ng-class="view == Views.CONTACT ? 'nav-active' : 'nav-inactive'"
+				class="underline"
+				>contact us</a>
 		</div>
 		
 		<div style='clear:both;'>
