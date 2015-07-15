@@ -2,7 +2,7 @@
 <html lang="en" ng-app='PropDevEx'>
 	<head>
 		<meta charset="utf-8">
-		<title>Fisher Roeland</title>
+		<title>Fisher Roeland Properties</title>
 
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
@@ -37,9 +37,9 @@
 
 		<meta ng-init="init()" ng-preinit="globalScope.preinit()">
 	</head>
-	<body ng-controller="GodController">
+	<body ng-controller="GodController" ng-cloak>
 	<!-- <body ng-controller="GodController" oncontextmenu="return false;"> -->
-		<div class="wrapper" ng-cloak>
+		<div class="wrapper">
 
 			<div>
 				<div data-html-fragment='navbar'>
@@ -50,9 +50,46 @@
 			    <div id='viewport' class='viewport' visible='false'>
 		        	<div data-html-fragment='home'></div>
 		        	<div data-html-fragment='contact'></div>
+		        	<div data-html-fragment='commercial'></div>
+		        	<div data-html-fragment='industrial'></div>
+		        	<div data-html-fragment='residential'></div>
+		        	<div data-html-fragment='business'></div>
+		        	<div data-html-fragment='hotel'></div>
+		        	<div data-html-fragment='retail'></div>
+					<div data-html-fragment='investment'></div>
+					<div data-html-fragment='sold'></div>
 			    </div>
 		    </div>
 		</div>
+
+		<div>
+		    	<a
+    		class="twitter-timeline"
+    		href="https://twitter.com/property24"
+    		data-widget-id="621299416310415360"
+    		>Tweets by @property24</a>
+            
+            <script>
+            	! function(d,s,id) {
+            		
+            		var js,
+            			fjs = d.getElementsByTagName(s)[0],
+            			p = /^http:/.test(d.location)
+            				? 'http'
+            				: 'https';
+
+            		if (!d.getElementById(id)) {
+            			js = d.createElement(s);
+            			js.id = id;
+            			js.src = p + "://platform.twitter.com/widgets.js";
+            			fjs.parentNode.insertBefore(js,fjs);
+            		}
+            	} 
+            	( document, "script", "twitter-wjs");
+            </script>
+		</div>
+
+
 
 		<div data-html-fragment='modal'>
 		</div>	

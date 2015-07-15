@@ -1,8 +1,13 @@
 var Views = Object.freeze({
 
-	DEBUG 			: guid(),
-
 	HOME 			: guid(),
-	CATEGORY		: guid(),
-	PROPERTY		: guid(),
+	CONTACT 		: guid(),
+	COMMERCIAL 		: guid(),
+	INDUSTRIAL 		: guid(),
+	RESIDENTIAL 	: guid(),
+	BUSINESS 		: guid(),
+	HOTEL 			: guid(),
+	RETAIL 			: guid(),
+	INVESTMENT 		: guid(),
+	SOLD 			: guid(),
 });	
