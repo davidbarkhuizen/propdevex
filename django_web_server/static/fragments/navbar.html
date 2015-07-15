@@ -7,12 +7,17 @@
 			alt="Fisher Roeland Proprties" />
 	</div>
 
-	<div style='float:left;margin-left:12px;margin-top:18px;'>
+	<div style='float:left;margin-left:12px;margin-top:6px;'>
 		<div style='color:#76767;'>
 			<a href='#' 
 				ng-click="gotoView(Views.HOME);"
 				ng-class="view == Views.HOME ? 'nav-active' : 'nav-inactive'"
 				>home</a>
+			<a href='#' 
+				ng-click="gotoView(Views.SOCIAL);"
+				ng-class="view == Views.SOCIAL ? 'nav-active' : 'nav-inactive'"
+				class='underline'
+				>social media</a>
 			<a href='#' 
 				class='underline'
 				ng-click="gotoView(Views.CONTACT);"

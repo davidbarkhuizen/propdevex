@@ -1,6 +1,15 @@
 /* -----------------------------------------------------------*/
 /* LAYOUT */
 
+/* no outline */
+a:focus,
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 html, body {
     height: 100%;
     width: 100%;
@@ -8,7 +17,7 @@ html, body {
     padding: 0;
     margin: 0;
 
-    font-family: courier !important;
+    font-family: verdana !important;
     font-size: 20px;
     font-weight: bold;
 }
@@ -30,26 +39,6 @@ html, body {
 /* ----------------------------------------------------------------------*/
 
 .red { color:red; }
-
-.active {
-    color:purple;
-}
-
-.inactive {
-    color:darkgrey;
-}
-
-.action-required {
-    color:red;
-}
-
-.no-action-required {
-    color:green;
-}
-
-.selected-text {
-    color:blue;
-}
 
 a {
     text-decoration: none;
@@ -73,10 +62,12 @@ a {
 
 .nav-active {
     color: white;
+    font-size: 25px;
 }
 
 .nav-inactive {
-    color:  #767676;    
+    color: lightgrey;
+    /*color:  #767676;*/    
 }
 
 /* -----------------------------------------------------------*/
@@ -157,6 +148,7 @@ a {
 
 .header {
     font-size: 23.4px !important;
+    color: #a9bc48;
 }
 
 .center-text {
@@ -249,4 +241,10 @@ a {
 
 .text-left {
     text-align: left;
+}
+
+
+
+.timeline {
+    height:400px !important;
 }

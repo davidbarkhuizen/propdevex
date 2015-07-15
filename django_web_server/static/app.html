@@ -31,6 +31,7 @@
 	    <script src="/static/js/controllers/events.js"></script>
 		<script src="/static/js/controllers/god.controller.js"></script>
 		<script src="/static/js/controllers/modal.controller.js"></script>
+		<script src="/static/js/controllers/social.controller.js"></script>
 
 		<!-- APP -->
 		<script src="/static/js/app.js"></script>
@@ -49,6 +50,7 @@
 		    <div>
 			    <div id='viewport' class='viewport' visible='false'>
 		        	<div data-html-fragment='home'></div>
+		  			<div data-html-fragment='social'></div>
 		        	<div data-html-fragment='contact'></div>
 		        	<div data-html-fragment='commercial'></div>
 		        	<div data-html-fragment='industrial'></div>
@@ -61,36 +63,6 @@
 			    </div>
 		    </div>
 		</div>
-
-		<div>
-		    	<a
-    		class="twitter-timeline"
-    		href="https://twitter.com/property24"
-    		data-widget-id="621299416310415360"
-    		>Tweets by @property24</a>
-            
-            <script>
-            	! function(d,s,id) {
-            		
-            		var js,
-            			fjs = d.getElementsByTagName(s)[0],
-            			p = /^http:/.test(d.location)
-            				? 'http'
-            				: 'https';
-
-            		if (!d.getElementById(id)) {
-            			js = d.createElement(s);
-            			js.id = id;
-            			js.src = p + "://platform.twitter.com/widgets.js";
-            			fjs.parentNode.insertBefore(js,fjs);
-            		}
-            	} 
-            	( document, "script", "twitter-wjs");
-            </script>
-		</div>
-
-
-
 		<div data-html-fragment='modal'>
 		</div>	
 	</body>

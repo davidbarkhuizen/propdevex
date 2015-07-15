@@ -1,0 +1,28 @@
+TOP LEVEL
+- Contact us
+- Home
+- Commercial
+- Industrial
+- Residential
+- Business
+- Hotels 
+- Retail
+- Investment Properties
+- Sold
+
+Residential
+- Linbro Park
+- Honeydew
+- Krugersdorp
+- Northriding
+
+select Item (e.g. LinBro Part)
+=> Property Page
+e.g.
+
+Linbro Park Residential Development Property.
+- Urban Development Framework (UDF) Map 
+- Stand List
+	1) Stand 17644 sq meters
+	2) X2 stands 39391 sq meters
+- Price on Request => email jenny@frprop.com

@@ -5,6 +5,7 @@ var commonDependencies = [ '$rootScope', '$scope', '$http', '$timeout'];
 var controllers = [
 	['GodController', [GodController]],
 	['ModalController', [ModalController]],
+	['SocialController', [SocialController]],
 ];
 
 controllers.forEach(function(ctrl) { 
