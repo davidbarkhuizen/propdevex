@@ -26,3 +26,40 @@ Linbro Park Residential Development Property.
 	1) Stand 17644 sq meters
 	2) X2 stands 39391 sq meters
 - Price on Request => email jenny@frprop.com
+
+// ---------------------
+
+{
+	"name": "Linbro Park", 
+	"title" : "Linbro Park Residential Development Property",
+	"situationDescription" : ["line1", "line2, "line3"]
+	"udf": "linbropark.udf.png",
+	"stands" : [
+		{
+			"areaSQM" : 17644,
+			"units" : 1,
+		},
+		{
+			"areaSQM" : 39391,
+			"units" : 2,
+		},
+	],
+},
+{
+	"name": "Honeydew", 
+	"title" : "Property currently known as portion 252 , farm 189, Rietfontein, off Beyers Naude",
+	"situationDescription" : [
+		"South facing", 
+		"Vacant with no bond, 
+		"No electricity or services",
+		"One bore hole",
+		"Access is through portion 257 which is a 5 bedroomed house on 21 acres on land"
+	]
+	"udf": "honeydew.udf.png",
+	"stands" : [
+		{
+			"areaSQM" : 85 653,
+			"units" : 1,
+		},
+	],
+}

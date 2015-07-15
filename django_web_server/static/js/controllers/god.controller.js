@@ -75,25 +75,35 @@ function GodController($rootScope, $scope, $http, $timeout) {
 		return dims;
 	};
 
-	$scope.init_twitter_widget = function() {
-        		
-		var
-			s = "script",
-			id = "twitter-wjs";
+	// LOAD DATA MODEL
 
-		var js,
-			fjs = document.getElementsByTagName(s)[0],
-			p = /^http:/.test(document.location)
-				? 'http'
-				: 'https';
+	$scope.loadDataModel = function() {
 
-		if (!document.getElementById(id)) {
-			js = document.createElement(s);
-			js.id = id;
-			js.src = p + "://platform.twitter.com/widgets.js";
-			fjs.parentNode.insertBefore(js,fjs);
-		}
+		var request = 
+		{
+			method: 'GET',
+			url: "/static/data/datamodel.json",
+		};
+
+
+		function handleSuccess(response) { 
+
+			response.properties.forEach(function(x){
+				$scope.model.properties.push(x);
+			});
+
+		};
+
+		function handleError(response) { 
+
+			console.log(response);
+		};
+
+		$http(request)
+			.success(handleSuccess)
+			.error(handleError);
+
 	};
 
-	$timeout($scope.init_twitter_widget, 500);
+	$scope.loadDataModel();
 };

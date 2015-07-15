@@ -1,0 +1,40 @@
+{ "properties":
+	[
+		{
+			"category" : "residential",
+			"name": "Linbro Park", 
+			"title" : "Linbro Park Residential Development Property",
+			"situationDescription" : [],
+			"udf": "linbropark.udf.png",
+			"stands" : [
+				{
+					"areaSQM" : 17644,
+					"units" : 1
+				},
+				{
+					"areaSQM" : 39391,
+					"units" : 2
+				}
+			]
+		},
+		{
+			"category" : "residential",
+			"name": "Honeydew", 
+			"title" : "Property currently known as portion 252 , farm 189, Rietfontein, off Beyers Naude",
+			"situationDescription" : [
+				"South facing", 
+				"Vacant with no bond",
+				"No electricity or services",
+				"One bore hole",
+				"Access is through portion 257 which is a 5 bedroomed house on 21 acres on land"
+			],
+			"udf": "honeydew.udf.png",
+			"stands" : [
+				{
+					"areaSQM" : 85653,
+					"units" : 1
+				}
+			]
+		}
+	]
+}

@@ -4,7 +4,13 @@
 	style='vertical-align:middle;float:middle;'
 	>
 
-	<div>
+	<br/>
+
+	<div class='header'>
 		residential
+	</div>
+
+	<div ng-repeat='p in model.properties'>
+		{{ p.name  }}
 	</div>
 </div>
