@@ -110,6 +110,7 @@ function GodController($rootScope, $scope, $http, $timeout) {
 				$scope.model.properties.push(x);
 			});
 
+			$scope.model.princeEnquiryInfo = response.princeEnquiryInfo;
 		};
 
 		function handleError(response) { 
@@ -128,6 +129,20 @@ function GodController($rootScope, $scope, $http, $timeout) {
 		$scope.model.selectProperty(property);
 		$scope.gotoView(Views.PROPERTY);
 	}
+
+	// -----------------------------------------------------------------
+
+	$scope.mailToHref = function(toAddr, subject) {
+		return 'mailto:' + toAddr + '?Subject=' + encodeURIComponent(subject);
+	};
+
+	$scope.enquireAfterPriceOfSelectedProperty = function() {
+
+		var href = $scope.mailToHref($scope.model.princeEnquiryInfo['email'], $scope.model.selectedProperty['name']);
+		console.log(href);
+
+		window.open(href, '_blank');
+	};
 
 	// -----------------------------------------------------------------
 	// INIT

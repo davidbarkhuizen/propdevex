@@ -1,4 +1,11 @@
-{ "properties":
+{ 
+	"princeEnquiryInfo" : {
+			"name" : "Jenny Roeland",
+			"phone" : "082-123-4567",
+			"email" : "jenny.roeland@fisherroelandproperties.co.za"
+		},
+
+	"properties":
 	[
 		{
 			"category" : "residential",

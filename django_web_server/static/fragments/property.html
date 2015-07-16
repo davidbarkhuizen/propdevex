@@ -13,7 +13,7 @@
 		</a>	
 		&nbsp;
 		<span class='FRP-grey'>
-			{{ model.selectedProperty.category }}
+			{{ model.propertyNumberInCategory(model.selectedProperty) }} of {{ model.propertiesForCategory(model.selectedProperty.category).length }}  {{ model.selectedProperty.category }}
 		</span>
 		&nbsp;
 		<a href="#" ng-click='model.selectNextPropertyInCategory()'>
@@ -26,6 +26,11 @@
 	</div>
 	<div class='FRP-green'>
 		{{ model.selectedProperty.title }}
+	</div>
+	<div>
+		<a href="#" ng-click='enquireAfterPriceOfSelectedProperty()' style='color:green;'>
+			enquire after price
+		</a>
 	</div>
 
 	<div>
@@ -42,8 +47,11 @@
 		</div>
 
 		<div class='margin-right-20' style='text-align:left;'>
+			
+			<br/>
+
 			<div>
-				<div>
+				<div class='FRP-grey'>
 				 	Situation and Description
 				</div>
 				<div class='list fixed-height-150'>
@@ -54,9 +62,11 @@
 					<ul>
 				</div>
 			</div>
+			
 			<br/>
+			
 			<div>
-				<div>
+				<div class='FRP-grey'>
 					Stands ({{ model.selectedProperty.stands.length }})
 				</div>
 				<div class='list fixed-height-150'>
@@ -70,10 +80,4 @@
 		</div>
 
 	</div>
-
-<!-- 	<div style='text-align:left;' class='margin-left-20'>
-		dog
-	</div>
- -->
-	<br/>
 </div>

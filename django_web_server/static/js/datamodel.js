@@ -2,6 +2,12 @@ function DataModel(urlRoot) {
 
 	var that = this;
 
+	that.princeEnquiryInfo = {
+		"name" : "",
+		"phone" : "",
+		"email" : ""
+	};
+
 	// --------------------------------------------------
 	// PROPERTY PROPERTY ACCESSORS
 
@@ -86,6 +92,16 @@ function DataModel(urlRoot) {
 				matches.push(p);
 		});
 		return matches;
+	};
+
+	that.propertyNumberInCategory = function(property) {
+
+		if (property === undefined)
+			return;
+
+		console.dir(that.propertiesForCategory(property.category));
+
+		return 1 + that.propertiesForCategory(property.category).indexOf(property);
 	};
 
 	that.shiftSelectedPropertyInCategory = function(shift) {
