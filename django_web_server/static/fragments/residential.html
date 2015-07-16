@@ -7,10 +7,12 @@
 	<br/>
 
 	<div class='header'>
-		residential
+		residential properties
 	</div>
 
-	<div ng-repeat='p in model.properties'>
+	<br/>
+
+	<div ng-repeat='p in model.properties | filter: model.categoryMatch("residential")'>
 		{{ p.name  }}
 	</div>
 </div>

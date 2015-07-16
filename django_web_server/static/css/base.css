@@ -62,7 +62,7 @@ a {
 
 .nav-active {
     color: white;
-    font-size: 28px;
+    /*font-size: 28px;*/
     text-transform:capitalize;
 }
 
@@ -150,6 +150,7 @@ a {
 .header {
     font-size: 28px !important;
     color: #a9bc48;
+    text-transform:capitalize;
 }
 
 .center-text {

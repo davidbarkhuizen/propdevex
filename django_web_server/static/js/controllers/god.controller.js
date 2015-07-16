@@ -85,9 +85,10 @@ function GodController($rootScope, $scope, $http, $timeout) {
 			url: "/static/data/datamodel.json",
 		};
 
-
 		function handleSuccess(response) { 
 
+			// load properties
+			//
 			response.properties.forEach(function(x){
 				$scope.model.properties.push(x);
 			});
