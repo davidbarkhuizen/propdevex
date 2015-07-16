@@ -28,15 +28,47 @@
 		{{ model.selectedProperty.title }}
 	</div>
 
-	<br/>
-
 	<div>
-		<img
-			ng-src="{{ model.udfSrcForSelectedProperty() }}"
-			alt="UDF"
-			width='400px'
-			height='400px'
-			 />
+
+		<br/>
+
+		<div class='float-left margin-left-20 margin-right-20'>
+			<img
+				ng-src="{{ model.udfSrcForSelectedProperty() }}"
+				alt="UDF"
+				width='400px'
+				height='400px'
+				 />
+		</div>
+
+		<div class='margin-right-20' style='text-align:left;'>
+			<div>
+				<div>
+				 	Situation and Description
+				</div>
+				<div class='list fixed-height-150'>
+					<ul>
+						<li ng-repeat="para in model.selectedProperty.situationDescription">
+							{{ para }}
+						</li>
+					<ul>
+				</div>
+			</div>
+			<br/>
+			<div>
+				<div>
+					Stands ({{ model.selectedProperty.stands.length }})
+				</div>
+				<div class='list fixed-height-150'>
+					<ul>
+						<li ng-repeat="stand in model.selectedProperty.stands">
+							{{ model.summaryForStand(stand) }}
+						</li>
+					<ul>
+				</ul>
+			</div>
+		</div>
+
 	</div>
 
 <!-- 	<div style='text-align:left;' class='margin-left-20'>

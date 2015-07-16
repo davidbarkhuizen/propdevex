@@ -16,6 +16,24 @@ function DataModel(urlRoot) {
 			: '';
 	};
 
+	that.summaryForStand = function(stand) {
+
+		var s = "";
+
+		if ((stand.name !== null) && (stand.name !== undefined) && (stand.name !== ''))
+			s = s + stand.name + ': '
+
+		if ((stand.areaSQM !== null)  && (stand.areaSQM !== 0)) {
+			s = s + (stand.areaSQM / 10000).toFixed(2) + ' ha';
+			s = s + ' (' + stand.areaSQM.toFixed(0) + ' sqm)';
+		}			
+
+		if (stand.units !== null)
+			s = s + ' x ' + stand.units
+
+		return s;
+	};
+
 	// --------------------------
 
 	that.properties = [];
@@ -96,4 +114,5 @@ function DataModel(urlRoot) {
 	that.selectNextPropertyInCategory = function() {
 		that.shiftSelectedPropertyInCategory(1);
 	};
+
 }
