@@ -28,7 +28,10 @@
 		{{ model.selectedProperty.title }}
 	</div>
 	<div>
-		<a href="#" ng-click='enquireAfterPriceOfSelectedProperty()' style='color:green;'>
+		<a href="#"
+			ng-click='enquireAfterPriceOfSelectedProperty()'
+			class='underline'
+			style='color:green;'>
 			enquire after price
 		</a>
 	</div>
@@ -72,7 +75,10 @@
 				<div class='list fixed-height-150'>
 					<ul>
 						<li ng-repeat="stand in model.selectedProperty.stands">
-							<a style='color:black;' href="#" ng-click="viewStandDetail(stand);">{{ model.summaryForStand(stand) }}</a>
+							<a
+								class='underline'
+								href="#"
+								ng-click="viewStandDetail(stand);">{{ model.summaryForStand(stand) }}</a>
 						</li>
 					<ul>
 				</ul>

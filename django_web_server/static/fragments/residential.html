@@ -20,8 +20,9 @@
 	<div class='list fixed-height-300 margin-left-20' style='width:95%;text-align:center;'>
 		<div ng-repeat='p in model.properties | filter: model.categoryMatch("residential")'>
 			<a
+				style='color:green'
+				class='underline'
 				title={{p['title']}}
-				class='FRP-grey'
 				href="#"
 				ng-click="viewProperty(p)">
 			{{ p.name }} - {{ p.stands.length }} stands
