@@ -139,16 +139,12 @@ function GodController($rootScope, $scope, $http, $timeout) {
 	$scope.enquireAfterPriceOfSelectedProperty = function() {
 
 		var href = $scope.mailToHref($scope.model.princeEnquiryInfo['email'], $scope.model.selectedProperty['name']);
-		console.log(href);
-
 		window.open(href, '_blank');
 	};
 
 	$scope.viewStandDetail = function(stand) {
-		console.log(stand);
-		console.log('modalController');
 		$scope.model.selectStand(stand);
-		console.dir($scope.modalController.openModal());
+		$scope.modalController.openModal();
 	};
 
 	// -----------------------------------------------------------------
