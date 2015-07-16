@@ -52,11 +52,11 @@
 
 			<div>
 				<div class='FRP-grey'>
-				 	Situation and Description
+				 	Description
 				</div>
 				<div class='list fixed-height-150'>
 					<ul>
-						<li ng-repeat="para in model.selectedProperty.situationDescription">
+						<li ng-repeat="para in model.selectedProperty.description">
 							{{ para }}
 						</li>
 					<ul>
@@ -72,7 +72,7 @@
 				<div class='list fixed-height-150'>
 					<ul>
 						<li ng-repeat="stand in model.selectedProperty.stands">
-							{{ model.summaryForStand(stand) }}
+							<a style='color:black;' href="#" ng-click="viewStandDetail(stand);">{{ model.summaryForStand(stand) }}</a>
 						</li>
 					<ul>
 				</ul>

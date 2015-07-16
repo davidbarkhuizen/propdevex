@@ -144,6 +144,13 @@ function GodController($rootScope, $scope, $http, $timeout) {
 		window.open(href, '_blank');
 	};
 
+	$scope.viewStandDetail = function(stand) {
+		console.log(stand);
+		console.log('modalController');
+		$scope.model.selectStand(stand);
+		console.dir($scope.modalController.openModal());
+	};
+
 	// -----------------------------------------------------------------
 	// INIT
 

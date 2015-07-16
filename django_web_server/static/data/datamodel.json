@@ -11,11 +11,11 @@
 			"category" : "residential",
 			"name": "Linbro Park", 
 			"title" : "Linbro Park Residential Development Property",
-			"situationDescription" : [
-				"NSEW facing", 
-				"great views", 
-				"sophisticated drainage system", 
-				"high status property"
+			"description" : [
+				"at the heart of business in Africa", 
+				"situated adjacent to the Sandton precinct", 
+				"with immediate access to national arterial roads", 
+				"this location is set to explode"
 			],
 			"udf": "linbro.png",
 			"stands" : [
@@ -23,26 +23,53 @@
 					"name" : null,
 					"areaSQM" : 17644,
 					"units" : 1,
-					"notes" : []
+					"situationDescription" : [
+									"blah blah blah blah", 
+									"yadda yadda yadda yaddah", 
+									"yak yak yak yak", 
+									"mmm mmm mmm mmm"
+					]				
 				},
 				{
 					"name" : null,
 					"areaSQM" : 39391,
 					"units" : 2,
-					"notes" : []
+					"situationDescription" : [
+									"east facing", 
+									"tennis court", 
+									"olympic pool", 
+									"private stable"
+					]
 				}
 			]
 		},
 		{
 			"category" : "residential",
 			"name": "Honeydew", 
+			"description" : [
+				"West Rand Development",
+				"proximate with growing industrial, residential and commercial areas",
+				"primed to offer that in-demand West-Rand lifestyle"
+			],
 			"title" : "Property currently known as portion 252 , farm 189, Rietfontein, off Beyers Naude",
 			"udf": "honeydew.png",
-			"situationDescription" : ["South facing", "Vacant with no bond", "No electricity or services", "One bore hole", "Access is through portion 257 which is a 5 bedroomed house on 21 acres on land" ],
 			"stands" : [
 				{
+					"name" : null,
 					"areaSQM" : 85653,
-					"units" : 1
+					"units" : 1,
+					"situationDescription" : [
+						"South facing", 
+						"Vacant with no bond", 
+						"No electricity or services", 
+						"One bore hole", 
+						"Access is through portion 257 which is a 5 bedroomed house on 21 acres on land",
+						"line x",
+						"line y",
+						"line z",
+						"line k",
+						"line n"
+					]
 				}
 			]
 		}
