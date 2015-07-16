@@ -86,20 +86,25 @@ function DataModel(urlRoot) {
 	};
 
 	that.propertiesForCategory = function(category) {
+		
+		console.log('propertiesForCategory:  ', category);
+
+
 		var matches = [];
 		that.properties.forEach(function(p){
 			if (p.category == category)
 				matches.push(p);
 		});
+
+		console.dir(matches);
+
 		return matches;
 	};
 
 	that.propertyNumberInCategory = function(property) {
 
-		if (property === undefined)
+		if ((property === undefined) || (property === null))
 			return;
-
-		console.dir(that.propertiesForCategory(property.category));
 
 		return 1 + that.propertiesForCategory(property.category).indexOf(property);
 	};

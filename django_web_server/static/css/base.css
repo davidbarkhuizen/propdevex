@@ -222,6 +222,19 @@ a {
     max-width: 300px !important;
 }
 
+.width-400 {
+    min-width: 400px !important;
+    width: 400px !important;
+    max-width: 400px !important;
+}
+
+.width-500 {
+    min-width: 500px !important;
+    width: 500px !important;
+    max-width: 500px !important;
+}
+
+
 .width-1200 {
     width: 1200px !important;
 }
