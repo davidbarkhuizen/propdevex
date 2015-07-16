@@ -3,6 +3,7 @@ var Views = Object.freeze({
 	HOME 			: guid(),
 	SOCIAL	 		: guid(),
 	CONTACT 		: guid(),
+	PROPERTY 		: guid(),
 
 	COMMERCIAL 		: guid(),
 	INDUSTRIAL 		: guid(),

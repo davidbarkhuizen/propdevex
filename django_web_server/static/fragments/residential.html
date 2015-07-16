@@ -1,6 +1,6 @@
 <div
 	id='ResidentialFragment'
-	ng-show='view == Views.RESIDENTIAL'
+	ng-show='showView(Views.RESIDENTIAL)'
 	style='vertical-align:middle;float:middle;'
 	>
 
@@ -13,6 +13,6 @@
 	<br/>
 
 	<div ng-repeat='p in model.properties | filter: model.categoryMatch("residential")'>
-		{{ p.name  }}
+		<a style='color:#a9bc48 !important;' href="#" ng-click="viewProperty(p)">{{ p.name  }}</a>
 	</div>
 </div>

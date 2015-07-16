@@ -1,12 +1,28 @@
 function GodController($rootScope, $scope, $http, $timeout) {
 
-	$scope.model = new DataModel();
+	$scope.model = new DataModel('/static/');
 
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// VIEWS	
 
+	$scope.nlIsActive = function(view) {
+		
+		if ($scope.view === view)
+			return true;
+
+		if ($scope.view === Views.PROPERTY) {
+			return ($scope.model.categoryForView(view) == $scope.model.selectedProperty.category)
+		}
+
+		return false;
+	}
+
 	$scope.Views = Views;
 	$scope.view = Views.HOME;
+
+	$scope.showView= function(view) {
+		return ($scope.view === view);
+	};
 
 	$scope.gotoView = function(newView) {
 		$scope.view = newView;	
@@ -75,6 +91,7 @@ function GodController($rootScope, $scope, $http, $timeout) {
 		return dims;
 	};
 
+	// -----------------------------------------------------------------
 	// LOAD DATA MODEL
 
 	$scope.loadDataModel = function() {
@@ -103,8 +120,17 @@ function GodController($rootScope, $scope, $http, $timeout) {
 		$http(request)
 			.success(handleSuccess)
 			.error(handleError);
-
 	};
+
+	// -----------------------------------------------------------------
+
+	$scope.viewProperty = function(property) {
+		$scope.model.selectProperty(property);
+		$scope.gotoView(Views.PROPERTY);
+	}
+
+	// -----------------------------------------------------------------
+	// INIT
 
 	$scope.loadDataModel();
 };

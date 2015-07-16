@@ -1,0 +1,47 @@
+<div
+	id='PropertyFragment'
+	ng-show='showView(Views.PROPERTY)'
+	style='vertical-align:middle;float:middle;'
+	>
+
+	<br/>
+
+	<div>
+		<a href="#" ng-click='model.selectPreviousPropertyInCategory()'>
+			&#8592;
+			<!-- <img ng-src="/static/img/icon/button_black_prev.cut.20.png"/> -->
+		</a>	
+		&nbsp;
+		<span class='FRP-grey'>
+			{{ model.selectedProperty.category }}
+		</span>
+		&nbsp;
+		<a href="#" ng-click='model.selectNextPropertyInCategory()'>
+			<!-- <img ng-src="/static/img/icon/button_black_next.cut.20.png"/> -->
+			&#8594;
+		</a>
+	</div>
+	<div class='header'>
+		{{ model.selectedProperty.name }}
+	</div>
+	<div class='FRP-green'>
+		{{ model.selectedProperty.title }}
+	</div>
+
+	<br/>
+
+	<div>
+		<img
+			ng-src="{{ model.udfSrcForSelectedProperty() }}"
+			alt="UDF"
+			width='400px'
+			height='400px'
+			 />
+	</div>
+
+<!-- 	<div style='text-align:left;' class='margin-left-20'>
+		dog
+	</div>
+ -->
+	<br/>
+</div>

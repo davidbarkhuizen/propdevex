@@ -20,5 +20,5 @@ function SocialController($rootScope, $scope, $http, $timeout) {
 		}
 	};
 
-	$timeout($scope.init_twitter_widget, 500);
+	// $timeout($scope.init_twitter_widget, 500);
 };

@@ -29,7 +29,7 @@ html, body {
 }
 
 .wrapper > div {
-    display: table-row;
+    display: table-row
 }
 
 .wrapper > div > div {
@@ -44,12 +44,26 @@ html, body {
     color:#828282;
 }
 
+.FRP-green {
+    color:#a9bc48;
+}
+
 
 a {
     text-decoration: none;
     color:#828282;
 }
 
+.label {
+    min-width:300px;
+    width:300px;
+
+    float:left;
+}
+
+.label-value {
+    float:left;
+}
 
 /* ----------------------------------------------------------------------*/
 /* NAVBAR */
@@ -155,7 +169,7 @@ a {
 
 .header {
     font-size: 28px !important;
-    color: #a9bc48;
+    color: black;/*#a9bc48;*/
     text-transform:capitalize;
 }
 
