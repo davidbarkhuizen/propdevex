@@ -40,8 +40,14 @@ html, body {
 
 .red { color:red; }
 
+.FRP-grey {
+    color:#828282;
+}
+
+
 a {
     text-decoration: none;
+    color:#828282;
 }
 
 

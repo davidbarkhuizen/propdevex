@@ -12,4 +12,19 @@
 
 	<br/>
 
+
+	<div class='FRP-grey'>
+		we offer development opportunities
+		<br/>
+		across sectors
+	</div>
+
+	</br>
+
+	<div>
+		<div ng-repeat='categoryView in model.categoryViews'>
+			<a href="#" ng-click='gotoView(categoryView.view)'>{{ categoryView.category }}</a>
+		</div>
+	</div>
+
 </div>
