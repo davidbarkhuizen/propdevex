@@ -1,0 +1,16 @@
+{
+	"application_entry_point" : "/static/app.html",
+
+	"django_secret_key" : "00000000000000000000000000000000000000000000000000",
+
+	"db_engine" : "django.db.backends.sqlite3",
+	"db_host" : "localhost",
+	"db_name" : "/var/www/site/site.sqlite3",
+	"db_user" : "user",
+	"db_password" : "password",
+
+	"smtp_addr" : "",
+	"smtp_port" : 666,
+	"smtp_login" : "", 
+	"smtp_password" : ""
+}

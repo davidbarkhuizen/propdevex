@@ -1,0 +1,16 @@
+{
+	"application_entry_point" : "/static/app.html",
+
+	"django_secret_key" : "5t^$1ig@+e5rmizoktq25g^8#ooiimi%)fm3vtuzacxi)hki=%",
+
+	"db_engine" : "django.db.backends.sqlite3",
+	"db_host" : "localhost",
+	"db_name" : "/var/www/propdevex/propdevex.sqlite3",
+	"db_user" : "user",
+	"db_password" : "password",
+
+	"smtp_addr" : "",
+	"smtp_port" : 666,
+	"smtp_login" : "", 
+	"smtp_password" : ""
+}
