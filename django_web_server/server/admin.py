@@ -1,5 +1,14 @@
 from django.contrib import admin
 
+# -------------------------------------------------------------
+
+from .models import Site
+
+admin.site.register(Site)
+
+# -------------------------------------------------------------
+# FRP FisherRoelandProperties
+
 from .models import FRP_Contact
 from .models import FRP_Category
 from .models import FRP_Property

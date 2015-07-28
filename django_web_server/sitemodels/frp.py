@@ -7,12 +7,12 @@ class FRP_Contact(models.Model):
 		verbose_name_plural = "contacts"
 		app_label = 'server'
 
-	Name = models.CharField(max_length=1024, unique=True, null=False)
-	Phone = models.CharField(max_length=1024, unique=True, null=False)
-	Email = models.CharField(max_length=1024, unique=True, null=False)
+	name = models.CharField(max_length=1024, unique=True, null=False)
+	phone = models.CharField(max_length=1024, unique=True, null=False)
+	email = models.CharField(max_length=1024, unique=True, null=False)
 
 	def __str__(self):
-		return ','.join([self.Name, self.Phone, self.Email])
+		return ','.join([self.name, self.phone, self.email])
 
 class FRP_Category(models.Model):
 	class Meta:
@@ -21,10 +21,10 @@ class FRP_Category(models.Model):
 		verbose_name_plural = "categories"
 		app_label = 'server'
 
-	Name = models.CharField(max_length=1024, unique=True, null=False)
+	name = models.CharField(max_length=1024, unique=True, null=False)
 
 	def __str__(self):
-		return self.Name
+		return self.name
 
 class FRP_Property(models.Model):
 	class Meta:
@@ -33,14 +33,14 @@ class FRP_Property(models.Model):
 		verbose_name_plural = "properties"
 		app_label = 'server'
 
-	Category = models.ForeignKey(FRP_Category, null=False)
-	Name = models.CharField(max_length=1024, unique=True, null=False)
-	Title = models.CharField(max_length=1024, null=False)
-	Description = models.TextField(null=True)
-	UDF = models.FileField(upload_to='MEDIA', null=True)
+	category = models.ForeignKey(FRP_Category, null=False)
+	name = models.CharField(max_length=1024, unique=True, null=False)
+	title = models.CharField(max_length=1024, null=False)
+	description = models.TextField(null=True)
+	udf = models.FileField(upload_to='MEDIA', null=True)
 
 	def __str__(self):
-		return self.Name
+		return self.name
 
 class FRP_Stand(models.Model):
 	class Meta:
@@ -48,10 +48,11 @@ class FRP_Stand(models.Model):
 		verbose_name = "stand"
 		app_label = 'server'
 
-	Property = models.ForeignKey(FRP_Property, null=False)
-	Name = models.CharField(max_length=1024, unique=False, null=True)
-	Units = models.IntegerField(null=False)
-	SituationDescription = models.TextField(null=True)
+	property = models.ForeignKey(FRP_Property, null=False)
+	name = models.CharField(max_length=1024, unique=False, null=True)
+	units = models.IntegerField(null=False)
+	situationDescription = models.TextField(null=True)
+	areaSQM = models.IntegerField(null=False)
 
 	def __str__(self):
-		return self.Name + ' x ' + str(self.Units)
+		return self.name + ' x ' + str(self.units) + ' @ ' + str(self.areaSQM) + ' SQM'
