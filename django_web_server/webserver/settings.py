@@ -1,4 +1,4 @@
-MEDIA_ROOT = '~/data/websites/propdevex/media_root/'
+MEDIA_ROOT = '/var/www/propdevex/media'
 MEDIA_URL = '/MEDIA/'
 
 """
@@ -18,6 +18,29 @@ SECRET_KEY = '5t^$1ig@+e5rmizoktq25g^8#ooiimi%)fm3vtuzacxi)hki=%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+# django 1.6
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+#
+'''
+# django 1.7+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+'''
 
 TEMPLATE_DEBUG = True
 
@@ -55,7 +78,7 @@ WSGI_APPLICATION = 'webserver.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '~/data/websites/propdevex/propdevex.sqlite3',
+        'NAME': '/var/www/propdevex/propdevex.sqlite3',
     }
 }
 
