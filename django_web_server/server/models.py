@@ -8,13 +8,18 @@ class Site(models.Model):
 		app_label = 'server'
 
 	name 					= models.CharField(max_length=1024, unique=True, null=False)
-	ftp_url 				= models.CharField(max_length=1024, unique=True, null=False)
-	ftp_user 				= models.CharField(max_length=1024, unique=True, null=False)
-	ftp_pwd					= models.CharField(max_length=1024, unique=True, null=False)
+	users 					= models.ManyToManyField(User)
+
 	datamodel_json_string	= models.TextField()
+	dest_file_path			= models.CharField(max_length=1024, unique=True, null=False)
 	updated					= models.BooleanField(default=True, null=False)
 
-	users = models.ManyToManyField(User)
+	ftp_host 				= models.CharField(max_length=1024, unique=True, null=False)
+	ftp_port 				= models.IntegerField(null=False)
+	ftp_user 				= models.CharField(max_length=1024, unique=True, null=False)
+	ftp_password			= models.CharField(max_length=1024, unique=True, null=False)
+	ftp_account				= models.CharField(max_length=1024, unique=True, null=False)
+	ftp_secure				= models.BooleanField(default=False, null=False)
 
 	def __str__(self):
 		return self.name
