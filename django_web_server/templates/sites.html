@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<script type="text/javascript">		
+			setInterval(function(){
+				window.location.reload(true);
+				console.log('xxx'); 
+			} , 5000);
+		</script>
+	</head>
+	<body>
+		<div style='font-weight:bold;'>
+			black pearl
+		</div>
+		<div style='font-weight:bold;font-size:large;'>
+			Site Data Model Manager
+		</div>
+		<br/>
+
+		{% for site in sites %}
+			<div>
+				<span style='font-weight:bold;'>
+					{{ site.name }}
+				</span>
+				<a href="/admin">edit</a>
+			</div>
+
+			<div>
+			{% if last_updated_at %}
+				site.last_updated_at
+			{% else %}			
+				never updated
+			{% endif %}
+			</div>
+			<div>
+			{% if site.update == False %}
+				no update scheduled
+			{% else %}			
+				an update is either scheduled or in progress
+			{% endif %}
+			</div>
+			<div>
+			{% if site.update == False %}
+				<a href='/admin/sites?id={{site.id}}'>update!</a>
+			{% endif %}			
+			</div>
+		{% endfor %}
+	</body>
+</html>

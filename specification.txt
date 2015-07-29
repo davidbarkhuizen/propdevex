@@ -1,30 +1,13 @@
-TOP LEVEL
-- Contact us
-- Home
-- Commercial
-- Industrial
-- Residential
-- Business
-- Hotels 
-- Retail
-- Investment Properties
-- Sold
+TO DO
 
-Residential
-- Linbro Park
-- Honeydew
-- Krugersdorp
-- Northriding
+create html entry point (refactor to match gpxmapsnet config and redirect)
+	only show site(s) for user - only 1 site per user, except for super user
+	button to go to edit data model
+	button to update
+		ajax check on site update progress w basic error reporting
 
-select Item (e.g. LinBro Part)
-=> Property Page
-e.g.
+complete DAL for site, complete daemon
 
-Linbro Park Residential Development Property.
-- Urban Development Framework (UDF) Map 
-- Stand List
-	1) Stand 17644 sq meters
-	2) X2 stands 39391 sq meters
-- Price on Request => email jenny@frprop.com
+DONE
 
-// ---------------------
+refactor data model to include binary files
