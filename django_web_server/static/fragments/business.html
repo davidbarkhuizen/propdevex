@@ -4,6 +4,7 @@
 	style='vertical-align:middle;float:middle;'
 	>
 
+
 	<br/>
 
 	<div class='header'>
@@ -11,4 +12,22 @@
 	</div>
 
 	<br/>
+	
+	( {{ model.propertiesForCategory("business").length }} )
+
+	<br/>
+	<br/>
+
+	<div class='list fixed-height-300 margin-left-20' style='width:95%;text-align:center;'>
+		<div ng-repeat='p in model.properties | filter: model.categoryMatch("business")'>
+			<a
+				style='color:green'
+				class='underline'
+				title={{p['title']}}
+				href="#"
+				ng-click="viewProperty(p)">
+			{{ p.name }} - {{ p.stands.length }} stands
+			</a>
+		</div>
+	</div>
 </div>

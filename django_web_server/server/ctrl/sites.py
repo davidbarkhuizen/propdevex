@@ -3,6 +3,8 @@ from django.template import RequestContext, loader
 
 from server.models import Site
 
+from sitemodels.frp import render_data_model
+
 def routing(request):
 
 	site_id = None
@@ -29,6 +31,8 @@ def routing(request):
 		'user_name' : user_name,
 		'sites' : sites
 	}
+
+	render_data_model()
 
 	template = loader.get_template('sites.html')
 	context = RequestContext(request, data)

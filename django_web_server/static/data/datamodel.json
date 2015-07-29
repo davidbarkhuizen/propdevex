@@ -1,9 +1,19 @@
 { 
-	"princeEnquiryInfo" : {
+	"contacts" : 
+	[
+		{
 			"name" : "Jenny Roeland",
 			"phone" : "082-123-4567",
-			"email" : "jenny.roeland@fisherroelandproperties.co.za"
+			"email" : "jenny.roeland@fisherroelandproperties.co.za",
+			"categories" : []
 		},
+		{
+			"name" : "Dog and Pony Show",
+			"phone" : "082-123-4567",
+			"email" : "dog@pony.show",
+			"categories" : ["residential"]
+		}
+	],
 
 	"properties":
 	[
@@ -44,7 +54,7 @@
 			]
 		},
 		{
-			"category" : "residential",
+			"category" : "business",
 			"name": "Honeydew", 
 			"description" : [
 				"West Rand Development",

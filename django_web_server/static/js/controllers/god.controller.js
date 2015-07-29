@@ -99,7 +99,7 @@ function GodController($rootScope, $scope, $http, $timeout) {
 		var request = 
 		{
 			method: 'GET',
-			url: "/static/data/datamodel.json",
+			url: "/static/data/datamodel.json?guid=" + guid,
 		};
 
 		function handleSuccess(response) { 
@@ -110,7 +110,7 @@ function GodController($rootScope, $scope, $http, $timeout) {
 				$scope.model.properties.push(x);
 			});
 
-			$scope.model.princeEnquiryInfo = response.princeEnquiryInfo;
+			$scope.model.contacts = response.contacts;
 		};
 
 		function handleError(response) { 
@@ -138,7 +138,20 @@ function GodController($rootScope, $scope, $http, $timeout) {
 
 	$scope.enquireAfterPriceOfSelectedProperty = function() {
 
-		var href = $scope.mailToHref($scope.model.princeEnquiryInfo['email'], $scope.model.selectedProperty['name']);
+		var category = $scope.model.selectedProperty['category'];
+
+		var contactsForCategory = [];
+		$scope.model.contacts.forEach(function(contact){
+			if (contact.categories.indexOf(category) !== -1) {
+				contactsForCategory.push(contact);
+			}
+		});
+
+		if (contactsForCategory.length == 0) {
+			contactsForCategory.push($scope.model.contacts[0]);
+		}
+
+		var href = $scope.mailToHref(contactsForCategory[0]['email'], $scope.model.selectedProperty['name']);
 		window.open(href, '_blank');
 	};
 

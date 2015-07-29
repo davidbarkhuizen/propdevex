@@ -2,11 +2,12 @@ function DataModel(urlRoot) {
 
 	var that = this;
 
-	that.princeEnquiryInfo = {
+	that.contacts = [{
 		"name" : "",
 		"phone" : "",
-		"email" : ""
-	};
+		"email" : "",
+		"categories" : []
+	}];
 
 	// --------------------------------------------------
 	// PROPERTY PROPERTY ACCESSORS
