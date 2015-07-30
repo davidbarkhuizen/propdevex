@@ -1,11 +1,15 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
+from django.shortcuts import redirect
 
 from server.models import Site
 
-from sitemodels.frp import render_data_model
+from sitemodels.frp import render_data_model, init_db_model
 
 def routing(request):
+
+	if not request.user.is_authenticated():
+		return redirect('/admin')
 
 	site_id = None
 	if 'id' in request.GET.keys():
@@ -32,7 +36,7 @@ def routing(request):
 		'sites' : sites
 	}
 
-	render_data_model()
+	init_db_model()
 
 	template = loader.get_template('sites.html')
 	context = RequestContext(request, data)

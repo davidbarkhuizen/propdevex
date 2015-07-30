@@ -61,6 +61,119 @@ class FRP_Stand(models.Model):
 	def __str__(self):
 		return self.name + ' x ' + str(self.units) + ' @ ' + str(self.areaSQM) + ' SQM'
 
+# ---------------------------
+
+from django.contrib.auth.models import Group, Permission, User
+from django.contrib.contenttypes.models import ContentType
+
+
+from django.db import connection
+
+def init_db_model():
+
+	# create users
+
+	usernames = ['FRP_jenny', 'FRP_melissa'] 
+	default_password = 'password'
+
+	users = []
+
+	for username in usernames:
+		user = User.objects.create_user(username=username, password=default_password)
+		user.save()
+		users.append(user)
+
+	# create site
+
+	site = Site(name='FisherRoelandProperty', ftp_host='host', ftp_port=21, ftp_user='user', ftp_password='password')
+	site.save()
+
+	david = User.objects.get(username='david')
+	users.append(david)
+
+	for user in users:
+		site.users.add(user)
+
+	site.save()
+
+	cursor = connection.cursor() 	
+	try:
+		auth_group_name = 'FisherRoelandProperty'
+
+		# get unused auth_group.id 
+
+		sql = 'select 1 + coalesce((select max(id) from auth_group), 0)'
+		cursor.execute(sql)
+		rows = cursor.fetchone()
+		auth_group_id = rows[0]
+
+		# create auth_group
+		
+		sql = '''
+		insert into auth_group
+		(id, name) 
+		values ({0}, '{1}')
+		'''.format(auth_group_id, auth_group_name)
+
+		cursor.execute(sql)
+
+		# django_content_type.id for user-editable models 
+
+		sql = "select id from django_content_type  as dct where dct.model in ('frp_contact', 'frp_property', 'frp_stand');" 
+
+		cursor.execute(sql)
+		content_type_ids = [str(row[0]) for row in cursor.fetchall()]
+
+		print('content_type_ids')
+		print(content_type_ids)
+
+		# auth_permission.id
+
+		sql = '''select id from auth_permission where content_type_id in ({0});
+		'''.format(','.join(content_type_ids))
+		cursor.execute(sql)
+		auth_permission_ids = [row[0] for row in cursor.fetchall()]
+
+		print('auth_permission_ids')
+		print(auth_permission_ids)
+
+		# auth_group_permissions
+
+		for auth_permission_id in auth_permission_ids:
+
+			sql = '''
+			insert into auth_group_permissions
+			(
+				id, 
+				group_id, 
+				permission_id
+			) 
+			values 
+			(
+				(select 1 + coalesce((select max(id) from auth_group_permissions), 0)),
+				{0}, 
+				{1}
+			)
+			'''.format(auth_group_id, auth_permission_id)
+
+			print(sql)
+			cursor.execute(sql)
+
+		# auth_user_groups
+
+		for user in users:
+
+			sql = '''
+			insert into auth_user_groups
+			(id, user_id, group_id)
+			values ((1 + (select max(id) from auth_user_groups)), {0}, {1})
+			'''.format(user.id, auth_group_id)
+
+			cursor.execute(sql)
+
+	finally:
+		cursor.close()
+
 def render_data_model():
 
 	data_model = {}
@@ -117,13 +230,3 @@ def render_data_model():
 		data_model['properties'].append(db_prop)
 
 	print(json.dumps(data_model))
-
-
-
-
-
-
-
-
-
-

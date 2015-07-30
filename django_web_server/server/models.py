@@ -29,7 +29,7 @@ class Site(models.Model):
 		app_label = 'server'
 
 	name 					= defaultCharField(unique=True, null=False)
-	users 					= models.ManyToManyField(User, related_name='sites')
+	users 					= models.ManyToManyField(User)
 
 	textuploads				= models.ManyToManyField(TextUpload, null=True, blank=True)
 	binaryuploads			= models.ManyToManyField(BinaryUpload, null=True, blank=True)
