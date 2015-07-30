@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 
 from server.models import Site
 
-from sitemodels.frp import render_data_model, init_db_model
+from sitemodels.frp import render_data_model, populate_data_model
 
 def routing(request):
 
@@ -36,7 +36,9 @@ def routing(request):
 		'sites' : sites
 	}
 
-	init_db_model()
+	# init_db_model()
+	# populate_data_model()
+	render_data_model()
 
 	template = loader.get_template('sites.html')
 	context = RequestContext(request, data)

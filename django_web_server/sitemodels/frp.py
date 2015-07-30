@@ -1,7 +1,21 @@
 from django.db import models
 from server.models import Site, BinaryUpload, TextUpload
 
+import random, string
+def random_str(len):
+	return ''.join(random.choice(string.letters) for i in xrange(len))
+
 import json
+
+CATEGORY_NAMES = [ 'commercial',
+	'industrial',
+	'residential',
+	'business',
+	'hotel',
+	'retail',
+	'investment',
+	'sold',
+	]
 
 class FRP_Category(models.Model):
 	class Meta:
@@ -66,10 +80,9 @@ class FRP_Stand(models.Model):
 from django.contrib.auth.models import Group, Permission, User
 from django.contrib.contenttypes.models import ContentType
 
-
 from django.db import connection
 
-def init_db_model():
+def init_FRP_auth():
 
 	# create users
 
@@ -124,18 +137,12 @@ def init_db_model():
 		cursor.execute(sql)
 		content_type_ids = [str(row[0]) for row in cursor.fetchall()]
 
-		print('content_type_ids')
-		print(content_type_ids)
-
 		# auth_permission.id
 
 		sql = '''select id from auth_permission where content_type_id in ({0});
 		'''.format(','.join(content_type_ids))
 		cursor.execute(sql)
 		auth_permission_ids = [row[0] for row in cursor.fetchall()]
-
-		print('auth_permission_ids')
-		print(auth_permission_ids)
 
 		# auth_group_permissions
 
@@ -156,7 +163,6 @@ def init_db_model():
 			)
 			'''.format(auth_group_id, auth_permission_id)
 
-			print(sql)
 			cursor.execute(sql)
 
 		# auth_user_groups
@@ -174,6 +180,51 @@ def init_db_model():
 	finally:
 		cursor.close()
 
+def populate_data_model():
+
+	# category
+
+	for category_name in CATEGORY_NAMES:
+		
+		if FRP_Category.objects.filter(name=category_name).exists():
+			continue
+
+		db_category = FRP_Category(name=category_name)
+		db_category.save()
+
+	for category in FRP_Category.objects.all():
+
+		# contact
+
+		name = random_str(8)
+		email = random_str(8) + '@' + random_str(8) + '.com'  
+		phone = random_str(8)
+		
+		db_contact = FRP_Contact(name=name, email=email,phone=phone)
+		db_contact.save()
+		db_contact.categories.add(category)
+		db_contact.save()
+
+		# properties
+
+		name = random_str(20)
+		title = random_str(50)
+		description = '\r\n'.join([random_str(20) for i in range(5)])
+		udf = None
+
+		db_Property = FRP_Property(category=category, name=name, title=title, description=description, udf=udf)
+		db_Property.save()
+
+		for i in range(random.randint(0,3)):
+
+			name = random_str(20)
+			units = random.choice(range(100))
+			situationDescription = '\r\n'.join([random_str(20) for i in range(5)])
+			areaSQM = random.randint(10000,100000)
+
+			stand = FRP_Stand(property=db_Property, name=name, units=units, situationDescription=situationDescription, areaSQM=areaSQM)
+			stand.save()
+
 def render_data_model():
 
 	data_model = {}
@@ -181,16 +232,16 @@ def render_data_model():
 	# CONTACTS
 	#
 	data_model['contacts'] = []
-	for db in FRP_Contact.objects.all():
+	for db_contact in FRP_Contact.objects.all():
 
-		contact = { "name" : db.name,
-			"phone" : db.phone,
-			"email" : db.email,
+		contact = { "name" : db_contact.name,
+			"phone" : db_contact.phone,
+			"email" : db_contact.email,
 			"categories" : []
 			}
 		
-		for category in db.categories:
-			contact.categories.append(category)
+		for db_category in db_contact.categories.all():
+			contact['categories'].append(db_category.name)
 		
 		data_model['contacts'].append(contact)
 
@@ -203,7 +254,7 @@ def render_data_model():
 			"name": db_prop.name, 
 			"title" : db_prop.title,
 			"description" : [],
-			'udf' : '' if db_prop.udf is None else db_prop.udf,
+			'udf' : None if db_prop.udf.name is None else db_prop.udf.name,
 			'stands' : []
 			}
 
@@ -225,8 +276,8 @@ def render_data_model():
 			if db_stand.situationDescription is not None:
 				property['situationDescription'] = db_stand.situationDescription.split('\n')
 
-			db_prop['stands'].append(stand)
+			property['stands'].append(stand)
 
-		data_model['properties'].append(db_prop)
+		data_model['properties'].append(property)
 
 	print(json.dumps(data_model))
