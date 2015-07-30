@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+
 from server.models import Site, BinaryUpload, TextUpload
 
 import random, string
@@ -6,6 +8,16 @@ def random_str(len):
 	return ''.join(random.choice(string.letters) for i in xrange(len))
 
 import json
+
+SITE_NAME = 'FisherRoelandProperty'
+USER_NAMES = ['FRP_jenny', 'FRP_melissa'] 
+DEFAULT_PASSWORD = 'password'
+
+SITE_ROOT = 'frp/'
+UDF_ROOT = SITE_ROOT + 'udf'
+JSON_ROOT = SITE_ROOT + 'json'
+
+JSON_DUMP_LOCATION = settings.MEDIA_ROOT + '/' + JSON_ROOT
 
 CATEGORY_NAMES = [ 'commercial',
 	'industrial',
@@ -55,7 +67,7 @@ class FRP_Property(models.Model):
 	name = models.CharField(max_length=1024, unique=True, null=False)
 	title = models.CharField(max_length=1024, null=False)
 	description = models.TextField(null=True)
-	udf = models.FileField(upload_to='MEDIA', null=True)
+	udf = models.FileField(upload_to=UDF_ROOT, null=True)
 
 	def __str__(self):
 		return self.name
@@ -82,23 +94,24 @@ from django.contrib.contenttypes.models import ContentType
 
 from django.db import connection
 
-def init_FRP_auth():
+def init_db():
+
+	if User.objects.filter(username=USER_NAMES[0]).exists():
+		return
 
 	# create users
 
-	usernames = ['FRP_jenny', 'FRP_melissa'] 
-	default_password = 'password'
-
 	users = []
 
-	for username in usernames:
-		user = User.objects.create_user(username=username, password=default_password)
+	for username in USER_NAMES:
+
+		user = User.objects.create_user(username=username, password=DEFAULT_PASSWORD)
 		user.save()
 		users.append(user)
 
 	# create site
 
-	site = Site(name='FisherRoelandProperty', ftp_host='host', ftp_port=21, ftp_user='user', ftp_password='password')
+	site = Site(name=SITE_NAME, ftp_host='host', ftp_port=21, ftp_user='user', ftp_password='password')
 	site.save()
 
 	david = User.objects.get(username='david')
@@ -177,20 +190,23 @@ def init_FRP_auth():
 
 			cursor.execute(sql)
 
+		# category
+
+		for category_name in CATEGORY_NAMES:
+			
+			if FRP_Category.objects.filter(name=category_name).exists():
+				continue
+
+			db_category = FRP_Category(name=category_name)
+			db_category.save()
+
 	finally:
 		cursor.close()
 
-def populate_data_model():
+def randomly_populate_datamodel():
 
-	# category
-
-	for category_name in CATEGORY_NAMES:
-		
-		if FRP_Category.objects.filter(name=category_name).exists():
-			continue
-
-		db_category = FRP_Category(name=category_name)
-		db_category.save()
+	if len(FRP_Contact.objects.all()) > 0:
+		return
 
 	for category in FRP_Category.objects.all():
 
@@ -225,7 +241,12 @@ def populate_data_model():
 			stand = FRP_Stand(property=db_Property, name=name, units=units, situationDescription=situationDescription, areaSQM=areaSQM)
 			stand.save()
 
-def render_data_model():
+def update_data_model(db_site):
+
+	db_binary_uploads = []
+	db_text_uploads = []
+
+	source_root = settings.MEDIA_ROOT
 
 	data_model = {}
 
@@ -250,11 +271,21 @@ def render_data_model():
 	data_model['properties'] = []
 	for db_prop in FRP_Property.objects.all(): 
 
+		source = None
+		dest = None
+		if (db_prop.udf.name is not None) and (len(db_prop.udf.name) > 0):
+
+			source = source_root + '/' + db_prop.udf.name
+			dest = db_prop.udf.name
+
+			db_binary_upload = BinaryUpload(source_path=source, destination_path=dest, site=db_site)
+			db_binary_uploads.append(db_binary_upload)
+
 		property =  { "category" : db_prop.category.name,
 			"name": db_prop.name, 
 			"title" : db_prop.title,
 			"description" : [],
-			'udf' : None if db_prop.udf.name is None else db_prop.udf.name,
+			'udf' : dest,
 			'stands' : []
 			}
 
@@ -280,4 +311,26 @@ def render_data_model():
 
 		data_model['properties'].append(property)
 
-	print(json.dumps(data_model))
+	db_site.json_data_model = json.dumps(data_model)
+
+	json_source_location = JSON_DUMP_LOCATION + '/datamodel.json' 
+	with open(json_source_location, 'wt') as json_file:
+		json_file.write(db_site.json_data_model)
+
+	json_dest_location = JSON_ROOT
+
+	db_text_uploads.append(TextUpload(site=db_site, source_path=json_source_location,destination_path=json_dest_location))
+
+	for to_delete in BinaryUpload.objects.filter(site=db_site):
+		to_delete.delete()
+
+	for db_binary_upload in db_binary_uploads:
+		db_binary_upload.save()
+
+	for to_delete in TextUpload.objects.filter(site=db_site):
+		to_delete.delete()
+
+	for db_text_upload in db_text_uploads:
+		db_text_upload.save()
+
+	db_site.save()

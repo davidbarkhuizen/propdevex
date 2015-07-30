@@ -1,11 +1,11 @@
 <html>
 	<title>Site Data Model Manager</title>
 	<head>
-		<!--script type="text/javascript">		
+		<script type="text/javascript">		
 			setInterval(function(){
 				window.location.reload(true);
-			} , 10000);
-		</script-->
+			} , 5000);
+		</script>
 	</head>
 	<body>
 		<div style='font-weight:bold;'>
@@ -24,25 +24,23 @@
 				<a href="/admin">edit</a>
 			</div>
 
-			<div>
 			{% if last_updated_at %}
 				site.last_updated_at
 			{% else %}			
 				never updated
 			{% endif %}
-			</div>
-			<div>
+
+			-
+
 			{% if site.update == False %}
 				no update scheduled
 			{% else %}			
 				an update is either scheduled or in progress
 			{% endif %}
-			</div>
-			<div>
 			{% if site.update == False %}
-				<a href='/admin/sites?id={{site.id}}'>update!</a>
+				<a href='/admin/sites/update?id={{site.id}}'>update!</a>
 			{% endif %}			
-			</div>
+
 		{% endfor %}
 	</body>
 </html>
