@@ -1,15 +1,4 @@
-py_gps_tools  
-============  
+Site Data Model Manager
+2015 david.barkhuizen@gmail.com
 
-python tools for manipulation of gps files and data  
-
-# supported file formats:  
-
-.gpx  
-
-django webserver  
-----------------  
-[configure db]  
-edit settings.py, define sqlite3 db file path @ DATABASES.default.Name  
-$ python manage.py initdb  
-$ python manage.py syncdb  
+django / python / postgresql

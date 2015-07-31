@@ -10,7 +10,7 @@ def random_str(len):
 import json
 
 SITE_NAME = 'FisherRoelandProperty'
-USER_NAMES = ['FRP_jenny', 'FRP_melissa'] 
+USER_NAMES = ['frpjenny', 'frpmelissa'] 
 DEFAULT_PASSWORD = 'password'
 
 SITE_ROOT = 'frp/'
@@ -185,7 +185,11 @@ def init_db():
 			sql = '''
 			insert into auth_user_groups
 			(id, user_id, group_id)
-			values ((1 + (select max(id) from auth_user_groups)), {0}, {1})
+			values
+			(
+				(select 1 + coalesce((select max(id) from auth_user_groups), 0)), 
+				{0}, {1}
+			)
 			'''.format(user.id, auth_group_id)
 
 			cursor.execute(sql)
@@ -199,6 +203,9 @@ def init_db():
 
 			db_category = FRP_Category(name=category_name)
 			db_category.save()
+
+	except Exception, e:
+		raise e
 
 	finally:
 		cursor.close()

@@ -18,29 +18,23 @@
 <div id="container">
 
     {% if not is_popup %}
-    <!-- Header -->
+    <!-- HEADER -->
     <div id="header">
-        <div id="branding">
-        {% block branding %}{% endblock %}
-        </div>
-        {% if user.is_active and user.is_staff %}
-        <div id="user-tools">
-            {% trans 'Welcome,' %}
-            <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-            {% block userlinks %}
-                {% url 'django-admindocs-docroot' as docsroot %}
-                {% if docsroot %}
-                    <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
+        <div id="site-name">
+            <span style='font-size:200%;float:left;margin-left:5px;'>
+                Site Data Model Manager
+            </span>
+            <span style='float:right;margin-top:5px;margin-right:5px;'>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'admin:password_change' %}">{% trans 'change password' %}</a> |  
+                    <a href="{% url 'admin:logout' %}">{% trans 'log out' %}</a>
+                    @   
+                    <strong>{% firstof user.get_short_name user.get_username %}</strong>
                 {% endif %}
-                {% if user.has_usable_password %}
-                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
-                {% endif %}
-                <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
-            {% endblock %}
+            </span>
         </div>
-        {% endif %}
-        {% block nav-global %}{% endblock %}
     </div>
+
     <!-- END Header -->
     {% block breadcrumbs %}
     <div class="breadcrumbs">
@@ -70,6 +64,17 @@
         <br class="clear" />
     </div>
     <!-- END Content -->
+
+    {% if user.is_authenticated and not is_popup  %}
+    <div style='margin-left:15px;'>
+        <h1>
+            Update site
+        </h1>
+        <div style='font-weight:bold;'>
+            <a href='/admin/sites'>manage site update process</a>
+        </div>
+    </div>
+    {% endif %}
 
     {% block footer %}<div id="footer"></div>{% endblock %}
 </div>

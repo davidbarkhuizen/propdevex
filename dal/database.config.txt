@@ -1,0 +1,81 @@
+INSTALL POSTGRES SERVER & ASSOCIATED PYTHON LIBRARIES
+
+- POSTGRESQL SERVER
+
+! instruction for installation under ubuntu/debian linux
+! assumes localhost as db server location
+
+# install postgresql server package using apt-get
+$ sudo apt-get install postgresql
+
+# postgresql server control via /etc/init.d/postgresql
+$ /etc/init.d/postgresql status
+$ /etc/init.d/postgresql start
+$ /etc/init.d/postgresql stop
+$ /etc/init.d/postgresql restart
+
+# postgresql server control via service
+$ service postgresql status
+$ sudo service postgresql start
+$ sudo service postgresql stop
+$ sudo service postgresql restart
+
+- PYTHON LIBRARIES
+
+# install python package
+$ sudo apt-get install python-psycopg2
+
+CREATE AND CONFIGURE DATABASE AND APP USER
+
+# log in to psql console as admin
+$ psql -U postgres -h localhost
+or
+$ sudo -u postgres psql -h localhost
+
+# set password for admin user postgres
+postgres=# \password
+...
+
+# quit psql console
+# \q + <enter>
+# or
+# ctrl + d
+
+# create non-admin postgresql user sdmm, using postgresql createuser util
+$ sudo -u postgres createuser sdmm
+
+# create database sdmm with owner of user sdmm, using postgresql createdb util 
+$ sudo -u postgres createdb sdmm -O sdmm
+
+# connect with user postgres via psql console to master db
+$ psql -U postgres -h localhost
+
+# set password for user sdmm to 'password'
+postgres=# alter user sdmm with password 'password';
+
+# quit psql console
+postgres=# \q
+
+# test by connecting to new database with new user
+$ psql -d sdmm -U sdmm -h localhost
+
+THIS MAY NOT BE NECESSARYs
+# grant schema access to user orm 
+$ psql -d gpxmapsnet -U postgres -h localhost
+postgres=# GRANT usage on schema public to orm;
+
+-----------------------------------------------
+
+# settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'database_name',
+        'USER' : 'app_user_name',
+        'PASSWORD' : 'app_user_password',
+        'HOST' : 'database_server_host'
+    }
+}
+
+# list all tables
+postgres=# \dt

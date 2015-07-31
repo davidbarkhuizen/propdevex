@@ -1,4 +1,88 @@
-<html>
+{% load admin_static %}{% load firstof from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+{% block extrastyle %}{% endblock %}
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
+{% block extrahead %}{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+	<div id="container">
+
+	    <!-- HEADER -->
+	    <div id="header">
+	        <div id="site-name">
+	            <span style='font-size:200%;float:left;margin-left:5px;'>
+	                Site Data Model Manager
+	            </span>
+	            <span style='float:right;margin-top:5px;margin-right:5px;'>
+	                {% if user.has_usable_password %}
+	                <a href="{% url 'admin:password_change' %}">{% trans 'change password' %}</a> |  
+	                {% endif %}
+	                <a href="{% url 'admin:logout' %}">{% trans 'log out' %}</a>
+	                @   
+	                <strong>{% firstof user.get_short_name user.get_username %}</strong>
+	            </span>
+	        </div>
+	    </div>
+
+	    <div style='margin-left:15px;'>
+			<br/>
+			{% for site in sites %}
+				<div>
+					<h1 style='font-weight:bold;'>
+						{{ site.name }}
+					</h1>
+				</div>
+
+				<div>
+				{% if last_updated_at %}
+					site.last_updated_at
+				{% else %}			
+					never updated
+				{% endif %}
+				</div>
+				<div>
+				{% if site.update == False %}
+					no update scheduled
+				{% else %}			
+					an update is either scheduled or in progress
+				{% endif %}
+				</div>
+				<div>
+				{% if site.update == False %}
+				<div style='font-weight:bold;'>
+					<a href='/admin/sites/update?id={{site.id}}'>update site</a>
+				</div>
+				{% else %}
+				<br/>
+				{% endif %}	
+
+				</div>	
+			{% endfor %}
+	    </div>
+
+	    <br/>
+
+        <div style='margin-left:15px;'>
+	        <div style='font-weight:bold;'>
+	            <a href='/admin'>edit site data model</a>
+	        </div>
+    	</div>
+
+	    {% block footer %}<div id="footer"></div>{% endblock %}
+	</div>
+</body>
+</html>
+
+
+<!-- <html>
 	<title>Site Data Model Manager</title>
 	<head>
 		<script type="text/javascript">		
@@ -8,39 +92,6 @@
 		</script>
 	</head>
 	<body>
-		<div style='font-weight:bold;'>
-			black pearl
-		</div>
-		<div style='font-weight:bold;font-size:large;'>
-			Site Data Model Manager
-		</div>
-		<br/>
-
-		{% for site in sites %}
-			<div>
-				<span style='font-weight:bold;'>
-					{{ site.name }}
-				</span>
-				<a href="/admin">edit</a>
-			</div>
-
-			{% if last_updated_at %}
-				site.last_updated_at
-			{% else %}			
-				never updated
-			{% endif %}
-
-			-
-
-			{% if site.update == False %}
-				no update scheduled
-			{% else %}			
-				an update is either scheduled or in progress
-			{% endif %}
-			{% if site.update == False %}
-				<a href='/admin/sites/update?id={{site.id}}'>update!</a>
-			{% endif %}			
-
-		{% endfor %}
+		
 	</body>
-</html>
+</html> -->

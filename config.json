@@ -3,10 +3,10 @@
 
 	"django_secret_key" : "5t^$1ig@+e5rmizoktq25g^8#ooiimi%)fm3vtuzacxi)hki=%",
 
-	"db_engine" : "django.db.backends.sqlite3",
+	"db_engine" : "django.db.backends.postgresql_psycopg2",
 	"db_host" : "localhost",
-	"db_name" : "/var/www/propdevex/propdevex.sqlite3",
-	"db_user" : "user",
+	"db_name" : "sdmm",
+	"db_user" : "sdmm",
 	"db_password" : "password",
 
 	"smtp_addr" : "",

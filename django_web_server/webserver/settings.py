@@ -1,7 +1,9 @@
 import os
 import json
 
-config = json.load(open('/var/www/propdevex/config.json'))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+config = json.load(open(BASE_DIR + '/../config.json'))
 
 # --------------
 
@@ -23,10 +25,8 @@ WSGI_APPLICATION = 'webserver.wsgi.application'
 
 # DIRECTORIES -------------------------------------------------------
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-MEDIA_ROOT = '/var/www/propdevex/media'
-MEDIA_URL = '/MEDIA/'
+MEDIA_ROOT = BASE_DIR + '/../media'
+MEDIA_URL = '/media/'
 
 # django 1.6
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]

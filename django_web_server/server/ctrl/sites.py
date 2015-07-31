@@ -48,8 +48,6 @@ def randomly_populate_datamodel(request):
 
 def get(request):
 
-	print(settings.MEDIA_ROOT)
-
 	if not request.user.is_authenticated():
 		return redirect(LOGIN_ROOT)
 
