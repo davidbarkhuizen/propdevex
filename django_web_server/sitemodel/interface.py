@@ -10,7 +10,7 @@ def random_str(len):
 
 import json
 
-DATA_MODEL_DEST_NAME = 'datamodel.json'
+DATA_MODEL_FILE_NAME = 'datamodel.json'
 DEFAULT_PASSWORD = 'password'
 
 # ---------------------------
@@ -19,8 +19,6 @@ DEFAULT_FTP_HOST = 'host'
 DEFAULT_FTP_PORT = 21
 DEFAULT_FTP_USER = 'user'
 DEFAULT_FTP_PWD = 'password'
-
-JSON_ROOT = 'json'
 
 # ---------------------------
 
@@ -53,14 +51,14 @@ class SiteInterface(object):
 		self.render_site_model = render_site_model
 		self.randomly_populate_datamodel = randomly_populate_datamodel
 
+	def get_json_source_root(self):
+		return settings.MEDIA_ROOT + '/' + self.token + '/json/'
+
 	def get_site_root(self):
-		return self.token
+		return self.token + '/'
 
-	def json_dest_root(self):
-		return self.get_site_root() + '/' + JSON_ROOT
-
-	def json_source_root(self):
-		return settings.MEDIA_ROOT + '/' + self.token + '/' + JSON_ROOT
+	def get_json_dest_root(self):
+		return self.get_site_root() + 'json/'
 
 	@classmethod
 	def register(cls, 
@@ -228,17 +226,21 @@ def add_site_users_to_auth_group(site_token):
 
 def update_data_model(site_token, site_model):
 
-	source_root = settings.MEDIA_ROOT
+	site = SiteInterface.get(site_token)	
 
 	db_site = Site.objects.get(token=site_token)
-
 	db_site.json_data_model = json.dumps(site_model.model)
 
-	json_source_location = JSON_DUMP_LOCATION + '/' + DATA_MODEL_DEST_NAME 
+	db_text_uploads = []
+	db_binary_uploads = []
+
+	source_root = settings.MEDIA_ROOT
+
+	json_source_location = site.get_json_source_root() + DATA_MODEL_FILE_NAME 
 	with open(json_source_location, 'wt') as json_file:
 		json_file.write(db_site.json_data_model)
 
-	json_dest_location = JSON_DEST_ROOT
+	json_dest_location = site.get_json_dest_root() + DATA_MODEL_FILE_NAME
 
 	text_upload = TextUpload(
 		site=db_site, 

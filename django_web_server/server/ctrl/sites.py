@@ -31,6 +31,7 @@ def init(request, params):
 
 @redirect_if_user_not_authed(LOGIN_ROOT)
 @redirect_if_user_not_super(LOGIN_ROOT)
+@redirect_on_missing_parameter(['token'], SITE_ROOT)
 def randomly_populate_datamodel(request, params):
 
 	site_token = request.GET['token']
