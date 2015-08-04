@@ -11,6 +11,8 @@ class Site(models.Model):
 		app_label = 'server'
 
 	name 					= defaultCharField(unique=True, null=False)
+	token					= defaultCharField(unique=True, null=False)
+
 	users 					= models.ManyToManyField(User)
 
 	json_data_model			= models.TextField(null=True, blank=True)
@@ -49,16 +51,13 @@ class BinaryUpload(models.Model):
 	source_path				= defaultCharField(null=False)
 	destination_path		= defaultCharField(null=False)
 
+# REGISTER SITE MODELS
 
-# -------------------------------------------------------------
 # FRP FisherRoelandProperties
-
 from sitemodel.frp.model import FRP_Contact
 from sitemodel.frp.model import FRP_Category
 from sitemodel.frp.model import FRP_Property
 from sitemodel.frp.model import FRP_Stand
-
-# -------------------------------------------------------------
 
 __all__ = [ 
 	# FRP FisherRoelandProperties
