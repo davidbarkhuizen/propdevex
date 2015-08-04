@@ -1,5 +1,7 @@
 from django.db import models
 
+UDF_ROOT = 'udf'
+
 class FRP_Category(models.Model):
 	class Meta:
 		db_table = "frp_category"

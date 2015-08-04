@@ -1,109 +1,45 @@
-# http framework
+def redirect_if_user_not_authed(url):
 
-from django.http import HttpResponse
-import json
+	def redirects_if_user_not_authed(f):
 
-JSON_MIMETYPE = 'application/json'
+		def wrap(request, params = None):
 
-html_template = '''
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>gpxmaps.net</title>
-	</head>
-	<body>
-	<div>
-		<h3>
-			{0}
-		</h3>
-		<para>
-			{1}
-		</para>
-	</div>
-	</body>
-</html>
-'''
+			if not request.user.is_authenticated():
+				return redirect(url))
 
-def html(header, para):
-
-	html = html_template.format(header, para)
-	return HttpResponse(html)
-
-def success(data):
-
-	envelope = { 
-		'status' : 'ok', 
-		'data' : data
-		}
-
-	json_string = json.dumps(envelope)
-	return HttpResponse(json_string, mimetype=JSON_MIMETYPE)
-
-def failure(message):
-
-	envelope = { 
-		'status' : message 
-		}
-	
-	json_string = json.dumps(envelope)
-	return HttpResponse(json_string, mimetype=JSON_MIMETYPE)
-
-def fail_on_missing_parameters(parameters, keys):
-
-	present_keys = parameters.keys()
-	missing_keys = [key for key in keys if key not in present_keys]
-
-	if len(missing_keys) == 0:
-		return
-
-	msg = 'missing parameters:  ' + ','.join(missing_keys)
-	return failure(msg)
-
-def mandatory_parameters(mandatory_params):
-
-	def fails_on_missing_mandatory_parameters(f):
-
-		def wrap(request, params):
-
-			failed_on_missing_mandatory_parameters = fail_on_missing_parameters(params, mandatory_params)			
-			if (failed_on_missing_mandatory_parameters):
-				return failed_on_missing_mandatory_parameters
-			else:
-				return f(request, params)
+			return f(request, params)
 
 		return wrap
 
-	return fails_on_missing_mandatory_parameters
+	return redirects_if_user_not_authed
 
-def init_routing(controller_module, controller_module_name):
+def redirect_if_user_not_super(url):
 
-	supported_verbs = ['GET', 'POST', 'PATCH']
+	def redirects_if_user_not_super(f):
 
-	controller_attr_names = [str(a) for a in dir(controller_module)]
-	implemented_verb_names = [x.upper() for x in controller_attr_names if x.upper() in supported_verbs]
+		def wrap(request, params = None):
 
-	implementation = {}
+			if not request.user.is_superuser():
+				return redirect(url))
 
-	for verb_name in implemented_verb_names:
+			return f(request, params)
 
-		attr_name = [a for a in controller_attr_names if a.upper() == verb_name][0]
-		implementation[verb_name] = getattr(controller_module, attr_name) 		
+		return wrap
 
-	def routing_fn(request, qs):
+	return redirects_if_user_not_super
 
-		print('in routing_fn')
-		print('request')
-		print(request)
-		print('qs')
-		print(qs)
+def redirect_on_missing_parameter(parameter_names, url):
 
-		verb_name = request.method.upper()
+	def redirects_on_missing_parameter(f):
 
-		if (verb_name not in implemented_verb_names):
-			msg = 'invalid http method:  %s' % verb_name
-			return failure(msg) 
-		else:
-			return implementation[verb_name](request, getattr(request, verb_name))
+		def wrap(request, params = None):
 
-	controller_module.routing = routing_fn
+			for param_name in parameter_names:
+				if param_name not in request.GET.keys():
+					return redirect(url)	
+
+			return f(request, params)
+
+		return wrap
+
+	return redirects_on_missing_parameter
