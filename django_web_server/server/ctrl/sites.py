@@ -5,27 +5,29 @@ from django.conf import settings
 
 from server.models import Site
 
-import sitemodels.frp as frp
+import sitemodel.frp.logic as frp_logic
+import sitemodel.frp.model as frp_model
 
 LOGIN_ROOT = '/admin'
 SITE_ROOT = '/admin/sites'
 
+def get_site(request):
+	site_id = request.GET['id']
+	return Site.objects.get(id=site_id)
+
 def update(request):
-
-	if not request.user.is_authenticated():
+	if (not request.user.is_authenticated()) or ('id' not in request.GET.keys()):
 		return redirect(LOGIN_ROOT)
+	site = get_site(request)
 
-	site_id = None
-	if 'id' in request.GET.keys():
-		site_id = request.GET['id']
-		site = Site.objects.get(id=site_id)
+	if site.update is False:
 
-		if site.update is False:
+		site.update_data_model()
 
-			frp.update_data_model(site)
+		frp_logic.update_data_model(site)
 
-			site.update = True
-			site.save()
+		site.update = True
+		site.save()
 
 	return redirect(SITE_ROOT)
 
@@ -34,7 +36,7 @@ def init_db(request):
 	if (not request.user.is_authenticated()) or (not request.user.is_superuser):
 		return redirect(LOGIN_ROOT)
 
-	frp.init_db()
+	frp_logic.create_site_w_users_and_categories()
 
 	return redirect(SITE_ROOT)
 
