@@ -13,18 +13,14 @@ import json
 DATA_MODEL_DEST_NAME = 'datamodel.json'
 DEFAULT_PASSWORD = 'password'
 
-SITE_ROOT = 'frp/'
-JSON_DEST_ROOT = SITE_ROOT + 'json'
-UDF_ROOT = SITE_ROOT + 'udf'
-
-JSON_DUMP_LOCATION = settings.MEDIA_ROOT + '/' + JSON_ROOT
-
 # ---------------------------
 
 DEFAULT_FTP_HOST = 'host'
 DEFAULT_FTP_PORT = 21
 DEFAULT_FTP_USER = 'user'
 DEFAULT_FTP_PWD = 'password'
+
+JSON_ROOT = 'json'
 
 # ---------------------------
 
@@ -57,6 +53,15 @@ class SiteInterface(object):
 		self.render_site_model = render_site_model
 		self.randomly_populate_datamodel = randomly_populate_datamodel
 
+	def get_site_root(self):
+		return self.token
+
+	def json_dest_root(self):
+		return self.get_site_root() + '/' + JSON_ROOT
+
+	def json_source_root(self):
+		return settings.MEDIA_ROOT + '/' + self.token + '/' + JSON_ROOT
+
 	@classmethod
 	def register(cls, 
 		name, token,
@@ -68,7 +73,7 @@ class SiteInterface(object):
 
 		si = SiteInterface(name, token, 
 			user_names, 
-			user_editable_model_names
+			user_editable_model_names,
 			populate_model_constants,
 			render_site_model,
 			randomly_populate_datamodel
@@ -200,9 +205,12 @@ def add_site_users_to_auth_group(site_token):
 	cursor = connection.cursor()
 	try:
 		site = Site.objects.get(token = site_token)
-		auth_group = 
+		
+		sql = """select id from auth_group where name = '{0}'""".format(site_token)
+		cursor.execute(sql)
+		auth_group_id = cursor.fetchone()[0]
 
-		for user in site.users: 
+		for user in site.users.all(): 
 
 			sql = '''
 			insert into auth_user_groups
@@ -222,7 +230,7 @@ def update_data_model(site_token, site_model):
 
 	source_root = settings.MEDIA_ROOT
 
-	db_site = Sites.objects.get(token=site_token)
+	db_site = Site.objects.get(token=site_token)
 
 	db_site.json_data_model = json.dumps(site_model.model)
 
@@ -260,7 +268,7 @@ def update_data_model(site_token, site_model):
 # -----------------------------------------------------------------------------
 # IMPLEMENTATION-SPECIFIC
 
-def init_db(site_token):
+def init(site_token):
 
 	interface = SiteInterface.get(site_token)
 	
@@ -269,12 +277,18 @@ def init_db(site_token):
 	create_auth_group_permissions(interface.token, interface.user_editable_model_names)
 	add_site_users_to_auth_group(interface.token)
 
+def populate_model_constants(site_token): 
+
+	interface = SiteInterface.get(site_token)
+
+	interface.populate_model_constants()
+
 def update(site_token):
 
 	interface = SiteInterface.get(site_token)
 
 	site_model = interface.render_site_model()
-	update_data_model(site_token, site_modelde)
+	update_data_model(site_token, site_model)
 
 def randomly_populate_datamodel(site_token):
 	

@@ -1,5 +1,7 @@
+import random
+
 from django.db import connection
-from sitemodel.interface import SiteInterface, SiteModel
+from sitemodel.interface import SiteInterface, SiteModel, random_str
 
 from sitemodel.frp.model import  FRP_Category, FRP_Contact, FRP_Property, FRP_Stand
 
@@ -8,7 +10,7 @@ SITE_TOKEN = 'frp'
 USER_EDITABLE_MODEL_NAMES = ['frp_contact', 'frp_property', 'frp_stand']
 SITE_USER_NAMES = [ 'frpjenny', 'frpmelissa' ]
 
-CATEGORY_NAMES : [
+CATEGORY_NAMES = [
 	'commercial',
 	'industrial',
 	'residential',
@@ -142,7 +144,7 @@ def render_site_model():
 
 SiteInterface.register(
 	SITE_NAME,
-	SITE_TOKEN
+	SITE_TOKEN,
 	SITE_USER_NAMES,
 	USER_EDITABLE_MODEL_NAMES,
 	populate_model_constants,

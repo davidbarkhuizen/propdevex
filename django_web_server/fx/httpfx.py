@@ -1,3 +1,5 @@
+from django.shortcuts import redirect
+
 def redirect_if_user_not_authed(url):
 
 	def redirects_if_user_not_authed(f):
@@ -5,7 +7,7 @@ def redirect_if_user_not_authed(url):
 		def wrap(request, params = None):
 
 			if not request.user.is_authenticated():
-				return redirect(url))
+				return redirect(url)
 
 			return f(request, params)
 
@@ -19,8 +21,8 @@ def redirect_if_user_not_super(url):
 
 		def wrap(request, params = None):
 
-			if not request.user.is_superuser():
-				return redirect(url))
+			if not request.user.is_superuser:
+				return redirect(url)
 
 			return f(request, params)
 
