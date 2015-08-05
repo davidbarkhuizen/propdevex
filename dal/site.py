@@ -1,83 +1,92 @@
-from dbconnection import DBConnection
+def get_ids_of_sites_needing_to_be_updated(db):
 
-class Site(object):
+	sql = 'select id from site where updated = false;'
 
-	@classmethod
-	def truncate(cls):
-		db = DBConnection.get_connection()
-		db.execute('truncate table site;')
-		db.terminate()
+	ids = []
+	connection = db()
+	try:
+		for row in connection.fetchall(sql):
+			ids.append(row[0])
+	finally:
+		connection.exit()
 
-	@classmethod
-	def get_ids_of_sites_needing_to_be_updated(cls):
+	return ids
 
-		sql = 'select id from site where updated = false;'
-		db_connxn = DBConnection.get_connection()
-		ids = [row[0] for row in db_connxn.fetchall(sql)]		
-		db_connxn.terminate()
-		return ids
+def get_ftp_credentials_for_site(db, id):
+	"""returns { host, port, user, password }"""
 
-	@classmethod
-	def 
+	sql = '''
+	select ftp_host, ftp_port, ftp_user, ftp_password 
+	from site
+	where id = {0}'''.format(id)
 
-		ftp_host 				= models.CharField(max_length=1024, unique=True, null=False)
-	ftp_port 				= models.IntegerField(null=False)
-	ftp_user 				= models.CharField(max_length=1024, unique=True, null=False)
-	ftp_password			= models.CharField(max_length=1024, unique=True, null=False)
-	ftp_account				= models.CharField(max_length=1024, unique=True, null=False)
-	ftp_secure				= models.BooleanField(default=False, null=False)
+	ftp_creds = None
+	connection = db()
+	try:
+		row = connection.fetchone(sql)
+		creds = { "host" : row[0]
+			"port" : row[1],
+			"user" : row[2],
+			"password" : row[3] }
+	finally:
+		connection.exit()
 
-	@classmethod
-	def increment_activation_token_distribution_try_count_for_email(cls, email):
+	return ftp_creds
 
-		sql = '''
-		update "user"
-		set activation_token_distribution_try_count = activation_token_distribution_try_count + 1
-		where email = '{0}'
-		;'''.format(str(email))
+def get_text_uploads_for_site(db, id):
+	"""returns [ { source_path, destination_path } ]"""
 
-		db_connxn = DBConnection.get_connection()
-		print(sql)	
-		db_connxn.execute(sql)
-		db_connxn.close()
+	sql = ''''
+	select source_path, destination_path 
+	from textupload
+	where id = {0}'''.format(id)
 
-	@classmethod
-	def set_activation_token_distributed_for_email(cls, email):
+	text_uploads = []
+	try:
+		for row in connection.fetchall(sql):
+			text_upload = { "source_path" : row[0], "destination_path" : row[1] } 
+			text_uploads.append(text_upload)
+	finally:
+		connection.exit()
 
-		sql = '''
-		update "user"
-		set activation_token_distributed = now()
-		where (email = '{0}') 
-		;'''.format(email)
+	return text_uploads
 
-		db_connxn = DBConnection.get_connection()
-		db_connxn.execute(sql)
-		db_connxn.close()
+def get_binary_uploads_for_site(db, id):
+	"""returns [ { source_path, destination_path } ]"""
 
-	@classmethod
-	def select_emailuuid_for_undistributed(cls, max_retry_count = 3):
+	sql = '''
+	select source_path, destination_path 
+	from binaryupload
+	where id = {0}'''.format(id)
 
-		sql = '''
-		select email, uuid 
-		from "user"
-		where
-			(
-			(activation_token_distributed is null)
-			and
-			(activation_token_distribution_try_count < {0})
-			)
-		;'''.format(str(max_retry_count))
+	binary_uploads = []
+	connection = db()
+	try:
+		for row in connection.fetchall(sql):
+			binary_upload = { "source_path" : row[0], "destination_path" : row[1] } 
+			binary_uploads.append(text_upload)
+	finally:
+		connection.exit()
 
-		db_connxn = DBConnection.get_connection()
+	return binary_upload
 
-		data = []
-		rows = db_connxn.fetchall(sql)
-		for row in rows:
-			
-			email = row[0]
-			uuid = row[1]
+def mark_site_as_updated(db, id, msg):
 
-			datum =  { 'uuid' : uuid, 'email' : email }
-			data.append(datum)
+	# sanitize
+	msg = msg.replace('\'', '').replace('\"', '')
 
-		return data
+	sql = '''
+	update site
+	set
+		update = false,
+		last_updated_at = now(),
+		update_log_message = '{1}' 
+	where
+		id = {0};
+	'''.format(id, msg)
+
+	connection = db()
+	try:
+		connection.execute(sql):
+	finally:
+		connection.exit()

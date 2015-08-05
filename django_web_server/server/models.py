@@ -19,14 +19,13 @@ class Site(models.Model):
 
 	update					= models.BooleanField(default=False, null=False)
 	last_updated_at			= models.DateTimeField(null=True, blank=True)
+	update_log_message		= defaultCharField() 
 
 	ftp_host 				= defaultCharField(null=False)
 	ftp_port 				= models.IntegerField(null=False)
 	ftp_user 				= defaultCharField(null=False)
 	ftp_password			= defaultCharField(null=False)
 	ftp_account				= defaultCharField(blank=True)
-
-	# log_message				= defaultCharField()
 
 	def __str__(self):
 		return self.name
