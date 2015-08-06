@@ -43,7 +43,7 @@ class FtpClient(object):
 			
 			print(to_create)
 			try:
-				self.ftp.cwd(to_create)
+				self.ftp.cwd('/' + to_create)
 				print('exists')
 			except Exception:
 				print('folder @ ' + to_create + ' DNE!')
@@ -69,7 +69,7 @@ class FtpClient(object):
 			return
 
 		with open(source_path) as source_text_file:
-			resp = self.ftp.storlines("STOR " + dest_path, source_text_file)
+			resp = self.ftp.storlines("STOR " + '/' + dest_path, source_text_file)
 
 	def upload_bin_file(self, source_path, dest_path, ignore_if_same_size = True):
 
@@ -89,7 +89,7 @@ class FtpClient(object):
 			return
 
 		with open(source_path, 'rb') as source_bin_file:
-			resp = self.ftp.storbinary("STOR " + dest_path, source_bin_file, 1024)
+			resp = self.ftp.storbinary("STOR " + '/' + dest_path, source_bin_file, 1024)
 
 	def close(self):
 		if self.ftp:
