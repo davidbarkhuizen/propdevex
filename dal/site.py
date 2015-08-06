@@ -1,6 +1,6 @@
-def get_ids_of_sites_needing_to_be_updated(db):
+def get_ids_of_sites_marked_for_update(db):
 
-	sql = 'select id from site where updated = false;'
+	sql = 'select id from site where update = true;'
 
 	ids = []
 	connection = db()
@@ -8,15 +8,15 @@ def get_ids_of_sites_needing_to_be_updated(db):
 		for row in connection.fetchall(sql):
 			ids.append(row[0])
 	finally:
-		connection.exit()
+		connection.close()
 
 	return ids
 
 def get_ftp_credentials_for_site(db, id):
-	"""returns { host, port, user, password }"""
+	"""returns { host, port, user, password, upload_root }"""
 
 	sql = '''
-	select ftp_host, ftp_port, ftp_user, ftp_password 
+	select ftp_host, ftp_port, ftp_user, ftp_password, ftp_upload_root
 	from site
 	where id = {0}'''.format(id)
 
@@ -24,22 +24,25 @@ def get_ftp_credentials_for_site(db, id):
 	connection = db()
 	try:
 		row = connection.fetchone(sql)
-		creds = { "host" : row[0]
+		ftp_creds = { "host" : row[0],
 			"port" : row[1],
 			"user" : row[2],
-			"password" : row[3] }
+			"password" : row[3],
+			"upload_root" : row[4] }
 	finally:
-		connection.exit()
+		connection.close()
 
 	return ftp_creds
 
 def get_text_uploads_for_site(db, id):
 	"""returns [ { source_path, destination_path } ]"""
 
-	sql = ''''
+	sql = '''
 	select source_path, destination_path 
 	from textupload
-	where id = {0}'''.format(id)
+	where site_id = {0}'''.format(id)
+
+	connection = db()
 
 	text_uploads = []
 	try:
@@ -47,7 +50,7 @@ def get_text_uploads_for_site(db, id):
 			text_upload = { "source_path" : row[0], "destination_path" : row[1] } 
 			text_uploads.append(text_upload)
 	finally:
-		connection.exit()
+		connection.close()
 
 	return text_uploads
 
@@ -57,18 +60,18 @@ def get_binary_uploads_for_site(db, id):
 	sql = '''
 	select source_path, destination_path 
 	from binaryupload
-	where id = {0}'''.format(id)
+	where site_id = {0}'''.format(id)
 
 	binary_uploads = []
 	connection = db()
 	try:
 		for row in connection.fetchall(sql):
 			binary_upload = { "source_path" : row[0], "destination_path" : row[1] } 
-			binary_uploads.append(text_upload)
+			binary_uploads.append(binary_upload)
 	finally:
-		connection.exit()
+		connection.close()
 
-	return binary_upload
+	return binary_uploads
 
 def mark_site_as_updated(db, id, msg):
 
@@ -87,6 +90,6 @@ def mark_site_as_updated(db, id, msg):
 
 	connection = db()
 	try:
-		connection.execute(sql):
+		connection.execute(sql)
 	finally:
-		connection.exit()
+		connection.close()

@@ -1,6 +1,6 @@
 from django.db import models
 
-UDF_ROOT = 'udf'
+UDF_ROOT = 'frp/udf'
 
 class FRP_Category(models.Model):
 	class Meta:

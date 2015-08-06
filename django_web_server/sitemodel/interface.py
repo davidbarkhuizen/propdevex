@@ -231,8 +231,8 @@ def update_data_model(site_token, site_model):
 	db_site = Site.objects.get(token=site_token)
 	db_site.json_data_model = json.dumps(site_model.model)
 
-	db_text_uploads = []
-	db_binary_uploads = []
+	db_text_uploads = site_model.db_text_uploads
+	db_binary_uploads = site_model.db_binary_uploads
 
 	source_root = settings.MEDIA_ROOT
 
@@ -289,7 +289,7 @@ def update(site_token):
 
 	interface = SiteInterface.get(site_token)
 
-	site_model = interface.render_site_model()
+	site_model = interface.render_site_model(site_token)
 	update_data_model(site_token, site_model)
 
 def randomly_populate_datamodel(site_token):

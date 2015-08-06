@@ -1,6 +1,9 @@
-*.pyc
+*.py[cod]
 *.*~
+
+config.json
 credentials.json
+creds.json
 
 media/*.*
 media/*

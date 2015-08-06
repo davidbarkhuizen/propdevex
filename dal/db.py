@@ -1,14 +1,14 @@
 import psycopg2
 
-def connection_factory(host, database, user, password):
+def db_connection_factory(host, database, user, password):
 
 	def generate():
 
 		connection = psycopg2.connect(
-			host=cls.host, 
-			database=cls.database, 
-			user=cls.user, 
-			password=cls.password
+			host=host, 
+			database=database, 
+			user=user, 
+			password=password
 			)
 
 		def fetchone(sql):
@@ -26,21 +26,21 @@ def connection_factory(host, database, user, password):
 			cursor.execute(sql)          
 			connection.commit()
 
-		def exit():
+		def close():
 			if connection is not None:
 				connection.close()
 
 		class Connection(object):
 			
 			def fetchone(self, sql):
-				fetchone(sql)
+				return fetchone(sql)
 			def fetchall(self, sql):
-				fetchall(sql)
+				return fetchall(sql)
 			def execute(self, sql):
-				execute(sql)
+				return execute(sql)
 			def close(self):
-				close(sql)
+				close()
 
-		return connxn
+		return Connection()
 
 	return generate

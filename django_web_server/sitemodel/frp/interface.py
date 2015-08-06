@@ -1,7 +1,10 @@
 import random
 
 from django.db import connection
+from django.conf import settings
 from sitemodel.interface import SiteInterface, SiteModel, random_str
+
+from server.models import Site, TextUpload, BinaryUpload
 
 from sitemodel.frp.model import  FRP_Category, FRP_Contact, FRP_Property, FRP_Stand
 
@@ -71,11 +74,13 @@ def randomly_populate_datamodel():
 			stand = FRP_Stand(property=db_Property, name=name, units=units, situationDescription=situationDescription, areaSQM=areaSQM)
 			stand.save()
 
-def render_site_model():
+def render_site_model(site_token):
 	
 	data_model = {}
 	db_text_uploads = []
 	db_binary_uploads = []
+
+	db_site = Site.objects.get(token=site_token)
 
 	# CONTACTS
 	#
@@ -102,7 +107,7 @@ def render_site_model():
 		dest = None
 		if (db_prop.udf.name is not None) and (len(db_prop.udf.name) > 0):
 
-			source = source_root + '/' + db_prop.udf.name
+			source = settings.MEDIA_ROOT + '/' + db_prop.udf.name
 			dest = db_prop.udf.name
 
 			db_binary_upload = BinaryUpload(source_path=source, destination_path=dest, site=db_site)

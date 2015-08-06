@@ -26,6 +26,7 @@ class Site(models.Model):
 	ftp_user 				= defaultCharField(null=False)
 	ftp_password			= defaultCharField(null=False)
 	ftp_account				= defaultCharField(blank=True)
+	ftp_upload_root			= defaultCharField()
 
 	def __str__(self):
 		return self.name
