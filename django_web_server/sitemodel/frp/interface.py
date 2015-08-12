@@ -104,20 +104,20 @@ def render_site_model(site_token):
 	for db_prop in FRP_Property.objects.all(): 
 
 		source = None
-		dest = None
+		dest_path = None
 		if (db_prop.udf.name is not None) and (len(db_prop.udf.name) > 0):
 
 			source = settings.MEDIA_ROOT + '/' + db_prop.udf.name
-			dest = db_prop.udf.name
+			dest_path = '/'.join(db_prop.udf.name.split('/')[1:])
 
-			db_binary_upload = BinaryUpload(source_path=source, destination_path=dest, site=db_site)
+			db_binary_upload = BinaryUpload(source_path=source, destination_path=dest_path, site=db_site)
 			db_binary_uploads.append(db_binary_upload)
 
 		property =  { "category" : db_prop.category.name,
 			"name": db_prop.name, 
 			"title" : db_prop.title,
 			"description" : [],
-			'udf' : dest,
+			'udf' : dest_path,
 			'stands' : []
 			}
 

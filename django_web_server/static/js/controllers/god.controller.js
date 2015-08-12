@@ -99,7 +99,7 @@ function GodController($rootScope, $scope, $http, $timeout) {
 		var request = 
 		{
 			method: 'GET',
-			url: "/static/data/datamodel.json?guid=" + guid,
+			url: "/static/data/datamodel.json?guid=" + guid(),
 		};
 
 		function handleSuccess(response) { 

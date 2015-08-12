@@ -54,11 +54,8 @@ class SiteInterface(object):
 	def get_json_source_root(self):
 		return settings.MEDIA_ROOT + '/' + self.token + '/json/'
 
-	def get_site_root(self):
-		return self.token + '/'
-
 	def get_json_dest_root(self):
-		return self.get_site_root() + 'json/'
+		return ''
 
 	@classmethod
 	def register(cls, 

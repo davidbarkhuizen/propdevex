@@ -13,7 +13,7 @@ function DataModel(urlRoot) {
 	// PROPERTY PROPERTY ACCESSORS
 
 	that.udfSrc = function(property) {
-		return urlRoot + 'data/udf/' + property.udf;
+		return urlRoot + 'data/' + property.udf;
 	};
 
 	that.udfSrcForSelectedProperty = function() {

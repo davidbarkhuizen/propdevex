@@ -30,25 +30,17 @@ class FtpClient(object):
 
 		path_components = path.split('/')[:-1]
 
-		print('checking path ' + path)
-
-		for x in path_components:
-			print('component:  ' + x)
-
 		for i in range(len(path_components)):
 			
 			sub_folder = '/'.join(path_components[:i]) 
 			to_create = '/'.join(path_components[:i+1])
 			tail = path_components[i]
 			
-			print(to_create)
 			try:
 				self.ftp.cwd('/' + to_create)
-				print('exists')
 			except Exception:
 				print('folder @ ' + to_create + ' DNE!')
 				print('creating ' + tail)
-				print('sub folder' + sub_folder)
 				self.ftp.cwd('/' + sub_folder)
 				self.ftp.mkd(tail)
 
