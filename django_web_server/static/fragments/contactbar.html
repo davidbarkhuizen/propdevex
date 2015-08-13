@@ -1,29 +1,75 @@
 <div>
 	<div style="width:100%;" class='dark-grey-background'>
 
-		<div class='contact' style='padding-left:100px;'>
-			<span>
+		<div class='contact' style='width:100%;'>
+
+			<span style='float:left;margin-left:100px;margin-right:10px'>
 		  		<img
+		  			style='margin-top:5px;margin-bottom:5px;'
 					ng-src="/static/image/icon-fb.png"
-					alt="facebook" />
+					ng-click="openFacebook();"
+					/>
 			</span>
-		  	<span class='grey-text bold'>
-		  		Phone:&nbsp;
-		  	</span>
-			<span class='grey-text'>
-		  		{{ model.contacts[0].phone }}
+			<span style='float:left'>
+		  		<img
+		  			style='margin-top:5px;margin-bottom:5px;margin-right:10px'
+					ng-src="/static/image/icon-twitter.png"
+					ng-click="openTwitter();"
+					/>
+			</span>
+			<span style='float:left'>
+		  		<img
+		  			style='margin-top:5px;margin-bottom:5px;'
+					ng-src="/static/image/icon-linkedin.png"
+					ng-click="openLinkedIn();"
+					/>
+			</span>
+
+			<!-- BEGIN REVERSE ORDER ////////////////////////////////////// -->
+
+		  	<span style='float:right;margin-right:20px;' class='grey-text'>
+		  		{{ model.contacts[0].email }}
 		  	</span>
 
-		  	<span>
+		  	<span style='float:right' class='grey-text bold'>
+		  		Email:&nbsp;
+		  	</span>
+
+		  	<span style='float:right'>
+		  		&nbsp;
+		  	</span>
+
+			<span style='float:right'>
+		  		<img
+		  			style='margin-top:5px;margin-bottom:5px;'
+					ng-src="/static/image/icon-mail.png"
+					/>
+			</span>
+
+		  	<span style='float:right'>
 		  		&nbsp;&nbsp;&nbsp;
 		  	</span>
 
-		  	<span class='grey-text bold'>
-		  		Email:&nbsp
+			<span style='float:right' class='grey-text'>
+		  		{{ model.contacts[0].phone }}
 		  	</span>
-		  	<span class='grey-text'>
-		  		{{ model.contacts[0].email }}
+
+		  	<span style='float:right' class='grey-text bold'>
+		  		Phone:&nbsp;
 		  	</span>
+
+		  	<span style='float:right'>
+		  		&nbsp;
+		  	</span>
+
+			<span style='float:right'>
+		  		<img
+		  			style='margin-top:5px;margin-bottom:5px;'
+					ng-src="/static/image/icon-phone.png"
+					/>
+			</span>
+
+		  	<!-- END REVERSE ORDER //////////////////////////////////////// -->
 		</div>
 
 	</div>

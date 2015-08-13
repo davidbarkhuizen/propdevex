@@ -5,10 +5,10 @@
 		<title>Fisher Roeland Properties</title>
 
 		<!-- google fonts -->
-		<link
+<!-- 		<link
 			href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' 
 			rel='stylesheet'
-			type='text/css'>
+			type='text/css'> -->
 
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
@@ -43,8 +43,7 @@
 		<meta ng-init="init()" ng-preinit="globalScope.preinit()">
 	</head>
 
-	<body ng-controller="GodController" ng-cloak>
-
+	<body ng-controller="GodController" ng-cloak ng-show='dataModelIsLoaded'>
 
 		<div data-html-fragment='contactbar'>
 		</div>

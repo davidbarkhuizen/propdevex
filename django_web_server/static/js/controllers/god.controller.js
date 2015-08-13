@@ -2,6 +2,8 @@ function GodController($rootScope, $scope, $http, $timeout) {
 
 	$scope.model = new DataModel('/static/');
 
+	$scope.dataModelIsLoaded = false;
+
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// VIEWS	
 
@@ -111,6 +113,8 @@ function GodController($rootScope, $scope, $http, $timeout) {
 			});
 
 			$scope.model.contacts = response.contacts;
+
+			$timeout(function() { $scope.dataModelIsLoaded = true; }, 500);
 		};
 
 		function handleError(response) { 
@@ -158,6 +162,24 @@ function GodController($rootScope, $scope, $http, $timeout) {
 	$scope.viewStandDetail = function(stand) {
 		$scope.model.selectStand(stand);
 		$scope.modalController.openModal();
+	};
+
+	// -----------------------------------------------------------------
+
+	$scope.openUrlInNewWindow = function(url) {
+		window.open(url, '_blank');
+	}
+
+	$scope.openFacebook = function() {
+		$scope.openUrlInNewWindow('https://www.facebook.com');
+	};
+
+	$scope.openTwitter = function() {
+		$scope.openUrlInNewWindow('https://www.twitter.com');
+	};
+
+	$scope.openLinkedIn = function() {
+		$scope.openUrlInNewWindow('https://www.linkedin.com');
 	};
 
 	// -----------------------------------------------------------------
