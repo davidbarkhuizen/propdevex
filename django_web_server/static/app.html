@@ -4,6 +4,12 @@
 		<meta charset="utf-8">
 		<title>Fisher Roeland Properties</title>
 
+		<!-- google fonts -->
+		<link
+			href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' 
+			rel='stylesheet'
+			type='text/css'>
+
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="/static/css/base.css" />
 	    
@@ -36,8 +42,13 @@
 
 		<meta ng-init="init()" ng-preinit="globalScope.preinit()">
 	</head>
+
 	<body ng-controller="GodController" ng-cloak>
-	<!-- <body ng-controller="GodController" oncontextmenu="return false;"> -->
+
+		<div data-html-fragment='navbar'>
+		</div>
+
+		<!--
 		<div class="wrapper">
 
 			<div>
@@ -61,8 +72,12 @@
 					<div data-html-fragment='property'></div>
 			    </div>
 		    </div>
+
+			<div>
+				<div data-html-fragment='tailbar'>
+				</div>
+		    </div>
 		</div>
-		<div data-html-fragment='modal'>
-		</div>	
+		-->
 	</body>
 </html>
