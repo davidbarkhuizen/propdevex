@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='PropDevEx'>
+<html lang="en" ng-app='PropDevEx' ng-controller="GodController">
 	<head>
 		<meta charset="utf-8">
 		<title>Fisher Roeland Properties</title>
@@ -43,43 +43,23 @@
 		<meta ng-init="init()" ng-preinit="globalScope.preinit()">
 	</head>
 
-	<body ng-controller="GodController" ng-cloak ng-show='dataModelIsLoaded'>
+	<body ng-cloak>
 
-		<div data-html-fragment='contactbar'>
-		</div>
-		<div data-html-fragment='navbar'>
-		</div>
+		<div ng-show='isLoaded();'>
 
-		<!--
-		<div class="wrapper">
+			<div data-html-fragment='contactbar'>
+			</div>
 
-			<div>
-				<div data-html-fragment='navbar'>
-				</div>
-		    </div>
+			<div data-html-fragment='navbar'>
+			</div>
 
-		    <div>
-			    <div id='viewport' class='viewport' visible='false'>
-		        	<div data-html-fragment='home'></div>
-		  			<div data-html-fragment='social'></div>
-		        	<div data-html-fragment='contact'></div>
-		        	<div data-html-fragment='commercial'></div>
-		        	<div data-html-fragment='industrial'></div>
-		        	<div data-html-fragment='residential'></div>
-		        	<div data-html-fragment='business'></div>
-		        	<div data-html-fragment='hotel'></div>
-		        	<div data-html-fragment='retail'></div>
-					<div data-html-fragment='investment'></div>
-					<div data-html-fragment='sold'></div>
-					<div data-html-fragment='property'></div>
-			    </div>
-		    </div>
+			<div id='viewport' class='viewport' visible='false'>
+				<div data-html-fragment='home'></div>
+			</div>
 
-			<div>
-				<div data-html-fragment='tailbar'>
-				</div>
-		    </div>
-		</div>
-		-->
+			<div data-html-fragment='tailbar'>
+			</div>
+
+		<div>
 	</body>
 </html>

@@ -1,10 +1,15 @@
 <div
-	id='HomeFragment'
+	id='Home'
 	ng-show='showView(Views.HOME)'
-	style='vertical-align:middle;float:middle;'
+	style='width:100%;'
 	>
+	<!-- 	style='vertical-align:middle;float:middle;' -->
 
-	<br/>
+	<img
+		style='width:100%; display: block;'
+		ng-src="/static/image/slide01.jpg"/>
+
+	<!--
 
 	<div class='header'>
 		welcome to Fisher Roeland Properties
@@ -15,20 +20,9 @@
 	<div class='FRP-green'>
 		we offer development opportunities
 		<br/>
-		across sectors
+		across diverse sectors
 	</div>
 
-	</br>
-
-	<div>
-		<div ng-repeat='categoryView in model.categoryViews'>
-			<a href="#" ng-click='gotoView(categoryView.view)'>
-			{{ categoryView.category }}
-			<span ng-show='model.propertiesForCategory(categoryView.category).length > 0'>
-			&nbsp;({{ model.propertiesForCategory(categoryView.category).length }})
-			</span>
-			</a>
-		</div>
-	</div>
+	-->
 
 </div>

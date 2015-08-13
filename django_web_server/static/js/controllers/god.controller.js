@@ -96,6 +96,11 @@ function GodController($rootScope, $scope, $http, $timeout) {
 	// -----------------------------------------------------------------
 	// LOAD DATA MODEL
 
+	$scope.loaded = false;
+	$scope.isLoaded = function() {
+		return $scope.loaded;
+	}
+
 	$scope.loadDataModel = function() {
 
 		var request = 
@@ -114,7 +119,14 @@ function GodController($rootScope, $scope, $http, $timeout) {
 
 			$scope.model.contacts = response.contacts;
 
-			$timeout(function() { $scope.dataModelIsLoaded = true; }, 500);
+			function onFontsLoaded() {
+				console.log('fonts are loaded');
+				$scope.loaded = true;
+				//$timeout(function(){  console.log('show'); })
+			};
+
+			console.log('waiting for font load');
+			waitForWebfonts(['Open Sans'], onFontsLoaded);
 		};
 
 		function handleError(response) { 
