@@ -46,6 +46,11 @@ button:focus {
 
 /* --------------------------------------------------------------------------------- */
 
+.frp-font {
+	font-family:Palatino, serif;	
+	font-weight:bold;
+}
+
 html, body {
 	width: 100%;
  
@@ -122,6 +127,13 @@ Very light Grey:
 .nav-inactive {
 	color: #676767; /* grey-text */
 	font-weight: bold;
+}
+
+.unselectable {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 div.nav {
@@ -210,4 +222,18 @@ div.contact span {
 }
 .third {
     order: 3;
+}
+
+/* FLOAT */
+
+.left {
+	float: left;
+}
+
+.right {
+	float; right;
+}
+
+.clear-float {
+	clear: both;
 }
