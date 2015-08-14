@@ -242,6 +242,34 @@ div.tailbar-blurb-header span {
 }
 */
 
+/* ------------------------------- */
+
+.three-column-container {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.column1 {
+    order: 1;
+    flex: 0 0 30%;
+}
+
+.column2 {
+    order: 2;
+    flex: 0 0 30%;
+}
+
+.column3 {
+    order: 3;
+    flex: 0 0 30%;
+}
+
+/* ------------------------------- */
+
 .tailbar-container {
     display: flex;
     padding-top:15px;

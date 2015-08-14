@@ -3,9 +3,9 @@
 	ng-show='showView(Views.HOME)'
 	style='width:100%;'
 	>
+
 	<div style='width:100%; position: relative;'>
 
-		<!-- rotating image -->	
 		<div style='
 		    z-index:1;
 		    top:0;
@@ -21,7 +21,6 @@
 				ng-src="{{homeImageSrc();}}"/>
 		</div>
 
- 		<!-- black overlay -->
 		<div style='position:absolute;
 		    z-index:2;
 		    top:0;
@@ -49,7 +48,7 @@
     	</div>
 	</div>
 
-	<div class='light-grey-background'>
+	<div class='light-grey-background unselectable'>
 		<div style='font-size:2.5em;margin-left:25px;padding-top:20px;'>
 			<span class='vomit-green'>What are you</span>
 			<span class='grey-text'>looking for ?</span>
@@ -60,7 +59,7 @@
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		</div>
 
-		<div style='margin-left:25px;width:75%;'>
+		<div style='margin-left:25px;width:75%;' class='unselectable'>
 			<div>				
 				<img ng-repeat='categoryView in model.categoryViews'
 					style='margin-right:25px;margin-bottom:15px;'
@@ -70,4 +69,93 @@
 			</div>
 		</div>
 	</div>
+
+	<div class='unselectable' style='margin-bottom:50px;'>
+		<div
+			class='frp-font'
+			style='font-size:2.5em;margin-left:20px;padding-top:20px;margin-bottom:50px;'>
+			<span class='vomit-green'>FISHER ROELAND</span>
+			<span class='grey-text'>PROPERTIES</span>
+		</div>
+
+		<div class='three-column-container grey-text' style='margin-left:25px;padding-top:20px;'>
+			
+			<div class='column column1' style='margin-right:20px;'>
+				<img style='display:block;' ng-src="/static/image/icon-gears.png"/>
+
+				<div style='margin-top:15px;'>
+					<div style='font-size:2em;'>
+						How We Can Help You
+					</div>
+					<div class='justify' style='margin-top:15px;'>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+				</div>
+			</div>
+
+			<div class='column column2' style='margin-right:20px;'>
+				<img style='display:block;' ng-src="/static/image/icon-people.png"/>
+
+				<div style='margin-top:15px;'>
+					<div style='font-size:2em;'>
+						Partners in Success
+					</div>
+					<div class='justify' style='margin-top:15px;'>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+				</div>
+			</div>
+
+			<div class='column column3' style='margin-right:20px;'>
+				<img style='display:block;margin:auto;' ng-src="/static/image/icon-marker.png"/>
+			
+				<div style='text-align:center;'>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Office Address
+						</span>
+						<br/>
+						123 Jellicoe Ave, Rosebank, JHB, South Africa
+					</div>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Phone Number
+						</span>
+						<br/>
+						+27-(0)11-123-4567
+					</div>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Email Address
+						</span>
+						<br/>
+						enquiries@frp.com
+					</div>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Office Hours
+						</span>
+						<br/>
+						Monday - Friday
+						<br/>
+						09:00 - 17:00
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
 </div>
