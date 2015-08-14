@@ -1,3 +1,5 @@
+@import url("/static/css/fonts.css");
+
 /* selected element does not have outline */
 a:focus,
 input:focus,
