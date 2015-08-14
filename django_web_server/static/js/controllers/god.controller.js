@@ -220,5 +220,5 @@ function GodController($rootScope, $scope, $http, $timeout) {
 	// INIT
 
 	$scope.loadDataModel();
-	$timeout($scope.init_twitter_widget, 500);
+	//$timeout($scope.init_twitter_widget, 500);
 };
