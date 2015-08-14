@@ -11,7 +11,7 @@
 
 	<div style='width:100%; position: relative;'>
 
-		<!-- rotating image 1 -->	
+		<!-- rotating image -->	
 		<div style='
 		    z-index:1;
 		    top:0;
@@ -21,39 +21,12 @@
 
 	    	<img style='
 				width:100%;
-				height:100%;'
+				height:100%;
+				display:block;'
 
-				ng-src="/static/image/slide01.jpg"/>
+				ng-src="{{homeImageSrc();}}"/>
 		</div>
 
- 		<!-- rotating image 2 -->
-		<div style='position:absolute;
-		    z-index:1;
-		    top:0;
-		    left:0;
-		    width:100%;
-		    height:100%;'>
-		    	    	<img style='
-				width:100%;
-				height:100%;'
-
-				ng-src="/static/image/slide02.jpg"/>
-		</div>
-
- 		<!-- rotating image 3 -->
-		<div style='position:absolute;
-		    z-index:1;
-		    top:0;
-		    left:0;
-		    width:100%;
-		    height:100%;'>
-		    	    	<img style='
-				width:100%;
-				height:100%;'
-
-				ng-src="/static/image/slide03.jpg"/>
-		</div>
- 
  		<!-- black overlay -->
 		<div style='position:absolute;
 		    z-index:2;

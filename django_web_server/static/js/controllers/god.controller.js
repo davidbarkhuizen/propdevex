@@ -1,4 +1,4 @@
-function GodController($rootScope, $scope, $http, $timeout) {
+function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.model = new DataModel('/static/');
 
@@ -215,6 +215,31 @@ function GodController($rootScope, $scope, $http, $timeout) {
 			fjs.parentNode.insertBefore(js,fjs);
 		}
 	};
+
+	/* ------------------------------------------ */
+
+	$scope.homeImageSrcs = [
+		'/static/image/slide01_sized.jpg',
+		'/static/image/slide02_sized.jpg',
+		'/static/image/slide03.jpg'
+	];
+
+	$scope.homeImageSrcIndex = 0;
+
+	$scope.homeImageSrc = function() {
+		return $scope.homeImageSrcs[$scope.homeImageSrcIndex];
+	};
+
+	
+	$scope.rotateHomeImageSrcIndex = function() {
+		
+		$scope.homeImageSrcIndex = $scope.homeImageSrcIndex + 1;
+		
+		if ($scope.homeImageSrcIndex >= $scope.homeImageSrcs.length)
+			$scope.homeImageSrcIndex = 0;
+	};
+
+	$interval($scope.rotateHomeImageSrcIndex, 5000);
 
 	// -----------------------------------------------------------------
 	// INIT
