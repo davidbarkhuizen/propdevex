@@ -205,9 +205,11 @@ div.tailbar-blurb-header span {
 /* ---------------------------- */
 /* TAILBAR */
 
+/*
 .tailbar-column a {
 	color: #676767;
 }
+*/
 
 .tailbar-container {
     display: flex;
@@ -224,12 +226,15 @@ div.tailbar-blurb-header span {
 
 .first {
     order: 1;
+    flex: 0 0 50%;
 }
 .second {
     order: 2;
+    flex: 0 0 20%;
 }
 .third {
     order: 3;
+    flex: 0 0 30%;
 }
 
 /* FLOAT */

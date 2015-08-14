@@ -52,17 +52,20 @@
 	</div>
 
    	<div class="second tailbar-column">
-   		<div class='white' style='font-size:1.5em;'>
+   		<div class='white' style='font-size:1.5em;margin-top:-5px;'>
    			Categories
 		</div>
 		<div ng-repeat='categoryView in model.categoryViews' class='uppercase'>
-			<a href="#" ng-click='gotoView(categoryView.view)'>
+			<a href="#" 
+				ng-click='gotoView(categoryView.view)'
+				ng-class="nlIsActive(categoryView.view) ? 'nav-active' : 'nav-inactive'">
 				{{ categoryView.category }}
 				<span ng-show='model.propertiesForCategory(categoryView.category).length > 0'>
 					&nbsp;({{ model.propertiesForCategory(categoryView.category).length }})
 				</span>
 			</a>
 		</div>
+		<br/>
 	</div>
     
     <div class="third tailbar-column">
