@@ -94,6 +94,7 @@ function DataModel(urlRoot) {
 		{ category: "hotel", view: Views.HOTEL },
 		{ category: "retail", view: Views.RETAIL },
 		{ category: "investment", view: Views.INVESTMENT },
+		{ category: "agricultural", view: Views.AGRICULTURAL },
 		{ category: "sold", view: Views.SOLD },
 	];
 

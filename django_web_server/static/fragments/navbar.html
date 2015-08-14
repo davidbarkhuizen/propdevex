@@ -42,6 +42,11 @@
 				ng-class="nlIsActive(Views.INVESTMENT) ? 'nav-active' : 'nav-inactive'"
 					>Investment</a>
 				<a href='#' 
+				class='underline'
+				ng-click="gotoView(Views.AGRICULTURAL);"
+				ng-class="nlIsActive(Views.AGRICULTURAL) ? 'nav-active' : 'nav-inactive'"
+					>Agricultural</a>
+				<a href='#' 
 				ng-click="gotoView(Views.SOLD);"
 				ng-class="nlIsActive(Views.SOLD) ? 'nav-active' : 'nav-inactive'"
 					>Sold</a>

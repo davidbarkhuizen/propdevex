@@ -13,4 +13,5 @@ var Views = Object.freeze({
 	RETAIL 			: guid(),
 	INVESTMENT 		: guid(),
 	SOLD 			: guid(),
+	AGRICULTURAL    : guid(),
 });	

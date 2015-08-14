@@ -3,12 +3,6 @@
 	ng-show='showView(Views.HOME)'
 	style='width:100%;'
 	>
-	<!-- 	style='vertical-align:middle;float:middle;' -->
-
-<!-- 	<img
-		style='width:100%; display: block;'
-		ng-src="/static/image/slide01.jpg"/> -->
-
 	<div style='width:100%; position: relative;'>
 
 		<!-- rotating image -->	
@@ -53,23 +47,27 @@
     			unmissable development opportunities across a diverse range of sectors
     		</span>
     	</div>
-
 	</div>
 
-	<!--
+	<div class='light-grey-background'>
+		<div style='font-size:2.5em;margin-left:25px;padding-top:20px;'>
+			<span class='vomit-green'>What are you</span>
+			<span class='grey-text'>looking for ?</span>
+		</div>
+		<div class='justify'
+			style='width:70%;
+				margin-left:25px;margin-bottom:25px;margin-top:25px;'>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
 
-	<div class='header'>
-		welcome to Fisher Roeland Properties
+		<div style='margin-left:25px;width:75%;'>
+			<div>				
+				<img ng-repeat='categoryView in model.categoryViews'
+					style='margin-right:25px;margin-bottom:15px;'
+					ng-src="{{ '/static/image/category_tiles/' + categoryView.category + '.jpg'}}"
+					ng-click='gotoView(categoryView.view);'
+					/>
+			</div>
+		</div>
 	</div>
-
-	<br/>
-
-	<div class='FRP-green'>
-		we offer development opportunities
-		<br/>
-		across diverse sectors
-	</div>
-
-	-->
-
 </div>
