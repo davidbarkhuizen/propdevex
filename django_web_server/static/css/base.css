@@ -46,9 +46,22 @@ button:focus {
 
 /* --------------------------------------------------------------------------------- */
 
+@font-face {
+	font-family: TrajanPro;
+	src: url("/static/font/TrajanPro-regular.otf") format("opentype");
+}
+
+@font-face {
+	font-family: TrajanPro;
+	font-weight: bold;
+	src: url("/static/font/TrajanPro-bold.otf") format("opentype");
+}
+
+/* --------------------------------------------------------------------------------- */
+
 .frp-font {
-	font-family:Palatino, serif;	
-	font-weight:bold;
+	font-family: TrajanPro;	
+	font-weight: bold;
 }
 
 .bold {
