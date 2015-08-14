@@ -51,6 +51,10 @@ button:focus {
 	font-weight:bold;
 }
 
+.bold {
+	font-weight:bold;
+}
+
 html, body {
 	width: 100%;
  
