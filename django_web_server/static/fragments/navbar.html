@@ -7,7 +7,7 @@
 					ng-src="/static/image/logo.png"
 					alt="Fisher Roeland Properties" />
 			</span>
-		  	<span style='padding-left:100px;'>
+		  	<span style='padding-left:50px;'>
 
 				<a href='#' ng-click="gotoHomeView();"
 					ng-class="(view == Views.HOME) ? 'nav-active' : 'nav-inactive'"
@@ -17,6 +17,7 @@
 
 				<a ng-repeat='category in model.categories'
 					href='#' ng-click="gotoCategoryView(category);"
+					style='text-transform:capitalize;'
 					ng-class="((view == Views.CATEGORY) && (selectedCategory == category)) ? 'nav-active' : 'nav-inactive'"
 					>
 					{{ category }}

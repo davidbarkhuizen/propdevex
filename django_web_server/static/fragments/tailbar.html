@@ -1,83 +1,84 @@
-<div
-	id='TailBar'
-	class='light-grey dark-grey-background tailbar-container'
-	style='width:100%;height:100%;'>
+<div class='light-grey dark-grey-background' style='padding-left:100px;'>
+	<div
+		id='TailBar'
+		class='tailbar-container'
+		style='width:100%;height:100%;'>
 
-	<div class="first tailbar-column">
-		<div style='width:100%;'>
+		<div class="first tailbar-column">
+				<div style='width:100%;'>
 
-			<div class='tailbar-blurb-header unselectable' style='width:100%;'>
+					<div class='tailbar-blurb-header unselectable' style='width:100%;'>
 
-			  	<span style='float:left; line-height:100%; font-size:2em;'
-			  		class='grey-text frp-font'>
-		   			FISHER
-		   			<br/>
-		   			ROELAND
-		   			<br/>
-		   			PROPERTIES
-			  	</span>
+					  	<span style='float:left; line-height:100%; font-size:2em;'
+					  		class='grey-text frp-font'>
+				   			FISHER
+				   			<br/>
+				   			ROELAND
+				   			<br/>
+				   			PROPERTIES
+					  	</span>
 
-				<!-- BEGIN REVERSE ORDER ////////////////////////////////////// -->
+						<!-- BEGIN REVERSE ORDER ////////////////////////////////////// -->
 
-				<span style='float:right'>
-			  		<img
-						ng-src="/static/image/icon-linkedin.png"
-						ng-click="openLinkedIn();"
-						/>
-				</span>
+						<span style='float:right'>
+					  		<img
+								ng-src="/static/image/icon-linkedin.png"
+								ng-click="openLinkedIn();"
+								/>
+						</span>
 
-				<span style='float:right'>
-			  		<img
-			  			style='margin-right:10px'
-						ng-src="/static/image/icon-twitter.png"
-						ng-click="openTwitter();"
-						/>
-				</span>
+						<span style='float:right'>
+					  		<img
+					  			style='margin-right:10px'
+								ng-src="/static/image/icon-twitter.png"
+								ng-click="openTwitter();"
+								/>
+						</span>
 
-				<span style='float:right;margin-right:10px'>
-			  		<img
-						ng-src="/static/image/icon-fb.png"
-						ng-click="openFacebook();"
-						/>
-				</span>
+						<span style='float:right;margin-right:10px'>
+					  		<img
+								ng-src="/static/image/icon-fb.png"
+								ng-click="openFacebook();"
+								/>
+						</span>
 
-			  	<!-- END REVERSE ORDER //////////////////////////////////////// -->
+					  	<!-- END REVERSE ORDER //////////////////////////////////////// -->
+					</div>
+
+					<div class='justify grey-text bold' style='margin-top:5px;'>
+					   	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+
+		   		</div>
+		</div>
+
+	   	<div class="second tailbar-column" style='padding-left:50px;'>
+	   		<div class='white' style='font-size:1.5em;margin-top:-5px;'>
+	   			Categories
 			</div>
 
-			<div class='justify grey-text bold' style='margin-top:5px;'>
-			   	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<div ng-repeat='category in model.categories' class='uppercase'>
+				<a href="#" 
+					ng-click='gotoCategoryView(category)'
+					ng-class="(selectedCategory == category) ? 'nav-active' : 'nav-inactive'">
+					{{ category }}
+					<span ng-show='model.propertiesForCategory(category).length > 0'>
+						&nbsp;({{ model.propertiesForCategory(category).length }})
+					</span>
+				</a>
 			</div>
-
-   		</div>
-	</div>
-
-   	<div class="second tailbar-column" style='padding-left:50px;'>
-   		<div class='white' style='font-size:1.5em;margin-top:-5px;'>
-   			Categories
+			<br/>
 		</div>
-
-		<div ng-repeat='category in model.categories' class='uppercase'>
-			<a href="#" 
-				ng-click='gotoCategoryView(category)'
-				ng-class="(selectedCategory == category) ? 'nav-active' : 'nav-inactive'">
-				{{ category }}
-				<span ng-show='model.propertiesForCategory(category).length > 0'>
-					&nbsp;({{ model.propertiesForCategory(category).length }})
-				</span>
-			</a>
+		    
+	    <div class="third tailbar-column">
+			<div style='width:300px;min-width:300px;'>
+		    	<a
+					class="twitter-timeline"
+					href="https://twitter.com/wsj"
+					data-widget-id="621299416310415360"
+					style='width:300px;'
+					>@FisherRoleandProperty</a>
+			</div>
 		</div>
-		<br/>
-	</div>
-    
-    <div class="third tailbar-column">
-		<div style='width:300px;min-width:300px;'>
-	    	<a
-				class="twitter-timeline"
-				href="https://twitter.com/wsj"
-				data-widget-id="621299416310415360"
-				style='width:300px;'
-				>@FisherRoleandProperty</a>
-		</div>
-	
 	</div>
 </div>

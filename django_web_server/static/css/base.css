@@ -280,12 +280,12 @@ div.tailbar-blurb-header span {
 .tailbar-column {
     flex: 1;
     box-sizing: border-box;
-    padding-left: 20px;
+    /*padding-left: 20px;*/
 }
 
 .first {
     order: 1;
-    flex: 0 0 50%;
+    flex: 0 0 40%;
 }
 .second {
     order: 2;
@@ -293,7 +293,7 @@ div.tailbar-blurb-header span {
 }
 .third {
     order: 3;
-    flex: 0 0 30%;
+    flex: 0 0 25%;
 }
 
 /* FLOAT */

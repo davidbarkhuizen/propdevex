@@ -1,0 +1,43 @@
+<div
+	id='CategoryFragment'
+	ng-show='view == Views.CATEGORY'
+	>
+
+	<!-- HEADER TEXT OVERLAY -->
+	<div style='width:100%; position: relative;'>
+
+		<div style='
+		    z-index:1;
+		    top:0;
+		    left:0;
+		    width:100%;'>
+
+	    	<img style='
+				width:100%;
+				display:block;'
+
+				ng-src="/static/image/header-category.jpg"/>
+		</div>
+
+<!-- 		<div style='position:absolute;
+		    z-index:2;
+		    top:0;
+		    left:0;
+		    width:100%;
+		    height:100%;
+		    background-color:#000000;
+		    opacity: 0.5;'>
+		</div> -->
+
+    	<div
+    		class='image-overlay-text light-grey unselectable'
+    		style='vertical-align: middle;z-index:3;margin-left:25px;'>
+    			<div style='font-size:2em;'>
+	    			<span style='text-transform:capitalize;'>
+	    				{{ selectedCategory }}
+    				</span>
+    				properties
+    			</div>
+    	</div>
+	</div>
+</div>
