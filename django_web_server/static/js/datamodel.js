@@ -2,6 +2,8 @@ function DataModel(urlRoot) {
 
 	var that = this;
 
+	that.categories = ["commercial","industrial","residential","business","hotel","retail","investment","agricultural"];
+
 	that.contacts = [{
 		"name" : "",
 		"phone" : "",
@@ -103,7 +105,6 @@ function DataModel(urlRoot) {
 			if (that.categoryViews[i].category == category)
 				return that.categoryViews[i].view;
 	};
-
 
 	that.categoryForView = function(view) {
 		for(var i = 0; i < that.categoryViews.length; i++)

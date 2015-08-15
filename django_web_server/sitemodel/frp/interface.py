@@ -21,7 +21,7 @@ CATEGORY_NAMES = [
 	'hotel',
 	'retail',
 	'investment',
-	'sold'
+	'agricultural'
 	]
 
 def populate_model_constants():

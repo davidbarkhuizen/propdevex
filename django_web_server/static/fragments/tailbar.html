@@ -55,13 +55,14 @@
    		<div class='white' style='font-size:1.5em;margin-top:-5px;'>
    			Categories
 		</div>
-		<div ng-repeat='categoryView in model.categoryViews' class='uppercase'>
+
+		<div ng-repeat='category in model.categories' class='uppercase'>
 			<a href="#" 
-				ng-click='gotoView(categoryView.view)'
-				ng-class="nlIsActive(categoryView.view) ? 'nav-active' : 'nav-inactive'">
-				{{ categoryView.category }}
-				<span ng-show='model.propertiesForCategory(categoryView.category).length > 0'>
-					&nbsp;({{ model.propertiesForCategory(categoryView.category).length }})
+				ng-click='gotoCategoryView(category)'
+				ng-class="(selectedCategory == category) ? 'nav-active' : 'nav-inactive'">
+				{{ category }}
+				<span ng-show='model.propertiesForCategory(category).length > 0'>
+					&nbsp;({{ model.propertiesForCategory(category).length }})
 				</span>
 			</a>
 		</div>

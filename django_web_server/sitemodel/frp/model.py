@@ -56,6 +56,7 @@ class FRP_Stand(models.Model):
 	units = models.IntegerField(null=False)
 	situationDescription = models.TextField(null=True)
 	areaSQM = models.IntegerField(null=False)
+	sold = models.BooleanField(null=False, default=True)
 
 	def __str__(self):
 		return self.name + ' x ' + str(self.units) + ' @ ' + str(self.areaSQM) + ' SQM'

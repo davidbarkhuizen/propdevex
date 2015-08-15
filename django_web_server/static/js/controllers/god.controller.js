@@ -4,6 +4,32 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.dataModelIsLoaded = false;
 
+	$scope.selectedCategory = null;
+	$scope.selectedProperty = null;
+
+	$scope.cancelSelection = function() {
+		$scope.selectedCategory = null;
+		$scope.selectedProperty = null;
+	};
+
+	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+	$scope.gotoHomeView = function() {
+		$scope.cancelSelection();
+		$scope.view = Views.HOME; 
+	};
+
+	$scope.gotoCategoryView = function(category) {
+		// cancel selection ?
+		$scope.selectedCategory = category;
+		$scope.view = Views.CATEGORY; 
+	};
+
+	$scope.gotoSoldView = function() {
+		$scope.cancelSelection();
+		$scope.view = Views.SOLD; 
+	};
+
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// VIEWS	
 
