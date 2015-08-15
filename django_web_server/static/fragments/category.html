@@ -2,8 +2,6 @@
 	id='CategoryFragment'
 	ng-show='view == Views.CATEGORY'
 	>
-
-	<!-- HEADER TEXT OVERLAY -->
 	<div style='width:100%; position: relative;'>
 
 		<div style='
@@ -19,25 +17,30 @@
 				ng-src="/static/image/header-category.jpg"/>
 		</div>
 
-<!-- 		<div style='position:absolute;
-		    z-index:2;
-		    top:0;
-		    left:0;
-		    width:100%;
-		    height:100%;
-		    background-color:#000000;
-		    opacity: 0.5;'>
-		</div> -->
-
     	<div
-    		class='image-overlay-text light-grey unselectable'
-    		style='vertical-align: middle;z-index:3;margin-left:25px;'>
-    			<div style='font-size:2em;'>
-	    			<span style='text-transform:capitalize;'>
-	    				{{ selectedCategory }}
-    				</span>
-    				properties
-    			</div>
+    		class='category-header-image-overlay-text light-grey unselectable'
+    		style='z-index:2;margin-left:100px;'>
+
+    			<div style='display:table;height:100%;width:100%;'>
+	    			<div style='vertical-align: middle;display: table-cell;height:100%;width:100%;'>
+		    			<span style='font-size:2em;'>
+			    			<span style='text-transform:capitalize;'>
+			    				{{ selectedCategory }}
+		    				</span>
+		    				properties
+		    			</span>
+		    			<br/>
+						<span ng-if='model.propertiesForCategory(selectedCategory).length == 0'>
+		    				none
+		    			</span>
+						<span ng-if='model.propertiesForCategory(selectedCategory).length == 1'>
+		    				1 property
+		    			</span>
+		    			<span ng-if='model.propertiesForCategory(selectedCategory).length > 1'>
+		    				{{ model.propertiesForCategory(selectedCategory).length }} properties
+		    			</span>
+		    		</div>
+	    		</div>
     	</div>
 	</div>
 </div>
