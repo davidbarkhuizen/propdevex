@@ -41,7 +41,7 @@ class SiteInterface(object):
 		user_editable_model_names,
 		populate_model_constants,
 		render_site_model,
-		randomly_populate_datamodel):
+		populate_datamodel):
 		
 		self.name = name
 		self.token = token
@@ -49,7 +49,7 @@ class SiteInterface(object):
 		self.user_editable_model_names = user_editable_model_names
 		self.populate_model_constants = populate_model_constants
 		self.render_site_model = render_site_model
-		self.randomly_populate_datamodel = randomly_populate_datamodel
+		self.populate_datamodel = populate_datamodel
 
 	def get_json_source_root(self):
 		return settings.MEDIA_ROOT + '/' + self.token + '/json/'
@@ -64,14 +64,14 @@ class SiteInterface(object):
 		user_editable_model_names,
 		populate_model_constants,
 		render_site_model,
-		randomly_populate_datamodel):
+		populate_datamodel):
 
 		si = SiteInterface(name, token, 
 			user_names, 
 			user_editable_model_names,
 			populate_model_constants,
 			render_site_model,
-			randomly_populate_datamodel
+			populate_datamodel
 			)
 
 		cls.interfaces.append(si)
@@ -289,7 +289,7 @@ def update(site_token):
 	site_model = interface.render_site_model(site_token)
 	update_data_model(site_token, site_model)
 
-def randomly_populate_datamodel(site_token):
+def populate_datamodel(site_token):
 	
 	interface = SiteInterface.get(site_token)
-	interface.randomly_populate_datamodel()
+	interface.populate_datamodel()

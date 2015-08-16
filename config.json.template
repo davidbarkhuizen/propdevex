@@ -8,4 +8,6 @@
 	"db_name" : "sdmm",
 	"db_user" : "sdmm",
 	"db_password" : "password",
+
+	"site_data_import_root" : ""
 }

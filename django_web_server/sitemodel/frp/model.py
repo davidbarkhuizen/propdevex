@@ -38,7 +38,7 @@ class FRP_Property(models.Model):
 
 	category 		= models.ForeignKey(FRP_Category, null=False)
 
-	sold 			= models.BooleanField(null=False, default=True)
+	sold 			= models.BooleanField(null=False, default=False)
 
 	name 			= models.CharField(max_length=1024, unique=True, null=False)
 	areaSQM 		= models.IntegerField(null=False, blank=True)
@@ -47,8 +47,8 @@ class FRP_Property(models.Model):
 	shortLocation 	= models.CharField(max_length=1024, unique=False, null=False)
 	longLocation 	= models.CharField(max_length=1024, unique=False, null=False)
 	
-	latitude 		= models.DecimalField(null=True, blank=True)
-	longitude 		= models.DecimalField(null=True, blank=True)
+	latitude 		= models.DecimalField(decimal_places=6, max_digits=9, null=True, blank=True)
+	longitude 		= models.DecimalField(decimal_places=6, max_digits=9, null=True, blank=True)
 
 	def __str__(self):
 		return self.name
@@ -61,19 +61,19 @@ class FRP_PropertyImage(models.Model):
 		app_label = 'server'
 
 	property 		= models.ForeignKey(FRP_Property, null=False)	
-	imagefile 		= models.FileField(upload_to=IMAGE_ROOT, null=True)
+	file 			= models.FileField(upload_to=IMAGE_ROOT, null=True)
 	isprimary 		= models.BooleanField(null=False, default=False)
 
 class FRP_SubProperty(models.Model):
 	class Meta:
 		db_table = "frp_sub_property"
-		verbose_name = "subproperties"
-		verbose_name_plural = "propertyimages"
+		verbose_name = "subproperty"
+		verbose_name_plural = "subproperties"
 		app_label = 'server'
 
 	property 		= models.ForeignKey(FRP_Property, null=False)
 
-	sold 			= models.BooleanField(null=False, default=True)
+	sold 			= models.BooleanField(null=False, default=False)
 
 	name 			= models.CharField(max_length=1024, unique=False, null=True)
 	description 	= models.TextField(null=True)

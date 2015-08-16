@@ -5,10 +5,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 config = json.load(open(BASE_DIR + '/../config.json'))
 
-# --------------
+# -----------------------------------------------------------
 
 SECRET_KEY = config['django_secret_key']
 APPLICATION_ENTRY_POINT = config['application_entry_point']
+SITE_DATA_IMPORT_ROOT_FOLDER = config['site_data_import_root_folder']
 
 DEBUG = True
 TEMPLATE_DEBUG = True

@@ -3,14 +3,15 @@ import random
 from django.db import connection
 from django.conf import settings
 from sitemodel.interface import SiteInterface, SiteModel, random_str
+from django.core.files import File
 
 from server.models import Site, TextUpload, BinaryUpload
 
-from sitemodel.frp.model import  FRP_Category, FRP_Contact, FRP_Property, FRP_Stand
+from sitemodel.frp.model import  FRP_Category, FRP_Contact, FRP_Property, FRP_PropertyImage, FRP_SubPropertyImage
 
 SITE_NAME = 'FisherRoelandProperty' 
 SITE_TOKEN = 'frp'
-USER_EDITABLE_MODEL_NAMES = ['frp_contact', 'frp_property', 'frp_stand']
+USER_EDITABLE_MODEL_NAMES = [ 'frp_contact', 'frp_property', 'frp_property_image', 'frp_sub_property', 'frp_sub_property_image']
 SITE_USER_NAMES = [ 'frpjenny', 'frpmelissa' ]
 
 CATEGORY_NAMES = [
@@ -36,14 +37,16 @@ def populate_model_constants():
 		db_category = FRP_Category(name=category_name)
 		db_category.save()
 
-def randomly_populate_datamodel():
+def populate_datamodel():
+
+	import_root_location = settings.SITE_DATA_IMPORT_ROOT_FOLDER + SITE_TOKEN + '/'
 
 	if len(FRP_Contact.objects.all()) > 0:
 		return
 
 	for category in FRP_Category.objects.all():
 
-		# contact
+		# CONTACT
 
 		name = random_str(8)
 		email = random_str(8) + '@' + random_str(8) + '.com'  
@@ -54,25 +57,63 @@ def randomly_populate_datamodel():
 		db_contact.categories.add(category)
 		db_contact.save()
 
-		# properties
+		# PROPERTIES
 
-		name = random_str(20)
-		title = random_str(50)
-		description = '\r\n'.join([random_str(20) for i in range(5)])
-		udf = None
+		props_to_import = None
+		with open(import_root + category.name + '.json', 'rt') as source_file:
+			json_str = source_file.read()
+			props_to_import = json.loads(json_str)
 
-		db_Property = FRP_Property(category=category, name=name, title=title, description=description, udf=udf)
-		db_Property.save()
+		for prop in props_to_import:			
 
-		for i in range(random.randint(0,3)):
+			db_property = FRP_Property(category=category, sold=False, name=prop['name'], areaSQM=prop['areaSQM'], description=prop['description'], shortLocation=prop['shortLocation'],longLocation=prop['longLocation'], latitude=prop['latitude'], longitude=prop['longitude'])
+			
+			db_property.save()
 
-			name = random_str(20)
-			units = random.choice(range(100))
-			situationDescription = '\r\n'.join([random_str(20) for i in range(5)])
-			areaSQM = random.randint(10000,100000)
+			for i in range(len(prop['images'])):
 
-			stand = FRP_Stand(property=db_Property, name=name, units=units, situationDescription=situationDescription, areaSQM=areaSQM)
-			stand.save()
+				prop_image_file_name = prop['images'][i]
+
+				image_source_location = import_root_location  + category.name + '/' + prop_image_file_name
+
+				image_source_django_file = None
+				with open(image_source_location) as image_source_python_file:
+					image_source_django_file = File(f)
+
+				db_property_image = FRP_PropertyImage(property=db_property)
+				db_property_image.file.save(prop_image_file_name, image_source_django_file)
+
+				if i == 0:
+					db_property_image.isprimary = True
+
+				db_PropertyImage.save()
+
+			for j in range(len(prop['subproperties'])):
+
+				sub_prop = prop['subproperties'][j]				
+
+				db_subproperty = FRP_SubProperty(property=db_Property, name=sub_prop['name'], areaSQM=sub_prop['areaSQM'], description=sub_prop['description'])
+
+				db_subproperty.save()				
+
+				for k in range(len(sub_prop['images'])):
+
+					sub_prop_image_file_name = sub_prop['images'][k]
+
+					image_source_location = import_root_location  + category.name + '/' + sub_prop_image_file_name
+
+					image_source_django_file = None
+					with open(image_source_location) as image_source_python_file:
+						image_source_django_file = File(f)
+
+					db_sub_property_image = FRP_SubPropertyImage(property=db_property)
+					db_sub_property_image.file.save(sub_prop_image_file_name, image_source_django_file)
+
+					if k == 0:
+						db_sub_property_image.isprimary = True
+
+					db_sub_property_image.save()
+
 
 def render_site_model(site_token):
 	
@@ -154,5 +195,5 @@ SiteInterface.register(
 	USER_EDITABLE_MODEL_NAMES,
 	populate_model_constants,
 	render_site_model,
-	randomly_populate_datamodel		   
+	populate_datamodel		   
 	)

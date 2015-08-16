@@ -12,7 +12,7 @@
 		"description" : "Willows is a top quality stable yard that is home to 102 horses and ponies\nAll disciplines are taught including Dressage, Equitation, Eventing, Show Jumping, Showing and Vaulting.\nWillows International Riding centre is a GHS graded venue for Dressage, Equitation, Show Jumping, Showing with grading applications pending for  Eventing and Vaulting.",
 		"images" : ["zwavelpoort_geolocation.jpg"],
 
-		"stands" : [
+		"subproperties" : [
 			{
 				"name" : "portion 139",
 				"areaSQM" : 124600,
@@ -39,7 +39,7 @@
 		"longitude" : null,
 		"description" : "",
 		"images" : ["reid_avenue.jpg"],
-		"stands" : []
+		"subproperties" : []
 	},
 
 	{
@@ -54,7 +54,7 @@
 		"description" : "Assets:\nConference Centre/Hotel accommodation\n  250 m² Public areas and kitchen\n  140 m² Conference area\n1 040 m² Rooms\n  150 m² Lapa & tea area\n   95 m² Store & garage\n  235 m² Staff quarters\n  120m ² Water feature and Lapa",
 		"images" : ["pooks_hill_primary.jpg"],
 
-		"stands" : [
+		"subproperties" : [
 			{
 				"name" : "portion 19, (a portion of portion 18) of the Farm 388, off William Nicol Drive on the R511",
 				"areaSQM" : null,
@@ -85,7 +85,7 @@
 			"northriding_residential_udf.jpg",
 			"northriding_residential_geolocation.jpg"
 		],
-		"stands" : []
+		"subproperties" : []
 	},
 
 	{
@@ -104,7 +104,7 @@
 			"krugersdorp_geolocation.jpg"
 		],
 
-		"stands" : []
+		"subproperties" : []
 	},
 
 	{
@@ -121,7 +121,7 @@
 			"ellisras.jpg", "krugersdorp_geolocation.jpg"
 		],
 
-		"stands" : [
+		"subproperties" : [
 			{
 				"name" : "Phase 3 - Ellisrasx 119 - Erf 13303 to 13375",
 				"areaSQM" : 325,
@@ -154,7 +154,7 @@
 		"longitude" : null,
 		"description" : "",
 		"images" : [ "hilton_road_udf.jpg", "hilton_road_geolocation.jpg" ],
-		"stands" : []
+		"subproperties" : []
 	},
 
 	{
@@ -168,7 +168,7 @@
 		"longitude" : null,
 		"description" : "",
 		"images" : [ "clulee_99100_udf.jpg", "clulee_99100_geolocation.jpg"],
-		"stands" : []
+		"subproperties" : []
 	},
 
 	{
@@ -182,6 +182,6 @@
 		"longitude" : null,
 		"description" : "",
 		"images" : [ "clulee_1617_udf.jpg", "clulee_1617_geolocation.jpg" ],
-		"stands" : []
+		"subproperties" : []
 	}
 ]}
