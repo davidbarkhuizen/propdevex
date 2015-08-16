@@ -1,0 +1,86 @@
+{"properties" : [
+
+	{
+		"category" : "hotel",
+
+		"name" : "Aedeco Guest House",
+		"shortLocation" : "Knysna",
+		"longLocation" : "150 Old Cape Road, Knysna",
+		"areaSQM" : 928,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "Is a four star graded guesthouse, known as Ardeco Knysna.\nIt is an old double storey.\nIt comprises entrance foyer with lounge and 6 x upmarket en-suite rooms.\nCovered patio with built-in bar that overlooks the swimming pool.\nOutbuilding has a restaurant with kitchen, toilet and double garage.",
+		"images" : ["aedeco.jpg"],
+		"stands" : []
+	},
+
+	{
+		"category" : "hotel",
+
+		"name" : "Beauchamp Place",
+		"shortLocation" : "Knysna",
+		"longLocation" : "Beauchamp Place, 150 Old Cape Road, Knysna",
+		"areaSQM" : 1605,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "Is a three star graded guesthouse, known as Beauchamp Place\nSouth facing\nIt is an old double storey\nIt comprises a second building that is linked on the top floor\nThe main building comprises reception with office, small lounge, garage / storeroom and 13 guest suites.  Six of the rooms comprises bedroom with en-suite shower.\nAnother six rooms comprises room with kitchenette and en-suite bathroom.\nThere is a small family suite that comprises room, small room and bathroom.\nThe large family suite comprises 2 x bedrooms, utility room, kitchenette and 2 x en-suite showers.\nThe second building comprises on the ground floor of a double tandem garage and a guest suite behind it.\nThe top floor comprises suite that is sometimes used for functions / conferences and comprises room, kitchen, shower and toilet. ",
+		"images" : ["beauchamp_place.jpg"],
+		"stands" : []
+	},
+
+	{
+		"category" : "hotel",
+
+		"name" : "Camelot Spa",
+		"shortLocation" : "Sanlameer",
+		"longLocation" : "Sanlameer, Southbroom",
+		"areaSQM" : null,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "5 star Health Spa and Wellness Centre\nThe only facility of its kind on the South Coast\nThe Spa has been awarded two PMR Golden Arrow awards, won finalist status in the Spa of the Year Awards in 2013 by offering the highest level of service and quality treatments and our latest accolade is the World Luxury Spa award for Africa.\nThe spa has the only Rasul Chamber in the country which includes a built-in cold pool and twinkling LED lights, a floatation pool with music playing from underneath the water.\n10 therapy rooms – four of which are couples rooms and a relaxation area with a magnificent view of the lagoon.\nIn addition, the spa has a fully equipped gym.",
+		"images" : ["camelot_spa.jpg"],
+		"stands" : []
+	},
+
+	{
+		"category" : "hotel",
+
+		"name" : "Chigamane Beach Villas",
+		"longLocation" : "Chigamane Beach Villas is a fully developed and established holiday property in Mozambique",
+		"shortLocation" : "Vilanculos - Mozambique",
+		"areaSQM" : 34000,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "The stated property area excludes an additional license from Maritima for an extra 100 meters towards the beach; which has already been issued.\nAssets of the Company include:\n2x fully equipped beachfront Villas for 11 people.\n1x fully furnished and solar powered ‘Managers’ House.\n1x Office Reception with toilet.\nCommunal pool with deck overlooking the beach.\nFully established gardens with underground irrigation system.\n1x solar equipped borehole yield 10000 liters per hour.\n3x 5000 liter water tanks on concrete slab with solar powered pressure pump.\n1x container storeroom facility under thatch with equipment.\nProperty is fully fenced with 2m high diamond mesh with razor wire on top.\n1 x 18 kva Perkins silent generator and 1x 5.5 kva Honda generator.\n1x boat & jet ski; and\n1x Toyota Hilux game viewer.",
+		"images" : ["chigamane_primary.jpg", "chigamane_geolocation.jpg"],
+		"stands" : []
+	},
+
+	{
+		"category" : "hotel",
+
+		"name" : "Euphoria Golf Estate Hydro",
+		"shortLocation" : "Waterberg",
+		"longLocation" : "R101 Modimolle, Mookgophong, Waterberg, Limpopo",
+		"areaSQM" : 10000,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "4 star graded estate\n64 en-suit villas with a balcony\nState of the art conferencing facilities which seat 188 school style seating\nThe 18 hole championship golf course is the first golf course in Africa to be designed by Annika Sorenstam and provides a perfect links like bushveld experience.\nThe unique Hydro has four luxury private villas fitted with state of the art hydrotherapy facilities including Saunas, Steam Room, Rain Showers, Rasul “Love Chamber”, Jacuzzi, Fan Showers, Floatation Pool, Vichy Shower and Plunge Pools.\nA  Fine Dining Restaurant\nBar/bar lounge and Wine Cellar.\nOnly the second in South Africa and a first for the Limpopo Province. Euphoria has its own cableway which links the Clubhouse to the mountain top estate and Sundowner Deck Restaurant.",
+		"images" : ["euphoria_primary.jpg"],
+		"stands" : []
+	},
+
+	{
+		"category" : "hotel",
+
+		"name" : "Nondela Drakensberg Mountain Estate",
+		"shortLocation" : "Drakensberg",
+		"longLocation" : "3.5 hours from Johannesburg and 3 hours from Durban, in the Drakensberg, South Africa",
+		"areaSQM" : 10000000,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "A world class Ernie Els designed 18-hole golf course\nHigh-end engineering infrastructure servicing 547 residential, sectional title and hotel room opportunities, of which 36 have been transferred to third-party owners.\nSingle Residential Stands (4 bedrooms each)\nHotel (160 rooms with 2 beds)\nChalets (each 8 sleeper)\nStaff Quarters (200 Staff / 3 Room Chalets)\n5 km tar access road from the R74 (built to a 60km / hour specification)\nHelicopter landing pad\n25 km of tarred internal roads\n17.5 km of electrified perimeter fence line\nThe Kopanong Dam, which has a 10 km2 catchment area and a storage capacity of 530 ML\nA potable water reservoir with a storage capacity of 2.8 ML\nAn irrigation water reservoir with a storage capacity of 2.5 ML\nA potable water treatment works with a capacity of 960 kl per day\nA sewer treatment works with a capacity of 500 kl per day\nA 3 MVA bulk Eskom electricity supply and a full internal electrical reticulation system\nThere are individual service connections to 431 sites, with the remaining sites bulk serviced.\n\nAccommodation:\nGatehouse, estate offices and estate maintenance centre\n4 completed houses (one house is occupied by the Estate Manager)\n8 Partially completed houses ",
+		"images" : ["euphoria_primary.jpg"],
+		"stands" : []
+	}
+]}

@@ -1,0 +1,187 @@
+{"properties" : [
+
+	{
+		"category" : "residential",
+
+		"name" : "Zwavelpoort",
+		"shortLocation" : "Pretoria",
+		"longLocation" : "Plot 139/140 Zwavelpoort Road, off Lynwood Road, Pretoria",
+		"areaSQM" : 216981,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "Willows is a top quality stable yard that is home to 102 horses and ponies\nAll disciplines are taught including Dressage, Equitation, Eventing, Show Jumping, Showing and Vaulting.\nWillows International Riding centre is a GHS graded venue for Dressage, Equitation, Show Jumping, Showing with grading applications pending for  Eventing and Vaulting.",
+		"images" : ["zwavelpoort_geolocation.jpg"],
+
+		"stands" : [
+			{
+				"name" : "portion 139",
+				"areaSQM" : 124600,
+				"image" : "zwavelpoort_stand_139.jpg",
+				"description" : ""			
+			},
+			{
+				"name" : "portion 140",
+				"areaSQM" : 92381,
+				"image" : "zwavelpoort_stand_140.jpg",
+				"description" : ""			
+			}				
+		]
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "Reid Avenue",
+		"shortLocation" : "Pretoria",
+		"longLocation" : "Portion number 43 Reid Avenue, Linbro Park, Gauteng",
+		"areaSQM" : 17644,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "",
+		"images" : ["reid_avenue.jpg"],
+		"stands" : []
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "Pooks Hill",
+		"shortLocation" : "Midrand",
+		"longLocation" : "Located along the Mnandi/Knoppieslaagte Road, between the R511 and R562 in the Midrand area just past Dainfern, Helderfontein Estate and the new Steyn City developments",
+		"areaSQM" : 17644,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "Assets:\nConference Centre/Hotel accommodation\n  250 m² Public areas and kitchen\n  140 m² Conference area\n1 040 m² Rooms\n  150 m² Lapa & tea area\n   95 m² Store & garage\n  235 m² Staff quarters\n  120m ² Water feature and Lapa",
+		"images" : ["pooks_hill_primary.jpg"],
+
+		"stands" : [
+			{
+				"name" : "portion 19, (a portion of portion 18) of the Farm 388, off William Nicol Drive on the R511",
+				"areaSQM" : null,
+				"image" : null,
+				"description" : ""		
+			},
+			{
+				"name" : "Portion 191 (a portion of portion 31), Farm 388 off William Nicol Drive on the R511",
+				"areaSQM" : null,
+				"image" : null,
+				"description" : ""			
+			}				
+		]
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "Northriding",
+		"shortLocation" : "Northriding",
+		"longLocation" : "Plot 241, Olievenhoutpoort Farm 196, 73 Honeydew Road, Northriding, Gauteng",
+		"areaSQM" : 18000,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "Has an Eskom Servitude\nA Micro Tower\nA service Road",
+		"images" : [
+			"northriding_residential_schematic.jpg", 
+			"northriding_residential_udf.jpg",
+			"northriding_residential_geolocation.jpg"
+		],
+		"stands" : []
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "Krugersdorp",
+		"shortLocation" : "Krugersdorp",
+		"longLocation" : "Portion number 30, Farm 180 Rietvallei, Krugersdorp, Gauteng",
+		"areaSQM" : 128186,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "Has the Crocodile River running through the property\nEasy access to the N14 Highway\nHas a main sewage line runing through it ",
+		"images" : [
+			"krugersdorp_schematic.jpg", 
+			"krugersdorp_udf.jpg",
+			"krugersdorp_geolocation.jpg"
+		],
+
+		"stands" : []
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "Ellisras",
+		"shortLocation" : "Lephalale",
+		"longLocation" : "Lephalale, Waterberg, Limpopo",
+		"areaSQM" : null,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "The development concept comprise of various types of residential developments to be executed in 7 different phases.\nThis project will only cover phases 3-5.\n\nThe envisaged development being comprised of a number of individual sites to be developed has a competitive market advantage brought on by the fact that the market offering will provide a variety of different residential options. These options will include high density and more affordable units aimed at the middle class, lower middle class and especially the blue collar worker market to be employed at the power plants and mines. On the other side the development being comprised of easily segmental portions will also include market offering for the more affluent market in the form of free standing lower density residential. The intermediate market could also be well serviced by means of town-houses and smaller duplex and simplex units. The development mix will be informed by the market demand perspective to be discussed in greater detail in sub-sequent sections.",
+		"images" : [
+			"ellisras.jpg", "krugersdorp_geolocation.jpg"
+		],
+
+		"stands" : [
+			{
+				"name" : "Phase 3 - Ellisrasx 119 - Erf 13303 to 13375",
+				"areaSQM" : 325,
+				"images" : [],
+				"description" : "Phase 3 is zoned residential 1 and is to comprise of medium density housing. The property will allow for roughly 16 units per hectare with an average stand size of 325 m². Development plans for phase 3 are the most advanced with the concept building plans drawn up for the properties depending on the size of the stands."	
+			},
+			{
+				"name" : "Phase 4 - Ellisrasx 120 - Erf 13378 to 13457",
+				"areaSQM" : 500,
+				"images" : [],
+				"description" : "Phase 4 will be located on Ellisras ext 120. This area is located closest to the access route and is thus a logical second phase for implementation. Phase 4 is zoned residential 1 and will comprise of 81 residential erven made up of roughly 16 stands per hectare, to be developed on the southern portion of the development site. The stand sizes are larger with the average stand measuring 500 m² compared to an average stand size of 325 m² in Phase 3 and 5."
+			},
+			{
+				"name" : "Phase 5 - Ellisrasx 121 - Erf 13458 to 13507",
+				"areaSQM" : 325,
+				"images" : [],
+				"description" : "Phase 5 of the development is to be located on the north western corner of the proposed developments. This development phase will also constitute residential 1 development with roughly 16 units per hectare and a total of 49 stands with an average stand size of 325 m²."
+			}				
+		]
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "Hilton Road - Linbro Park",
+		"shortLocation" : "Linbro Park",
+		"longLocation" : "Portion number 102, 103, 105 & 106, Hilton Road, Linbro Park, Gauteng",
+		"areaSQM" : 82526,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "",
+		"images" : [ "hilton_road_udf.jpg", "hilton_road_geolocation.jpg" ],
+		"stands" : []
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "99/100 Clulee Road - Linbro Park",
+		"shortLocation" : "Linbro Park",
+		"longLocation" : "Portion number 100 & 99 Clulee Road, Linbro Park, Gauteng",
+		"areaSQM" : 39391,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "",
+		"images" : [ "clulee_99100_udf.jpg", "clulee_99100_geolocation.jpg"],
+		"stands" : []
+	},
+
+	{
+		"category" : "residential",
+
+		"name" : "16/17 Clulee Road - Linbro Park",
+		"shortLocation" : "Linbro Park",
+		"longLocation" : "Portion number 16 & 17, Clulee Road, Linbro Park, Gauteng",
+		"areaSQM" : 39111,
+		"latitude" : null,
+		"longitude" : null,
+		"description" : "",
+		"images" : [ "clulee_1617_udf.jpg", "clulee_1617_geolocation.jpg" ],
+		"stands" : []
+	}
+]}
