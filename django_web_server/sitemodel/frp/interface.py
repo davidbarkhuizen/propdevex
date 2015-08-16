@@ -1,5 +1,7 @@
 import random
 
+import json
+
 from django.db import connection
 from django.conf import settings
 from sitemodel.interface import SiteInterface, SiteModel, random_str
@@ -7,7 +9,7 @@ from django.core.files import File
 
 from server.models import Site, TextUpload, BinaryUpload
 
-from sitemodel.frp.model import  FRP_Category, FRP_Contact, FRP_Property, FRP_PropertyImage, FRP_SubPropertyImage
+from sitemodel.frp.model import  FRP_Category, FRP_Contact, FRP_Property, FRP_PropertyImage, FRP_SubProperty, FRP_SubPropertyImage
 
 SITE_NAME = 'FisherRoelandProperty' 
 SITE_TOKEN = 'frp'
@@ -39,10 +41,12 @@ def populate_model_constants():
 
 def populate_datamodel():
 
+	print('FRP = populate_datamodel')
+
 	import_root_location = settings.SITE_DATA_IMPORT_ROOT_FOLDER + SITE_TOKEN + '/'
 
-	if len(FRP_Contact.objects.all()) > 0:
-		return
+	#if len(FRP_Contact.objects.all()) > 0:		
+	#	return
 
 	for category in FRP_Category.objects.all():
 
@@ -59,12 +63,19 @@ def populate_datamodel():
 
 		# PROPERTIES
 
-		props_to_import = None
-		with open(import_root + category.name + '.json', 'rt') as source_file:
-			json_str = source_file.read()
-			props_to_import = json.loads(json_str)
+		to_import = None
+		try:
+			with open(import_root_location + category.name + '.json', 'rt') as source_file:
+				json_str = source_file.read()
+				to_import = json.loads(json_str)
+		except IOError as e:
+			print(e)
+			print('no source file found for category {0}'.format(category.name))
+			continue
 
-		for prop in props_to_import:			
+		for prop in to_import['properties']:			
+
+			print(prop)
 
 			db_property = FRP_Property(category=category, sold=False, name=prop['name'], areaSQM=prop['areaSQM'], description=prop['description'], shortLocation=prop['shortLocation'],longLocation=prop['longLocation'], latitude=prop['latitude'], longitude=prop['longitude'])
 			
@@ -76,43 +87,44 @@ def populate_datamodel():
 
 				image_source_location = import_root_location  + category.name + '/' + prop_image_file_name
 
+				db_property_image = FRP_PropertyImage(property=db_property)
+
 				image_source_django_file = None
 				with open(image_source_location) as image_source_python_file:
-					image_source_django_file = File(f)
-
-				db_property_image = FRP_PropertyImage(property=db_property)
-				db_property_image.file.save(prop_image_file_name, image_source_django_file)
+					image_source_django_file = File(image_source_python_file)					
+					db_property_image.file.save(prop_image_file_name, image_source_django_file)
 
 				if i == 0:
 					db_property_image.isprimary = True
 
-				db_PropertyImage.save()
+				db_property_image.save()
 
 			for j in range(len(prop['subproperties'])):
 
 				sub_prop = prop['subproperties'][j]				
 
-				db_subproperty = FRP_SubProperty(property=db_Property, name=sub_prop['name'], areaSQM=sub_prop['areaSQM'], description=sub_prop['description'])
+				db_subproperty = FRP_SubProperty(property=db_property, name=sub_prop['name'], areaSQM=sub_prop['areaSQM'], description=sub_prop['description'])
 
 				db_subproperty.save()				
 
-				for k in range(len(sub_prop['images'])):
+				if ('images' in sub_prop.keys()):
 
-					sub_prop_image_file_name = sub_prop['images'][k]
+					for k in range(len(sub_prop['images'])):
 
-					image_source_location = import_root_location  + category.name + '/' + sub_prop_image_file_name
+						sub_prop_image_file_name = sub_prop['images'][k]
 
-					image_source_django_file = None
-					with open(image_source_location) as image_source_python_file:
-						image_source_django_file = File(f)
+						image_source_location = import_root_location  + category.name + '/' + sub_prop_image_file_name
 
-					db_sub_property_image = FRP_SubPropertyImage(property=db_property)
-					db_sub_property_image.file.save(sub_prop_image_file_name, image_source_django_file)
+						db_sub_property_image = FRP_SubPropertyImage(property=db_property)
+						image_source_django_file = None
+						with open(image_source_location) as image_source_python_file:
+							image_source_django_file = File(image_source_python_file)
+							db_sub_property_image.file.save(sub_prop_image_file_name, image_source_django_file)
 
-					if k == 0:
-						db_sub_property_image.isprimary = True
+						if k == 0:
+							db_sub_property_image.isprimary = True
 
-					db_sub_property_image.save()
+						db_sub_property_image.save()
 
 
 def render_site_model(site_token):

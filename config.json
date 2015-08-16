@@ -14,5 +14,5 @@
 	"smtp_login" : "", 
 	"smtp_password" : "",
 
-	"site_data_import_root_folder" : "/home/David/code/propdevex/github/import/"
+	"site_data_import_root_folder" : "/home/david/code/propdevex/github/import/"
 }

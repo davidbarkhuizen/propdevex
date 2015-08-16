@@ -41,7 +41,7 @@ class FRP_Property(models.Model):
 	sold 			= models.BooleanField(null=False, default=False)
 
 	name 			= models.CharField(max_length=1024, unique=True, null=False)
-	areaSQM 		= models.IntegerField(null=False, blank=True)
+	areaSQM 		= models.IntegerField(null=True, blank=True)
 	description 	= models.TextField(null=True, blank=True)
 	
 	shortLocation 	= models.CharField(max_length=1024, unique=False, null=False)
@@ -51,7 +51,7 @@ class FRP_Property(models.Model):
 	longitude 		= models.DecimalField(decimal_places=6, max_digits=9, null=True, blank=True)
 
 	def __str__(self):
-		return self.name
+		return "({0}) {1}".format(self.category.name, self.name)
 
 class FRP_PropertyImage(models.Model):
 	class Meta:
@@ -77,10 +77,10 @@ class FRP_SubProperty(models.Model):
 
 	name 			= models.CharField(max_length=1024, unique=False, null=True)
 	description 	= models.TextField(null=True)
-	areaSQM			= models.IntegerField(null=False)
+	areaSQM			= models.IntegerField(null=True, blank=True)
 
 	def __str__(self):
-		return self.name
+		return "({0}) {1}".format(self.property.name, self.name)
 
 class FRP_SubPropertyImage(models.Model):
 	class Meta:
