@@ -140,10 +140,10 @@ def render_site_model(site_token):
 	data_model['contacts'] = []
 	for db_contact in FRP_Contact.objects.all():
 
-		contact = { "name" : db_contact.name,
-			"phone" : db_contact.phone,
-			"email" : db_contact.email,
-			"categories" : []
+		contact = { 'name' : db_contact.name,
+			'phone' : db_contact.phone,
+			'email' : db_contact.email,
+			'categories' : []
 			}
 		
 		for db_category in db_contact.categories.all():
@@ -156,22 +156,19 @@ def render_site_model(site_token):
 	data_model['properties'] = []
 	for db_prop in FRP_Property.objects.all(): 
 
-		source = None
-		dest_path = None
-		if (db_prop.udf.name is not None) and (len(db_prop.udf.name) > 0):
+		property =  { 'category' : db_prop.category.name,
+			'sold' : db_prop.sold,
+			'name': db_prop.name,
 
-			source = settings.MEDIA_ROOT + '/' + db_prop.udf.name
-			dest_path = '/'.join(db_prop.udf.name.split('/')[1:])
+			'areaSQM': db_prop.areaSQM,
+			'description': [],
+			'shortLocation': db_prop.shortLocation,
+			'longLocation': db_prop.longLocation,
+			'latitude': db_prop.latitude,
+			'longitude': db_prop.longitude,
 
-			db_binary_upload = BinaryUpload(source_path=source, destination_path=dest_path, site=db_site)
-			db_binary_uploads.append(db_binary_upload)
-
-		property =  { "category" : db_prop.category.name,
-			"name": db_prop.name, 
-			"title" : db_prop.title,
-			"description" : [],
-			'udf' : dest_path,
-			'stands' : []
+			'images' : [],
+			'subproperties' : []
 			}
 
 		# description
@@ -179,20 +176,73 @@ def render_site_model(site_token):
 		if db_prop.description is not None:
 			property['description'] = db_prop.description.split('\n')
 
-		# stands
-		#
-		for db_stand in FRP_Stand.objects.filter(property=db_prop):
+		db_images = FRP_PropertyImage.objects.filter(property=db_prop)
 
-			stand = { "name" : db_stand.name,
-				"areaSQM" : db_stand.areaSQM,
-				"units" : db_stand.units,
-				"situationDescription" : []
+		primary_db_images = [x for x in db_images if x.isprimary == True]
+		secondary_db_images = [x for x in db_images if x.isprimary == False]
+		
+		ordered_db_images = []
+		ordered_db_images.extend(primary_db_images)
+		ordered_db_images.extend(secondary_db_images)
+
+		for db_image in ordered_db_images:
+
+			if (db_image.file.name is None) or (len(db_image.file.name) == 0):
+				continue
+
+			source = None
+			dest_path = None
+
+			source = settings.MEDIA_ROOT + '/' + db_image.file.name
+			dest_path = '/'.join(db_image.file.name.split('/')[1:])
+
+			db_binary_upload = BinaryUpload(source_path=source, destination_path=dest_path, site=db_site)
+			db_binary_uploads.append(db_binary_upload)
+
+			property['images'].append(dest_path)
+
+		# sub property
+		#
+		for db_sub_property in FRP_SubProperty.objects.filter(property=db_prop):
+
+			sub_property = { 'name' : db_sub_property.name,
+				'areaSQM' : db_sub_property.areaSQM,
+				'description' : [],
+				'sold' : db_sub_property.sold,
+				'images' : []
 				}
 
-			if db_stand.situationDescription is not None:
-				property['situationDescription'] = db_stand.situationDescription.split('\n')
+			# description
+			#
+			if db_sub_property.description is not None:
+				sub_property['description'] = db_sub_property.description.split('\n')
 
-			property['stands'].append(stand)
+			db_images = FRP_SubPropertyImage.objects.filter(subproperty=db_sub_property)
+
+			primary_db_images = [x for x in db_images if x.isprimary == True]
+			secondary_db_images = [x for x in db_images if x.isprimary == False]
+			
+			ordered_db_images = []
+			ordered_db_images.extend(primary_db_images)
+			ordered_db_images.extend(secondary_db_images)
+
+			for db_image in ordered_db_images:
+
+				if (db_image.file.name is None) or (len(db_image.file.name) == 0):
+					continue
+
+				source = None
+				dest_path = None
+
+				source = settings.MEDIA_ROOT + '/' + db_image.file.name
+				dest_path = '/'.join(db_image.file.name.split('/')[1:])
+
+				db_binary_upload = BinaryUpload(source_path=source, destination_path=dest_path, site=db_site)
+				db_binary_uploads.append(db_binary_upload)
+
+				property['images'].append(dest_path)
+
+			property['subproperties'].append(sub_property)
 
 		data_model['properties'].append(property)
 
