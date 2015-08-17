@@ -130,8 +130,53 @@ function DataModel(siteUrlRoot) {
 				matches.push(p);
 		});
 
-		return matches.reverse();
+		return matches;
 	};
+
+	// PROPERTIES - PAGING
+
+	that.propertiesPerPage = 3;
+	that.propertiesPageNumber = 1;
+
+	that.setPropertiesPageNumber = function(num) {
+		that.propertiesPageNumber = num;
+	};
+	
+	that.propertiesForCategoryPageNumbers = function(category) {
+		var numbers = [];
+		var count = that.propertiesForCategoryPageCount(category);
+		for (var i = 0; i < count; i++) {
+			numbers.push(i + 1);
+		}
+
+		return numbers;
+	};
+
+	that.propertiesForCategoryPageCount = function(category) {
+
+		var itemCount = that.propertiesForCategory(category).length;
+
+		var pageCount = Math.floor(itemCount / that.propertiesPerPage);
+
+		if (itemCount % that.propertiesPerPage !== 0)
+			pageCount = pageCount + 1;
+
+		return pageCount;
+	};
+
+	that.propertiesForCategoryPaged = function(category) {
+		
+		var all = that.propertiesForCategory(category);
+
+		var start = (that.propertiesPageNumber - 1) * that.propertiesPerPage;
+
+		var page = [];
+		for (var i = start; (i < start + that.propertiesPerPage) && (i < all.length); i++)
+			page.push(all[i]);
+
+		return page;
+	};
+
 
 	that.propertyHasArea = function(property) {
 

@@ -50,7 +50,7 @@
 	<!-- PROPERTIES -->
 	<div class='unselectable' style='padding-left:100px;'>
 		<div style='width:100%;' class='unselectable'>
-			<div ng-repeat='property in model.propertiesForCategory(model.selectedCategory)'
+			<div ng-repeat='property in model.propertiesForCategoryPaged(model.selectedCategory)'
 				style='float:left;
 					margin-right:25px;margin-top:25px;
 					width:324px;
@@ -113,5 +113,17 @@
 	</div>
 
 	<div style='clear:both;margin-bottom:25px;'>
+	</div>
+	
+	<div
+		class='grey-text'
+		style='font-size:1.5em;margin-left:100px;margin-bottom:25px;'>
+		<a
+			href="#"
+			ng-repeat='num in model.propertiesForCategoryPageNumbers(model.selectedCategory)'
+			ng-class='(num == model.propertiesPageNumber) ? "green underline" : ""'
+			style='margin-right:10px;'
+			ng-click='model.setPropertiesPageNumber(num);'
+			>{{ num }}</a>
 	</div>
 </div>
