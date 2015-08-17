@@ -48,14 +48,17 @@
 	</div>
 
 	<!-- PROPERTIES -->
-	<div class='unselectable' style='padding-left:100px;margin-bottom:50px;'>
-
+	<div class='unselectable' style='padding-left:100px;'>
 		<div style='width:100%;' class='unselectable'>
 			<div ng-repeat='property in model.propertiesForCategory(model.selectedCategory)'
-				style='margin-right:25px;float:left;width:324px;'>
+				style='float:left;
+					margin-right:25px;margin-top:25px;
+					width:324px;
+					padding-bottom:10px;'
+				class='drop-shadow'>
 				<div>
 					<img 
-						style='width:324px;height:200px;margin-top:25px;'
+						style='width:324px;height:200px;'
 						ng-src="{{model.dataImageUrl(property.images[0])}}"
 						title={{property.name}}
 						alt={{property.name}}
@@ -63,20 +66,21 @@
 				</div>
 				
 				<div
-					class='grey-text ellipsis' style='font-size:1.5em;width:324px;'
+					class='grey-text ellipsis'
+					style='font-size:1.5em;width:314px;padding-left:10px;'
 					title='{{ property.name }}'
 					>
 					{{ property.name }}
 				</div>
 				
 				<div
-					style='width:324px;'
+					style='width:324px;padding-left:10px;'
 					class='grey-text'
 					>
 					{{ property.shortLocation }}
 				</div>
 
-				<div ng-if='model.propertyHasArea(property)'>
+				<div ng-if='model.propertyHasArea(property)' style='padding-left:10px;'>
 					<span
 						class='light-green bold'						 
 						style='width:324px;font-size:1.5em;'>
@@ -88,14 +92,19 @@
 						&nbsp;({{ model.propertyAreaSqmText(property) }})
 					</span>
 				</div>
-				<div ng-if='model.propertyHasArea(property) == false'>
+				<div ng-if='model.propertyHasArea(property) == false'
+					style='padding-left:5px;'>
 					<span
 						class='white bold'						 
 						style='width:324px;font-size:1.5em;'>
 						none
 					</span>
 				</div>
-				<div style='margin-top:5px;display: inline-block;border-radius: 3px;'
+				<div style='
+						display: inline-block;
+						margin-left:10px;
+						margin-top:5px;						
+						border-radius: 3px;'
 					class='bold white light-green-background'>
 					&nbsp;MORE INFO&nbsp;
 				</div>
@@ -103,34 +112,6 @@
 		</div>
 	</div>
 
-
-<!-- 	<div style='padding-left:100px;' >
-		<div style='float:left;margin-right:25px;margin-top:25px;width:350px;'
-			ng-repeat='property in model.propertiesForCategory(model.selectedCategory)'>
-			
-			<div>
-	    		<img style='width:324px;height:200px;'
-					ng-src="{{model.dataImageUrl(property.images[0])}}"/>
-			</div>
-
-			<div class='grey-text' style='font-size:1.5em;'>
-				{{ property.name }}
-			</div>
-			<div
-				ng-if='property.shortLocation !== property.name'
-				class='grey-text'
-				>
-				{{ property.shortLocation }}
-			</div>
-			<div
-				ng-if='model.propertyHasArea(property)'
-				class='light-green'>
-				<span class='bold' style='font-size:1.5em;'>{{ model.propertyAreaHaText(property) }}</span>
-				<span style='font-size:1.25em;'>({{ model.propertyAreaSqmText(property) }})</span>
-			</div>
-		</div>
-	</div>
- -->
-	<div style='clear:both;'>
+	<div style='clear:both;margin-bottom:25px;'>
 	</div>
 </div>
