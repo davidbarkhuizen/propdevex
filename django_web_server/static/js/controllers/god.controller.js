@@ -234,4 +234,6 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.loadDataModel();
 	$timeout($scope.init_twitter_widget, 500);
+
+	$scope.gotoCategoryView("residential");
 };

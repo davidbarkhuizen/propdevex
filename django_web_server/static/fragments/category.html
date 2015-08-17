@@ -1,9 +1,11 @@
 <div
 	id='CategoryFragment'
 	ng-show='view == Views.CATEGORY'
+	style='width:100%'
 	>
 	<div style='width:100%; position: relative;'>
 
+		<!-- section background image -->
 		<div style='
 		    z-index:1;
 		    top:0;
@@ -17,12 +19,13 @@
 				ng-src="/static/image/header-category.jpg"/>
 		</div>
 
+		<!-- text overlay -->
     	<div
     		class='category-header-image-overlay-text light-grey unselectable'
-    		style='z-index:2;margin-left:100px;'>
+    		style='z-index:2;'> <!-- margin-left:100px; -->
 
-    			<div style='display:table;height:100%;width:100%;'>
-	    			<div style='vertical-align: middle;display: table-cell;height:100%;width:100%;'>
+    			<div style='padding-left:100px;display:table;height:100%;'>
+	    			<div style='vertical-align: middle;display: table-cell;height:100%;'>
 		    			<span style='font-size:2em;'>
 			    			<span style='text-transform:capitalize;'>
 			    				{{ model.selectedCategory }}
@@ -42,5 +45,36 @@
 		    		</div>
 	    		</div>
     	</div>
+	</div>
+
+
+	<div style='padding-left:100px;' >
+		<div style='float:left;margin-right:25px;margin-top:25px;width:350px;'
+			ng-repeat='property in model.propertiesForCategory(model.selectedCategory)'>
+			
+			<div>
+	    		<img style='width:324px;height:200px;'
+					ng-src="{{model.dataImageUrl(property.images[0])}}"/>
+			</div>
+
+			<div class='grey-text' style='font-size:1.5em;'>
+				{{ property.name }}
+			</div>
+			<div
+				ng-if='property.shortLocation !== property.name'
+				class='grey-text'
+				>
+				{{ property.shortLocation }}
+			</div>
+			<div
+				ng-if='model.propertyHasArea(property)'
+				class='light-green'>
+				<span class='bold' style='font-size:1.5em;'>{{ model.propertyAreaHaText(property) }}</span>
+				<span style='font-size:1.25em;'>({{ model.propertyAreaSqmText(property) }})</span>
+			</div>
+		</div>
+	</div>
+
+	<div style='clear:both;'>
 	</div>
 </div>

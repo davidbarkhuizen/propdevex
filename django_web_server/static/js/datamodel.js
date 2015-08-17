@@ -2,8 +2,16 @@ function DataModel(siteUrlRoot) {
 
 	var that = this;
 
+	that.dataRootUrl = function() {
+		return siteUrlRoot + 'data/';
+	}
+
 	that.url = function() {
-		return siteUrlRoot + "data/datamodel.json";
+		return that.dataRootUrl() + "datamodel.json";
+	};
+
+	that.dataImageUrl = function(imageFileName) {
+		return that.dataRootUrl() + imageFileName;
 	};
 
 	// --------------------------------------------------
@@ -114,6 +122,45 @@ function DataModel(siteUrlRoot) {
 	// --------------------------------------------------
 	// PROPERTY PROPERTY ACCESSORS
 
+	that.propertiesForCategory = function(category) {
+		
+		var matches = [];
+		that.properties.forEach(function(p){
+			if (p.category == category)
+				matches.push(p);
+		});
+
+		return matches;
+	};
+
+	that.propertyHasArea = function(property) {
+
+		if (property.areaSQM === null)
+			return false;
+
+		return true;
+	};
+
+	that.propertyAreaSqmText = function(property) {
+
+		if (that.propertyHasArea(property) == false)
+			return '';
+
+		return property.areaSQM.toLocaleString() + ' sqm';
+	};
+
+	that.propertyAreaHaText = function(property) {
+
+		if (that.propertyHasArea(property) == false)
+			return '';
+
+		return (property.areaSQM / 10000).toFixed(2) + ' ha';
+	};
+
+	that.propertyAreaText = function(property) {
+		return that.propertyAreaHaText() + ' (' + that.propertyAreaSQMText() + ')';
+	};
+
 	/*
 
 	that.imageSrc = function(imageFileName) {
@@ -174,16 +221,7 @@ function DataModel(siteUrlRoot) {
 
 	// --------------------------
 
-	that.propertiesForCategory = function(category) {
-		
-		var matches = [];
-		that.properties.forEach(function(p){
-			if (p.category == category)
-				matches.push(p);
-		});
-
-		return matches;
-	}; 
+ 
 
 	/*
 
