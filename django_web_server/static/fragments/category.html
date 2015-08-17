@@ -48,7 +48,7 @@
 	</div>
 
 	<!-- PROPERTIES -->
-	<div class='unselectable' style='padding-left:100px;'>
+	<div class='unselectable' style='padding-left:100px;margin-bottom:50px;'>
 
 		<div style='width:100%;' class='unselectable'>
 			<div ng-repeat='property in model.propertiesForCategory(model.selectedCategory)'
@@ -82,16 +82,23 @@
 					&nbsp;
 				</div>
 
-				<div ng-if='model.propertyHasArea(property)' 
-					style='width:324px;font-size:3em;'>
-					{{ model.propertyAreaHaText(property) }}
+				<div ng-if='model.propertyHasArea(property)'>
+					<span
+						class='light-green bold'						 
+						style='width:324px;font-size:1.5em;'>
+						{{ model.propertyAreaHaText(property) }}
+					</span>
+					<span
+						class='light-green'						 
+						style='width:324px;font-size:1.0em;'>
+						&nbsp;({{ model.propertyAreaSqmText(property) }})
+					</span>
 				</div>
 				<div ng-if='model.propertyHasArea(property) == false' 
-					style='width:324px;font-size:3em;'>
+					class='bold'
+					style='width:324px;font-size:1.5em;'>
 					&nbsp;
-				</div>
-
-
+				</span>
 			</div>
 		</div>
 	</div>
