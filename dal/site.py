@@ -91,5 +91,7 @@ def mark_site_as_updated(db, id, msg):
 	connection = db()
 	try:
 		connection.execute(sql)
+	except Exception as e:
+		print(e)
 	finally:
 		connection.close()

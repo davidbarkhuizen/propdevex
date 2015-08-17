@@ -20,9 +20,11 @@ def update_site(db, id):
 		ftp_creds['user'], ftp_creds['password']
 		) as client:
 
-		# binary_uploads
-		#
-		for binary_upload in binary_uploads:
+		uploads = []
+		uploads.extend(binary_uploads)
+		uploads.extend(text_uploads)
+
+		for binary_upload in uploads:
 			dest_path = ftp_creds['upload_root'] + '/' + binary_upload['destination_path'] 
 			client.upload_bin_file(
 				binary_upload['source_path'], 
@@ -30,16 +32,14 @@ def update_site(db, id):
 				)	
 			print('uploaded ' + dest_path)
 
-		# text_uploads
-		#
-		for text_upload in text_uploads:
-			dest_path = ftp_creds['upload_root'] + '/' + text_upload['destination_path'] 
-			client.upload_text_file(
-				text_upload['source_path'], 
-				dest_path
-				)
-			print('uploaded ' + dest_path)	
-
 def update_all_sites(db):
-	for id in get_ids_of_sites_marked_for_update(db):
+	
+	print('checking for sites marked for update...')
+	site_ids = get_ids_of_sites_marked_for_update(db)
+	if len(site_ids) == 0:
+		print('none found')
+		return
+	
+	for id in site_ids:
 		update_site(db, id)
+		mark_site_as_updated(db, id, 'update succeeded')
