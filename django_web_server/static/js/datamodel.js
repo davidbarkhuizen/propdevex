@@ -146,7 +146,7 @@ function DataModel(siteUrlRoot) {
 		if (that.propertyHasArea(property) == false)
 			return '';
 
-		return property.areaSQM.toLocaleString() + ' sqm';
+		return property.areaSQM.toLocaleString() + ' m²';
 	};
 
 	that.propertyAreaHaText = function(property) {
