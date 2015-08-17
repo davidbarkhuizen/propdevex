@@ -25,19 +25,19 @@
 	    			<div style='vertical-align: middle;display: table-cell;height:100%;width:100%;'>
 		    			<span style='font-size:2em;'>
 			    			<span style='text-transform:capitalize;'>
-			    				{{ selectedCategory }}
+			    				{{ model.selectedCategory }}
 		    				</span>
 		    				properties
 		    			</span>
 		    			<br/>
-						<span ng-if='model.propertiesForCategory(selectedCategory).length == 0'>
+						<span ng-if='model.propertiesForCategory(model.selectedCategory).length == 0'>
 		    				none
 		    			</span>
-						<span ng-if='model.propertiesForCategory(selectedCategory).length == 1'>
+						<span ng-if='model.propertiesForCategory(model.selectedCategory).length == 1'>
 		    				1 property
 		    			</span>
-		    			<span ng-if='model.propertiesForCategory(selectedCategory).length > 1'>
-		    				{{ model.propertiesForCategory(selectedCategory).length }} properties
+		    			<span ng-if='model.propertiesForCategory(model.selectedCategory).length > 1'>
+		    				{{ model.propertiesForCategory(model.selectedCategory).length }} properties
 		    			</span>
 		    		</div>
 	    		</div>

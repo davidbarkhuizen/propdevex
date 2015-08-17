@@ -60,7 +60,7 @@
 			<div ng-repeat='category in model.categories' class='uppercase'>
 				<a href="#" 
 					ng-click='gotoCategoryView(category)'
-					ng-class="(selectedCategory == category) ? 'nav-active' : 'nav-inactive'">
+					ng-class="(model.selectedCategory == category) ? 'nav-active' : 'nav-inactive'">
 					{{ category }}
 					<span ng-show='model.propertiesForCategory(category).length > 0'>
 						&nbsp;({{ model.propertiesForCategory(category).length }})

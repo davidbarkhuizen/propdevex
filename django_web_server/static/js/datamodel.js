@@ -1,8 +1,27 @@
-function DataModel(urlRoot) {
+function DataModel(siteUrlRoot) {
 
 	var that = this;
 
+	that.url = function() {
+		return siteUrlRoot + "data/datamodel.json";
+	};
+
+	// --------------------------------------------------
+	// MODEL FIELDS
+
 	that.categories = ["commercial","industrial","residential","business","hotel","retail","investment","agricultural"];
+
+	that.categoryViews = [
+		{ category: "commercial", view: Views.COMMERCIAL },
+		{ category: "industrial", view: Views.INDUSTRIAL },
+		{ category: "residential", view: Views.RESIDENTIAL },
+		{ category: "business", view: Views.BUSINESS },
+		{ category: "hotel", view: Views.HOTEL },
+		{ category: "retail", view: Views.RETAIL },
+		{ category: "investment", view: Views.INVESTMENT },
+		{ category: "agricultural", view: Views.AGRICULTURAL },
+		{ category: "sold", view: Views.SOLD },
+	];
 
 	that.contacts = [{
 		"name" : "",
@@ -11,11 +30,88 @@ function DataModel(urlRoot) {
 		"categories" : []
 	}];
 
+	that.properties = [];
+
+	// --------------------------------------------------
+	// BIND MODEL
+
+	var bound = false;
+	
+	that.isBound = function() {
+		return bound;
+	};
+
+	that.bind = function(jsonResp) {
+
+		// properties
+
+		that.properties.length = 0;
+
+		jsonResp.properties.forEach(function(property){
+			that.properties.push(property);
+		});
+
+		// contacts
+
+		that.contacts.length = 0;
+		jsonResp.contacts.forEach(function(contact){
+			that.contacts.push(contact);
+		});
+
+		bound = true;
+	};
+
+	// --------------------------------------------------
+	// CATEGORIES
+
+	that.categoryMatch = function(categoryName) {	
+		return function( item ) {
+			return item.category === categoryName;
+		};
+	};
+
+	that.viewForCategory = function(category) {
+		for(var i = 0; i < that.categoryViews.length; i++)
+			if (that.categoryViews[i].category == category)
+				return that.categoryViews[i].view;
+	};
+
+	that.categoryForView = function(view) {
+		for(var i = 0; i < that.categoryViews.length; i++)
+			if (that.categoryViews[i].view == view)
+				return that.categoryViews[i].category;
+	};
+
+	that.getPropertyCategoryViews = function() {
+		var views = [];
+		that.categoryViews.forEach(function(x){ views.push(x.view); });
+		return views;
+	};
+
+	// --------------------------------------------------
+
+	that.selectedProperty = null;
+	that.selectProperty = function(property) {
+		that.selectedProperty = property;
+	};
+
+	that.selectedSubProperty = null;
+	that.selectSubProperty = function(subProperty) {
+		that.selectedSubProperty = subProperty;
+	};
+
+	that.cancelSelection = function() {
+		that.selectedProperty = null;
+		that.selectedSubProperty = null;
+	};
+
 	// --------------------------------------------------
 	// PROPERTY PROPERTY ACCESSORS
 
-	that.udfSrc = function(property) {
-		return urlRoot + 'data/' + property.udf;
+	/*
+
+	that.imageSrc = function(imageFileName) {
+		return urlRoot + 'data/' + imageFileName;
 	};
 
 	that.udfSrcForSelectedProperty = function() {
@@ -68,55 +164,9 @@ function DataModel(urlRoot) {
 		return s;
 	};
 
+	*/
+
 	// --------------------------
-
-	that.properties = [];
-
-	that.selectedStand = null;
-	that.selectStand = function(stand) {
-		that.selectedStand = stand;
-	};
-
-	that.selectedProperty = null;
-	that.selectProperty = function(property) {
-		that.selectedProperty = property;
-	};
-
-	that.categoryMatch = function(categoryName) {	
-		return function( item ) {
-			return item.category === categoryName;
-		};
-	};
-
-	that.categoryViews = [
-		{ category: "commercial", view: Views.COMMERCIAL },
-		{ category: "industrial", view: Views.INDUSTRIAL },
-		{ category: "residential", view: Views.RESIDENTIAL },
-		{ category: "business", view: Views.BUSINESS },
-		{ category: "hotel", view: Views.HOTEL },
-		{ category: "retail", view: Views.RETAIL },
-		{ category: "investment", view: Views.INVESTMENT },
-		{ category: "agricultural", view: Views.AGRICULTURAL },
-		{ category: "sold", view: Views.SOLD },
-	];
-
-	that.viewForCategory = function(category) {
-		for(var i = 0; i < that.categoryViews.length; i++)
-			if (that.categoryViews[i].category == category)
-				return that.categoryViews[i].view;
-	};
-
-	that.categoryForView = function(view) {
-		for(var i = 0; i < that.categoryViews.length; i++)
-			if (that.categoryViews[i].view == view)
-				return that.categoryViews[i].category;
-	};
-
-	that.getPropertyCategoryViews = function() {
-		var views = [];
-		that.categoryViews.forEach(function(x){ views.push(x.view); });
-		return views;
-	};
 
 	that.propertiesForCategory = function(category) {
 		
@@ -127,7 +177,9 @@ function DataModel(urlRoot) {
 		});
 
 		return matches;
-	};
+	}; 
+
+	/*
 
 	that.propertyNumberInCategory = function(property) {
 
@@ -194,7 +246,5 @@ function DataModel(urlRoot) {
 		that.shiftSelectedPropertyStand(1);
 	};
 
-
-
-
+	*/
 }

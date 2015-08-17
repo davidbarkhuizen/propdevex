@@ -1,49 +1,38 @@
 function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
-	$scope.model = new DataModel('/static/');
-
-	$scope.dataModelIsLoaded = false;
-
-	$scope.selectedCategory = null;
-	$scope.selectedProperty = null;
-
-	$scope.cancelSelection = function() {
-		$scope.selectedCategory = null;
-		$scope.selectedProperty = null;
-	};
+	var siteRoot = '/static/';
 
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+	// DATA MODEL 
 
-	$scope.gotoHomeView = function() {
-		$scope.cancelSelection();
-		$scope.view = Views.HOME; 
-	};
+	$scope.model = new DataModel(siteRoot);
 
-	$scope.gotoCategoryView = function(category) {
-		// cancel selection ?
-		$scope.selectedCategory = category;
-		$scope.view = Views.CATEGORY; 
-	};
+	$scope.loadDataModel = function() {
 
-	$scope.gotoSoldView = function() {
-		$scope.cancelSelection();
-		$scope.view = Views.SOLD; 
-	};
+		var request = 
+		{
+			method: 'GET',
+			url: suffixStaticUrlWithGuid($scope.model.url()),
+		};
+
+		function handleSuccess(response) { 
+
+			$scope.model.bind(response);
+		};
+
+		function handleError(response) { 
+
+			// TODO = explode visibly - i.e. with red error
+			console.log(response);
+		};
+
+		$http(request)
+			.success(handleSuccess)
+			.error(handleError);
+	};	
 
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// VIEWS	
-
-	$scope.nlIsActive = function(view) {
-		
-		if ($scope.view === view)
-			return true;
-
-		if ($scope.view === Views.PROPERTY) {
-			return ($scope.model.categoryForView(view) == $scope.model.selectedProperty.category)
-		}
-
-		return false;
-	}
 
 	$scope.Views = Views;
 	$scope.view = Views.HOME;
@@ -52,28 +41,40 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		return ($scope.view === view);
 	};
 
-	$scope.gotoView = function(newView) {
-		$scope.view = newView;	
-	
-		var bindWindow = function () {
+	$scope.gotoHomeView = function() {
+		$scope.model.cancelSelection();
+		$scope.view = Views.HOME; 
+	};
 
-			// focus on element marked with data-focus-element attribute 
-			// 
-			$scope.giveActiveViewFocus();
+	$scope.gotoCategoryView = function(category) {
 
-			// ui-grids only display correctly after this event if
-			// initially rendered off-screen
-			//
-			//var evt = document.createEvent('HTMLEvents');
-			//evt.initEvent('resize', true, false);
-			//window.dispatchEvent(evt);
-		};
+		if (category === undefined)
+			category = $scope.model.categories[0];
 
-		$timeout(bindWindow, 100);
+		$scope.model.cancelSelection();
+		$scope.model.selectCategory(category);
+
+		$scope.view = Views.CATEGORY; 
+	};
+
+	$scope.gotoSoldView = function() {
+		$scope.model.cancelSelection();
+		$scope.view = Views.SOLD; 
 	};
 
 	$rootScope.$on(Command.GOTO_VIEW, function(evt, view) { 
-		$scope.gotoView(view);
+
+		switch(view) {
+			case Views.HOME:
+				$scope.gotoHomeView();
+				break;
+			case Views.CATEGORY:
+				$scope.gotoCategoryView();
+				break;
+			case Views.SOLD:
+				$scope.gotoSoldView();
+				break;
+		}
 	});
 
 	$rootScope.$on(Event.DEBUG_ERROR, function(evt, error) {
@@ -122,48 +123,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	// -----------------------------------------------------------------
 	// LOAD DATA MODEL
 
-	$scope.loaded = false;
-	$scope.isLoaded = function() {
-		return $scope.loaded;
-	}
 
-	$scope.loadDataModel = function() {
-
-		var request = 
-		{
-			method: 'GET',
-			url: "/static/data/datamodel.json?guid=" + guid(),
-		};
-
-		function handleSuccess(response) { 
-
-			// load properties
-			//
-			response.properties.forEach(function(x){
-				$scope.model.properties.push(x);
-			});
-
-			$scope.model.contacts = response.contacts;
-
-			function onFontsLoaded() {
-				console.log('fonts are loaded');
-				$scope.loaded = true;
-				//$timeout(function(){  console.log('show'); })
-			};
-
-			console.log('waiting for font load');
-			waitForWebfonts(['Open Sans'], onFontsLoaded);
-		};
-
-		function handleError(response) { 
-
-			console.log(response);
-		};
-
-		$http(request)
-			.success(handleSuccess)
-			.error(handleError);
-	};
 
 	// -----------------------------------------------------------------
 
@@ -203,6 +163,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	};
 
 	// -----------------------------------------------------------------
+	/* SOCIAL LINKS */
 
 	$scope.openUrlInNewWindow = function(url) {
 		window.open(url, '_blank');
@@ -221,6 +182,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	};
 
 	// -----------------------------------------------------------------
+	/* TWITTER WIDGET */
 
 	$scope.init_twitter_widget = function() {
         		
@@ -243,6 +205,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	};
 
 	/* ------------------------------------------ */
+	/* HOME VIEW */
 
 	$scope.homeImageSrcs = [
 		'/static/image/slide01_sized.jpg',
@@ -255,7 +218,6 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	$scope.homeImageSrc = function() {
 		return $scope.homeImageSrcs[$scope.homeImageSrcIndex];
 	};
-
 	
 	$scope.rotateHomeImageSrcIndex = function() {
 		

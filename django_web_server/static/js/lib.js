@@ -1,3 +1,28 @@
+// ----------------------------------------------------------
+// GUID
+
+// broofa @ http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+//
+function guid() {
+
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+
+		.replace(/[xy]/g,
+			function(c) {
+    			var r = Math.random()*16|0;
+    			v = c == 'x' ? r : (r&0x3|0x8);
+    			return v.toString(16);
+			}
+		);
+}
+
+function suffixStaticUrlWithGuid(url) {
+	return url + "?guid=" + guid();
+};
+
+// ----------------------------------------------------------
+// LOL = NOT MY CODE, & ALSO NOT WORKING
+
 function waitForWebfonts(fonts, callback) {
     var loadedFonts = 0;
     for(var i = 0, l = fonts.length; i < l; ++i) {
@@ -52,10 +77,7 @@ function waitForWebfonts(fonts, callback) {
     }
 };
 
-
-
-
-
+// ----------------------------------------------------------
 
 function copyToClipboard(text) {
   window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
@@ -200,20 +222,7 @@ function ngShow(element) {
 	element.className = element.className.replace('ng-hide', ''); 
 }
 
-// broofa @ http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-//
-function guid() {
 
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
-
-		.replace(/[xy]/g,
-			function(c) {
-    			var r = Math.random()*16|0;
-    			v = c == 'x' ? r : (r&0x3|0x8);
-    			return v.toString(16);
-			}
-		);
-}
 
 Number.prototype.toRad = function() { return this * (Math.PI / 180); };
 
