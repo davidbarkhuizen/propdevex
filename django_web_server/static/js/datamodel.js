@@ -90,6 +90,11 @@ function DataModel(siteUrlRoot) {
 
 	// --------------------------------------------------
 
+	that.selectedCategory = null;
+	that.selectCategory = function(category) {
+		that.selectedCategory = category;
+	};
+
 	that.selectedProperty = null;
 	that.selectProperty = function(property) {
 		that.selectedProperty = property;
@@ -101,6 +106,7 @@ function DataModel(siteUrlRoot) {
 	};
 
 	that.cancelSelection = function() {
+		that.selectedCategory = null;
 		that.selectedProperty = null;
 		that.selectedSubProperty = null;
 	};
