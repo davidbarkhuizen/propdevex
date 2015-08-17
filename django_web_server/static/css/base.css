@@ -320,6 +320,12 @@ div.tailbar-blurb-header span {
 	text-align: justify;
 }
 
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 /* ------------------------------------------------ */
 
 .category-header-image-overlay-text {

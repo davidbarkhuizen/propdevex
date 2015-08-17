@@ -130,7 +130,7 @@ function DataModel(siteUrlRoot) {
 				matches.push(p);
 		});
 
-		return matches;
+		return matches.reverse();
 	};
 
 	that.propertyHasArea = function(property) {

@@ -47,8 +47,57 @@
     	</div>
 	</div>
 
+	<!-- PROPERTIES -->
+	<div class='unselectable' style='padding-left:100px;'>
 
-	<div style='padding-left:100px;' >
+		<div style='width:100%;' class='unselectable'>
+			<div ng-repeat='property in model.propertiesForCategory(model.selectedCategory)'
+				style='margin-right:25px;float:left;width:324px;'>
+				<div>
+					<img 
+						style='width:324px;height:200px;margin-top:25px;'
+						ng-src="{{model.dataImageUrl(property.images[0])}}"
+						/>
+				</div>
+				
+				<div
+					class='grey-text ellipsis' style='font-size:1.5em;width:324px;'
+					title='{{ property.name }}'
+					>
+					{{ property.name }}
+				</div>
+				
+				<div
+					ng-if='property.shortLocation !== property.name'
+					style='width:324px;'
+					class='grey-text'
+					>
+					{{ property.shortLocation }}
+				</div>
+				<div
+					ng-if='property.shortLocation === property.name'
+					style='width:324px;'
+					class='grey-text'
+					>
+					&nbsp;
+				</div>
+
+				<div ng-if='model.propertyHasArea(property)' 
+					style='width:324px;font-size:3em;'>
+					{{ model.propertyAreaHaText(property) }}
+				</div>
+				<div ng-if='model.propertyHasArea(property) == false' 
+					style='width:324px;font-size:3em;'>
+					&nbsp;
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+<!-- 	<div style='padding-left:100px;' >
 		<div style='float:left;margin-right:25px;margin-top:25px;width:350px;'
 			ng-repeat='property in model.propertiesForCategory(model.selectedCategory)'>
 			
@@ -74,7 +123,7 @@
 			</div>
 		</div>
 	</div>
-
+ -->
 	<div style='clear:both;'>
 	</div>
 </div>
