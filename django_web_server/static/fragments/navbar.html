@@ -16,7 +16,8 @@
 				</a>
 
 				<a ng-repeat='category in model.categories'
-					href='#' ng-click="gotoCategoryView(category);"
+					href='#'
+					ng-click="gotoCategoryView(category);"
 					style='text-transform:capitalize;'
 					ng-class="((view == Views.CATEGORY) && (model.selectedCategory == category)) ? 'nav-active' : 'nav-inactive'"
 					>

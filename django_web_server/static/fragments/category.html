@@ -62,6 +62,7 @@
 						ng-src="{{model.dataImageUrl(property.images[0])}}"
 						title={{property.name}}
 						alt={{property.name}}
+						ng-click='viewProperty(property);'
 						/>
 				</div>
 				
@@ -100,14 +101,17 @@
 						none
 					</span>
 				</div>
-				<div style='
-						display: inline-block;
-						margin-left:10px;
-						margin-top:5px;						
-						border-radius: 3px;'
-					class='bold white light-green-background'>
-					&nbsp;MORE INFO&nbsp;
-				</div>
+				<a href='#' ng-click="viewProperty(property);">
+					<div style='
+							display: inline-block;
+							margin-left:10px;
+							margin-top:5px;						
+							border-radius: 3px;'
+							class='bold white light-green-background'
+							>
+						&nbsp;MORE INFO&nbsp;
+					</div>
+				</a>
 			</div>
 		</div>
 	</div>

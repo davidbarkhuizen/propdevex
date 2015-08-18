@@ -106,6 +106,39 @@ function DataModel(siteUrlRoot) {
 	that.selectedProperty = null;
 	that.selectProperty = function(property) {
 		that.selectedProperty = property;
+		that.selectCategory(property.category);
+	};
+
+	that.selectNextPropertyInCategory = function() {
+
+		var properties = that.propertiesForCategory(that.selectedProperty.category);
+
+		if ((properties.length == 0) || (properties.length == 1))
+			return;
+
+		var index = properties.indexOf(that.selectedProperty);
+		index = index + 1;
+		if (index === properties.length)
+			index = 0;
+
+		that.selectProperty(properties[index]); 
+	};
+
+	that.selectPreviousPropertyInCategory = function() {
+
+		var properties = that.propertiesForCategory(that.selectedProperty.category);
+
+		if ((properties.length === 0) || (properties.length === 1)){
+			return;
+		}
+
+		var index = properties.indexOf(that.selectedProperty);
+		index = index - 1;
+		if (index === -1) {
+			index = properties.length - 1;
+		}
+
+		that.selectProperty(properties[index]); 
 	};
 
 	that.selectedSubProperty = null;

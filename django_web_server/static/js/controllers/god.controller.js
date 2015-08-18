@@ -57,6 +57,11 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		$scope.view = Views.CATEGORY; 
 	};
 
+	$scope.viewProperty = function(property) {
+		$scope.view = Views.PROPERTY;
+		$scope.model.selectProperty(property);
+	}
+
 	$scope.gotoSoldView = function() {
 		$scope.model.cancelSelection();
 		$scope.view = Views.SOLD; 
@@ -119,18 +124,6 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 		return dims;
 	};
-
-	// -----------------------------------------------------------------
-	// LOAD DATA MODEL
-
-
-
-	// -----------------------------------------------------------------
-
-	$scope.viewProperty = function(property) {
-		$scope.model.selectProperty(property);
-		$scope.gotoView(Views.PROPERTY);
-	}
 
 	// -----------------------------------------------------------------
 

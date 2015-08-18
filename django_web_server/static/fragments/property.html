@@ -1,89 +1,152 @@
 <div
 	id='PropertyFragment'
-	ng-show='showView(Views.PROPERTY)'
-	style='vertical-align:middle;float:middle;'
+	ng-show='view == Views.PROPERTY'
+	style='width:100%'
 	>
+	<div style='width:100%; position: relative;'>
 
-	<br/>
+		<!-- section background image -->
+		<div style='
+		    z-index:1;
+		    top:0;
+		    left:0;
+		    width:100%;'>
 
-	<div>
-		<a href="#" ng-click='model.selectPreviousPropertyInCategory()'>
-			&#8592;
-			<!-- <img ng-src="/static/img/icon/button_black_prev.cut.20.png"/> -->
-		</a>	
-		&nbsp;
-		<span class='FRP-grey'>
-			{{ model.propertyNumberInCategory(model.selectedProperty) }} of {{ model.propertiesForCategory(model.selectedProperty.category).length }}  {{ model.selectedProperty.category }}
-		</span>
-		&nbsp;
-		<a href="#" ng-click='model.selectNextPropertyInCategory()'>
-			<!-- <img ng-src="/static/img/icon/button_black_next.cut.20.png"/> -->
-			&#8594;
-		</a>
-	</div>
-	<div class='header'>
-		{{ model.selectedProperty.name }}
-	</div>
-	<div class='FRP-green'>
-		{{ model.selectedProperty.title }}
-	</div>
-	<div>
-		<a href="#"
-			ng-click='enquireAfterPriceOfSelectedProperty()'
-			class='underline'
-			style='color:green;'>
-			enquire after price
-		</a>
-	</div>
+	    	<img style='
+				width:100%;
+				display:block;'
 
-	<div>
-
-		<br/>
-
-		<div class='float-left margin-left-20 margin-right-20'>
-			<img
-				ng-src="{{ model.udfSrcForSelectedProperty() }}"
-				alt="UDF"
-				width='400px'
-				height='400px'
-				 />
+				ng-src="/static/image/header-category.jpg"/>
 		</div>
 
-		<div class='margin-right-20' style='text-align:left;'>
-			
-			<br/>
+		<!-- text overlay -->
+    	<div
+    		class='category-header-image-overlay-text light-grey unselectable'
+    		style='z-index:2;'> <!-- margin-left:100px; -->
 
-			<div>
-				<div class='FRP-grey'>
-				 	Description
-				</div>
-				<div class='list fixed-height-150'>
-					<ul>
-						<li ng-repeat="para in model.selectedProperty.description">
-							{{ para }}
-						</li>
-					<ul>
-				</div>
-			</div>
-			
-			<br/>
-			
-			<div>
-				<div class='FRP-grey'>
-					Stands ({{ model.selectedProperty.stands.length }})
-				</div>
-				<div class='list fixed-height-150'>
-					<ul>
-						<li ng-repeat="stand in model.selectedProperty.stands">
-							<a
-								class='underline'
-								href="#"
-								ng-click="viewStandDetail(stand);">{{ model.summaryForStand(stand) }}</a>
-						</li>
-					<ul>
-				</ul>
-			</div>
+    			<div style='padding-left:100px;display:table;height:100%;'>
+	    			<div style='vertical-align: middle;display: table-cell;height:100%;'>
+		    			<span style='font-size:2em;'>
+			    			<span style='text-transform:capitalize;'>
+			    				{{ model.selectedProperty.name }}, {{ model.selectedProperty.shortLocation }}
+		    				</span>
+		    			</span>
+		    			<br/>
+		    			<a href='#' 
+		    				style='color:white !important;'
+		    				ng-click='model.selectPreviousPropertyInCategory();' class='bold'>
+		    				&laquo;
+		    			</a>
+		    			<span>
+		    				{{ model.propertiesForCategory(model.selectedCategory).indexOf(model.selectedProperty) + 1 }} 
+		    				of 
+		    				{{ model.propertiesForCategory(model.selectedCategory).length }} 
+		    				{{ model.selectedProperty.category }}
+		    				properties	
+		    			</span>
+		    			<a 
+			    			style='color:white !important;'
+			    			href='#' ng-click='model.selectNextPropertyInCategory();' class='bold'>
+		    				&raquo;
+		    			</a>
+		    		</div>
+	    		</div>
+    	</div>
+	</div>
+
+	<div style='width:100%;'>
+		<div style='margin-left:100px;margin-top:15px;'>
+			<img 
+				style='width:606px;height:380px;'
+				ng-src="{{model.dataImageUrl(model.selectedProperty.images[0])}}"
+				title="{{ model.selectedProperty.name }}"
+				alt="{{ model.selectedProperty.name }}"
+				ng-click=''
+			/>
+    	</div>
+	</div>
+
+	<!-- CATEGORIES -->
+	<div class='unselectable'>
+
+		<div style='font-size:2.5em;margin-left:100px;padding-top:20px;'>
+			<span style='color:#a0bf14;'>Situation & Description</span>
+		</div>
+		<div class='justify grey-text'
+			style='width:70%;margin-left:100px;margin-bottom:25px;'>
+			<span ng-repeat='line in model.selectedProperty.description'>
+				{{ line }}
+				<br/>
+			</span>
 		</div>
 
+	</div>
+
+	<!-- PROPERTIES -->
+<!-- 	<div class='unselectable' style='padding-left:100px;'>
+		<div style='width:100%;' class='unselectable'>
+			<div ng-repeat='property in model.propertiesForCategoryPaged(model.selectedCategory)'
+				style='float:left;
+					margin-right:25px;margin-top:25px;
+					width:324px;
+					padding-bottom:10px;'
+				class='drop-shadow'>
+				<div>
+					<img 
+						style='width:324px;height:200px;'
+						ng-src="{{model.dataImageUrl(property.images[0])}}"
+						title={{property.name}}
+						alt={{property.name}}
+						/>
+				</div>
+				
+				<div
+					class='grey-text ellipsis'
+					style='font-size:1.5em;width:314px;padding-left:10px;'
+					title='{{ property.name }}'
+					>
+					{{ property.name }}
+				</div>
+				
+				<div
+					style='width:324px;padding-left:10px;'
+					class='grey-text'
+					>
+					{{ property.shortLocation }}
+				</div>
+
+				<div ng-if='model.propertyHasArea(property)' style='padding-left:10px;'>
+					<span
+						class='light-green bold'						 
+						style='width:324px;font-size:1.5em;'>
+						{{ model.propertyAreaHaText(property) }}
+					</span>
+					<span
+						class='light-green'						 
+						style='width:324px;font-size:1.0em;'>
+						&nbsp;({{ model.propertyAreaSqmText(property) }})
+					</span>
+				</div>
+				<div ng-if='model.propertyHasArea(property) == false'
+					style='padding-left:5px;'>
+					<span
+						class='white bold'						 
+						style='width:324px;font-size:1.5em;'>
+						none
+					</span>
+				</div>
+				<div style='
+						display: inline-block;
+						margin-left:10px;
+						margin-top:5px;						
+						border-radius: 3px;'
+					class='bold white light-green-background'>
+					&nbsp;MORE INFO&nbsp;
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<div style='clear:both;margin-bottom:25px;'>
 	</div>
 </div>
