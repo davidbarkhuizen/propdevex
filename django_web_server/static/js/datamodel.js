@@ -106,6 +106,7 @@ function DataModel(siteUrlRoot) {
 	that.selectedProperty = null;
 	that.selectProperty = function(property) {
 		that.selectedProperty = property;
+		that.selectedPropertyImageIndex = 0;
 		that.selectCategory(property.category);
 	};
 
@@ -146,9 +147,33 @@ function DataModel(siteUrlRoot) {
 		that.selectedSubProperty = subProperty;
 	};
 
+	that.selectedPropertyImageIndex = 0;
+	that.getSelectedPropertyImage = function() {
+
+		if ((that.selectedProperty === null) || (that.selectedProperty.images.length == 0))
+			return null;
+
+		return that.selectedProperty.images[that.selectedPropertyImageIndex];
+	};
+
+	that.selectNextPropertyImage = function() {
+
+		that.selectedPropertyImageIndex = that.selectedPropertyImageIndex + 1;
+		if (that.selectedPropertyImageIndex >= that.selectedProperty.images.length)
+			that.selectedPropertyImageIndex = 0;
+	};
+
+	that.selectPreviousPropertyImage = function() {
+
+		that.selectedPropertyImageIndex = that.selectedPropertyImageIndex - 1;
+		if (that.selectedPropertyImageIndex < 0)
+			that.selectedPropertyImageIndex = that.selectedProperty.images.length - 1;
+	};
+
 	that.cancelSelection = function() {
 		that.selectedCategory = null;
 		that.selectedProperty = null;
+		that.selectedPropertyImageIndex = 0;
 		that.selectedSubProperty = null;
 	};
 
@@ -213,7 +238,7 @@ function DataModel(siteUrlRoot) {
 
 	that.propertyHasArea = function(property) {
 
-		if (property.areaSQM === null)
+		if ((property == null) || (property.areaSQM === null))
 			return false;
 
 		return true;
@@ -228,6 +253,9 @@ function DataModel(siteUrlRoot) {
 	};
 
 	that.propertyAreaHaText = function(property) {
+
+		if ((property === null) || (property == undefined))
+			return '';
 
 		if (that.propertyHasArea(property) == false)
 			return '';

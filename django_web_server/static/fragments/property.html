@@ -32,7 +32,7 @@
 		    				</span>
 		    			</span>
 		    			<br/>
-		    			<a href='#' 
+		    			<a
 		    				style='color:white !important;'
 		    				ng-click='model.selectPreviousPropertyInCategory();' class='bold'>
 		    				&laquo;
@@ -46,7 +46,7 @@
 		    			</span>
 		    			<a 
 			    			style='color:white !important;'
-			    			href='#' ng-click='model.selectNextPropertyInCategory();' class='bold'>
+			    			ng-click='model.selectNextPropertyInCategory();' class='bold'>
 		    				&raquo;
 		    			</a>
 		    		</div>
@@ -54,26 +54,60 @@
     	</div>
 	</div>
 
-	<div style='width:100%;'>
-		<div style='margin-left:100px;margin-top:15px;'>
-			<img 
-				style='width:606px;height:380px;'
-				ng-src="{{model.dataImageUrl(model.selectedProperty.images[0])}}"
-				title="{{ model.selectedProperty.name }}"
-				alt="{{ model.selectedProperty.name }}"
-				ng-click=''
-			/>
+	<div style='width:100%;position:relative;'>
+		<div style='margin-left:83px;margin-top:15px;float:left;'>
+			<div style='display: table;'>
+				<div>
+					<img 
+						ng-click='model.selectPreviousPropertyImage();'
+						style='display: table-cell;vertical-align:middle;margin-right:10px;'
+						ng-src="/static/image/arrow-left.png"/>
+					<img 
+						style='
+							display: table-cell;vertical-align:middle;
+							width:606px;height:380px;'
+						ng-src="{{ model.dataImageUrl(model.getSelectedPropertyImage()) }}"
+						title="{{ model.selectedProperty.name }}"
+						alt="{{ model.selectedProperty.name }}"
+						ng-click=''
+					/>
+					<img 
+						ng-click='model.selectNextPropertyImage();'
+						style='display: table-cell;vertical-align:middle;margin-left:10px;'
+						ng-src="/static/image/arrow-right.png"/>
+				</div>
+			</div>
+    	</div>
+    	<div class='grey-text' style='float:left;margin-top:30px;margin-left:25px;width:30%;'>
+    		<div>
+	    		<span style='font-size:1.5em;'>Location:</span>
+	    		<br/>
+	    		{{ model.selectedProperty.longLocation }}&nbsp;
+	    		<br/>
+    		</div>
+    		<br/>
+			<div ng-if='model.propertyHasArea(model.selectedProperty);'>
+				<span style='font-size:1.5em;'>Size:</span>
+				<br/>
+				<span>
+					{{ model.propertyAreaHaText(model.selectedProperty) }}&nbsp;
+				</span>
+				<span>
+					&nbsp;({{ model.propertyAreaSqmText(model.selectedProperty) }})
+				</span>
+			</div>
+    	</div>
+    	<div style='clear:both;'>
     	</div>
 	</div>
 
-	<!-- CATEGORIES -->
 	<div class='unselectable'>
 
 		<div style='font-size:2.5em;margin-left:100px;padding-top:20px;'>
 			<span style='color:#a0bf14;'>Situation & Description</span>
 		</div>
 		<div class='justify grey-text'
-			style='width:70%;margin-left:100px;margin-bottom:25px;'>
+			style='width:70%;margin-left:100px;margin-bottom:25px;margin-top:10px;'>
 			<span ng-repeat='line in model.selectedProperty.description'>
 				{{ line }}
 				<br/>

@@ -9,14 +9,13 @@
 			</span>
 		  	<span style='padding-left:50px;'>
 
-				<a href='#' ng-click="gotoHomeView();"
+				<a ng-click="gotoHomeView();"
 					ng-class="(view == Views.HOME) ? 'nav-active' : 'nav-inactive'"
 					>
 					Home
 				</a>
 
 				<a ng-repeat='category in model.categories'
-					href='#'
 					ng-click="gotoCategoryView(category);"
 					style='text-transform:capitalize;'
 					ng-class="((view == Views.CATEGORY) && (model.selectedCategory == category)) ? 'nav-active' : 'nav-inactive'"
@@ -24,8 +23,7 @@
 					{{ category }}
 				</a>
 
-				<a href='#' 
-					ng-click="gotoSoldView();"
+				<a ng-click="gotoSoldView();"
 				ng-class="(view == Views.SOLD) ? 'nav-active' : 'nav-inactive'"
 					>Sold</a>
 		  	</span>
