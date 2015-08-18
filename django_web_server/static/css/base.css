@@ -352,10 +352,15 @@ div.tailbar-blurb-header span {
 }
 
 .green-button {
+	font-weight:bold;
 	display: inline-block;	
 	border-radius: 3px;
 	color:white;
 	background-color: #a1bd1b;
 	padding-left:5px;
 	padding-right:5px;
+}
+
+.invisible {
+	visibility: hidden;
 }
