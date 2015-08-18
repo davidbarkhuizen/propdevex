@@ -146,7 +146,7 @@ Very light Grey:
 }
 
 .light-green-background {
-	background-color: #a1bd1b !important;
+	background-color: #a1bd1b !important;0
 }
 
 .vomit-green {
@@ -349,4 +349,13 @@ div.tailbar-blurb-header span {
 	-moz-box-shadow: 0px 1px 2px grey;
 	-webkit-box-shadow: 0px 1px 2px grey;
 	box-shadow: 0px 1px 2px grey;
+}
+
+.green-button {
+	display: inline-block;	
+	border-radius: 3px;
+	color:white;
+	background-color: #a1bd1b;
+	padding-left:5px;
+	padding-right:5px;
 }

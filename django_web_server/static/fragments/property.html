@@ -79,14 +79,16 @@
 			</div>
     	</div>
     	<div
-    		class='grey-text drop-shadow'
+    		class='grey-text drop-shadow justify'
     		style='float:left;
     			margin-top:17px;margin-left:25px;
-    			width:30%;
-    			padding-left:15px;padding-top:15px;padding-bottom:15px;
+    			width:35%;
+    			padding-left:15px;padding-top:15px;padding-bottom:15px;padding-right:15px;
     			'>
     		<div>
 	    		<span style='font-size:1.5em;'>Location:</span>
+	    		<br/>
+	    		{{ model.selectedProperty.shortLocation }}&nbsp;
 	    		<br/>
 	    		{{ model.selectedProperty.longLocation }}&nbsp;
     		</div>
@@ -109,9 +111,9 @@
 			    &middot; {{ sub.name }}
 				</div>
 			</div>
+			<br/>
+			<div class='green-button'>FOR SALES / PRICING CLICK HERE</div>
     	</div>
-
-
     	<div style='clear:both;'>
     	</div>
 	</div>
