@@ -77,12 +77,19 @@ function DataModel(siteUrlRoot) {
 	that.selectProperty = function(property) {
 		that.selectedProperty = property;
 		that.selectedPropertyImageIndex = 0;
-		that.selectCategory(property.category);
+
+		if (property.sold == false) {
+			that.selectCategory(property.category);
+		}
+		else {
+			if (that.selectedCategory !== 'sold')
+				that.selectedCategory = 'sold';
+		}
 	};
 
 	that.selectNextPropertyInCategory = function() {
 
-		var properties = that.propertiesForCategory(that.selectedProperty.category);
+		var properties = that.propertiesForCategory(that.selectedCategory);
 
 		if ((properties.length == 0) || (properties.length == 1))
 			return;
@@ -97,7 +104,7 @@ function DataModel(siteUrlRoot) {
 
 	that.selectPreviousPropertyInCategory = function() {
 
-		var properties = that.propertiesForCategory(that.selectedProperty.category);
+		var properties = that.propertiesForCategory(that.selectedCategory);
 
 		if ((properties.length === 0) || (properties.length === 1)){
 			return;

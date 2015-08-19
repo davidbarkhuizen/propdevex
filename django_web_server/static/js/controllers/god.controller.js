@@ -68,6 +68,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 		$scope.model.cancelSelection();
 		$scope.model.selectCategory(category);
+		$scope.model.propertiesPageNumber = 1;
 
 		$scope.updateWindowHashForCurrentlySelectedCategory();
 
@@ -89,7 +90,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.gotoSoldView = function() {
 		$scope.model.cancelSelection();
-		$scope.view = Views.SOLD; 
+		$scope.view = Views.CATEGORY; 
 		$scope.model.selectCategory('sold');
 		$scope.updateWindowHashForCurrentlySelectedCategory();
 	};
