@@ -16,13 +16,13 @@
 			{
 				"name" : "portion 139",
 				"areaSQM" : 124600,
-				"image" : "zwavelpoort_stand_139.jpg",
+				"images" : ["zwavelpoort_stand_139.jpg"],
 				"description" : ""			
 			},
 			{
 				"name" : "portion 140",
 				"areaSQM" : 92381,
-				"image" : "zwavelpoort_stand_140.jpg",
+				"images" : ["zwavelpoort_stand_140.jpg"],
 				"description" : ""			
 			}				
 		]
@@ -58,13 +58,13 @@
 			{
 				"name" : "portion 19, (a portion of portion 18) of the Farm 388, off William Nicol Drive on the R511",
 				"areaSQM" : null,
-				"image" : null,
+				"images" : [],
 				"description" : ""		
 			},
 			{
 				"name" : "Portion 191 (a portion of portion 31), Farm 388 off William Nicol Drive on the R511",
 				"areaSQM" : null,
-				"image" : null,
+				"images" : [],
 				"description" : ""			
 			}				
 		]

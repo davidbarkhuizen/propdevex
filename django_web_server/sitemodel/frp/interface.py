@@ -75,8 +75,6 @@ def populate_datamodel():
 
 		for prop in to_import['properties']:			
 
-			print(prop)
-
 			db_property = FRP_Property(category=category, sold=False, name=prop['name'], areaSQM=prop['areaSQM'], description=prop['description'], shortLocation=prop['shortLocation'],longLocation=prop['longLocation'], latitude=prop['latitude'], longitude=prop['longitude'])
 			
 			db_property.save()
@@ -105,9 +103,22 @@ def populate_datamodel():
 
 				db_subproperty = FRP_SubProperty(property=db_property, name=sub_prop['name'], areaSQM=sub_prop['areaSQM'], description=sub_prop['description'])
 
-				db_subproperty.save()				
+				db_subproperty.save()		
+
+				print('subprop ', db_subproperty.name)		
 
 				if ('images' in sub_prop.keys()):
+
+					print('sub_prop[images]')
+					print(sub_prop['images'])
+
+					print('dir(sub_prop)')
+					print(dir(sub_prop))
+
+					if len(sub_prop['images']) > 0:
+						print('has images')
+					else:
+						print('no image')
 
 					for k in range(len(sub_prop['images'])):
 
@@ -115,7 +126,7 @@ def populate_datamodel():
 
 						image_source_location = import_root_location  + category.name + '/' + sub_prop_image_file_name
 
-						db_sub_property_image = FRP_SubPropertyImage(property=db_property)
+						db_sub_property_image = FRP_SubPropertyImage(subproperty=db_subproperty)
 						image_source_django_file = None
 						with open(image_source_location) as image_source_python_file:
 							image_source_django_file = File(image_source_python_file)
@@ -126,6 +137,8 @@ def populate_datamodel():
 
 						db_sub_property_image.save()
 
+				else:
+					print('no images')
 
 def render_site_model(site_token):
 	

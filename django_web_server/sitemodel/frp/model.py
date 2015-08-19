@@ -60,7 +60,7 @@ class FRP_PropertyImage(models.Model):
 		verbose_name_plural = "propertyimages"
 		app_label = 'server'
 
-	property 		= models.ForeignKey(FRP_Property, null=False)	
+	property		= models.ForeignKey(FRP_Property, null=False)	
 	file 			= models.FileField(upload_to=IMAGE_ROOT, null=True)
 	isprimary 		= models.BooleanField(null=False, default=False)
 
@@ -90,5 +90,5 @@ class FRP_SubPropertyImage(models.Model):
 		app_label = 'server'
 
 	subproperty 	= models.ForeignKey(FRP_SubProperty, null=False)	
-	imagefile 		= models.FileField(upload_to=IMAGE_ROOT, null=True)
+	file 			= models.FileField(upload_to=IMAGE_ROOT, null=True)
 	isprimary 		= models.BooleanField(null=False, default=False)
