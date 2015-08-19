@@ -253,7 +253,9 @@ def render_site_model(site_token):
 				db_binary_upload = BinaryUpload(source_path=source, destination_path=dest_path, site=db_site)
 				db_binary_uploads.append(db_binary_upload)
 
+				# append sub-property images to main property image list
 				property['images'].append(dest_path)
+				sub_property['images'].append(dest_path)
 
 			property['subproperties'].append(sub_property)
 
