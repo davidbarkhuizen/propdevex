@@ -93,6 +93,12 @@
 	    		<span style='margin-left:2px;'>{{ model.selectedProperty.shortLocation }}</span>
 	    		<br/>
 	    		<span style='margin-left:2px;'>{{ model.selectedProperty.longLocation }}</span>
+	    		<br/>
+	    		<br/>
+	    		<a href='http://maps.google.com/maps?z=12&t=k&q=loc:-26.08715+28.02632' target='_blank'>
+					<div class='green-button'>GOOGLE MAPS</div>
+				</a>
+			</a>
     		</div>
 			<div ng-if='model.propertyHasArea(model.selectedProperty);'>
 	    		<br/>
@@ -167,6 +173,16 @@
 				<span>
 					&nbsp;({{ model.propertyAreaSqmText(sub) }})
 				</span>
+			</div>
+
+			<div ng-if='sub.images.length > 0'>
+				<img 
+					style='width:606px;height:380px;margin-top:15px;'
+					ng-src="{{ model.dataImageUrl(sub.images[0]) }}"
+					title="{{ sub.name }}"
+					alt="{{ sub.name }}"
+					ng-click=''
+					/>
 			</div>
 
 			<div ng-if='((sub.description.length > 0) && (sub.description[0].length !== 0))'>
