@@ -9,7 +9,9 @@
 			</span>
 		  	<span style='padding-left:50px;'>
 
-				<a ng-click="gotoHomeView();"
+				<a
+					href='#'
+					ng-click="gotoHomeView();"
 					ng-class="(view == Views.HOME) ? 'nav-active' : 'nav-inactive'"
 					>
 					Home
@@ -25,8 +27,10 @@
 					{{ category }}
 				</a>
 
-				<a ng-click="gotoSoldView();"
-				ng-class="(view == Views.SOLD) ? 'nav-active' : 'nav-inactive'"
+				<a
+					ng-click="gotoSoldView();"
+					href='#'
+					ng-class="(view == Views.SOLD) ? 'nav-active' : 'nav-inactive'"
 					>Sold</a>
 		  	</span>
 		</div>
