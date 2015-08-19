@@ -256,6 +256,43 @@ function DataModel(siteUrlRoot) {
 		return that.propertyAreaHaText() + ' (' + that.propertyAreaSQMText() + ')';
 	};
 
+	that.geoLocURL = function(property) {
+
+		var latStr = property.latitude.toFixed(4);
+
+		if (property.latitude < 0)
+			latStr = '-' + latStr;
+		else		
+			latStr = '+' + latStr;
+
+		var lonStr = property.longitude.toFixed(4);
+
+		if (property.longitude < 0)
+			lonStr = '-' + lonStr;
+		else		
+			lonStr = '+' + lonStr;
+
+		var s = latStr + lonStr;
+		var url = 'http://maps.google.com/maps?z=12&t=k&q=loc:' + s;
+		console.log(url);
+
+		return url;
+	};
+
+	that.propertyHasGPSCoOrdinates = function(property) {
+
+		if (property === null)
+			return false;
+
+		var lat = parseFloat(property.latitude);
+		var lon = parseFloat(property.longitude);
+
+		if (isNaN(lat) || isNaN(lon))
+			return false;
+
+		return true;
+	};
+
 	/*
 
 	that.imageSrc = function(imageFileName) {

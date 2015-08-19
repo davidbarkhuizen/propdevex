@@ -92,8 +92,11 @@
 	    		<br/>
 	    		<div style='margin-left:2px;'>{{ model.selectedProperty.shortLocation }}</div>
 	    		<div style='margin-left:2px;'>{{ model.selectedProperty.longLocation }}</div>
-	    		<div style='margin-top:5px;'>
-		    		<a href='http://maps.google.com/maps?z=12&t=k&q=loc:-26.08715+28.02632' target='_blank'>
+	    		<div ng-if='model.propertyHasGPSCoOrdinates(model.selectedProperty)' 
+	    			style='margin-top:5px;'>
+		    		<a
+		    			href='{{ model.geoLocURL(model.selectedProperty); }}'
+		    			target='_blank'>
 						<div class='green-button'>GOOGLE MAPS</div>
 					</a>
 				</div>
@@ -153,10 +156,11 @@
 		</div>
 		<div class='justify grey-text'
 			style='width:70%;margin-left:100px;margin-bottom:25px;margin-top:10px;'>
-			<span ng-repeat='line in model.selectedProperty.description'>
-				{{ line }}
-				<br/>
-			</span>
+			<ul>
+				<li ng-repeat='line in model.selectedProperty.description'>
+					{{ line }}
+				</li>
+			</ul>
 		</div>
 	</div>
 
@@ -199,9 +203,11 @@
 
 			<div ng-if='((sub.description.length > 0) && (sub.description[0].length !== 0))'>
 				<br/>
-				<div ng-repeat='line in sub.description'>
-					{{ line }}
-				</div>
+				<ul>
+					<li ng-repeat='line in sub.description'>
+						{{ line }}
+					</li>
+				</ul>
 			<div>			
 		</div>
 	</div>
