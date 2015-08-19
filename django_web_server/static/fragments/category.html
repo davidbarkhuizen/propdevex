@@ -15,7 +15,6 @@
 	    	<img style='
 				width:100%;
 				display:block;'
-
 				ng-src="/static/image/header-category.jpg"/>
 		</div>
 
@@ -57,7 +56,7 @@
 					padding-bottom:10px;'
 				class='drop-shadow'>
 				<div>
-					<a href='#' ng-click='viewProperty(property);'>
+					<a href='' ng-click='viewProperty(property);'>
 						<img 
 							style='width:324px;height:200px;'
 							ng-src="{{model.dataImageUrl(property.images[0])}}"
@@ -103,7 +102,7 @@
 					</span>
 				</div>
 				<div style='margin-left:10px;'>
-					<a href='#' ng-click="viewProperty(property);">
+					<a href='' ng-click="viewProperty(property);">
 						<div class='green-button'>MORE INFO</div>
 					</a>
 				</div>
@@ -118,11 +117,11 @@
 		class='grey-text'
 		style='font-size:1.5em;margin-left:100px;margin-bottom:25px;'>
 		<a
-			href="#"
+			href=''
 			ng-repeat='num in model.propertiesForCategoryPageNumbers(model.selectedCategory)'
 			ng-class='(num == model.propertiesPageNumber) ? "green underline" : ""'
 			style='margin-right:10px;'
-			ng-click='model.setPropertiesPageNumber(num);'
+			ng-click='setPropertiesPageNumber(num);'
 			>{{ num }}</a>
 	</div>
 </div>

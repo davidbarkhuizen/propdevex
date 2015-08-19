@@ -1,3 +1,7 @@
+var Command = Object.freeze({
+	GOTO_VIEW : guid()
+});
+
 function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	var siteRoot = '/static/';
@@ -43,7 +47,18 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.gotoHomeView = function() {
 		$scope.model.cancelSelection();
+
+		window.location.hash = '#category=' + 'home';
 		$scope.view = Views.HOME; 
+	};
+
+	$scope.updateWindowHashForCurrentlySelectedCategory = function() {
+		window.location.hash = '#category=' + $scope.model.selectedCategory + ';page=' + $scope.model.propertiesPageNumber;
+	};
+
+	$scope.setPropertiesPageNumber = function(number) {
+		$scope.model.setPropertiesPageNumber(number);
+		$scope.updateWindowHashForCurrentlySelectedCategory();
 	};
 
 	$scope.gotoCategoryView = function(category) {
@@ -54,17 +69,29 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		$scope.model.cancelSelection();
 		$scope.model.selectCategory(category);
 
+		$scope.updateWindowHashForCurrentlySelectedCategory();
+
 		$scope.view = Views.CATEGORY; 
+	};
+
+	$scope.updateWindowHashForCurrentlySelectedProperty = function() {
+		var property = $scope.model.selectedProperty;
+		var propertyIndex = $scope.model.propertiesForCategory(property.category).indexOf(property);
+		var windowHash = '#category=' + property.category + ';propertyIndex=' + propertyIndex.toString();
+		window.location.hash = windowHash;
 	};
 
 	$scope.viewProperty = function(property) {
 		$scope.view = Views.PROPERTY;
 		$scope.model.selectProperty(property);
+		$scope.updateWindowHashForCurrentlySelectedProperty();
 	}
 
 	$scope.gotoSoldView = function() {
 		$scope.model.cancelSelection();
 		$scope.view = Views.SOLD; 
+		$scope.model.selectCategory('sold');
+		$scope.updateWindowHashForCurrentlySelectedCategory();
 	};
 
 	$rootScope.$on(Command.GOTO_VIEW, function(evt, view) { 
@@ -81,6 +108,106 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 				break;
 		}
 	});
+
+	$scope.respondToWindowHashChange = function(previousHash, currentHash) {
+
+		console.log('respondToWindowHashChange');
+
+		if ((currentHash == null) || (currentHash.length <= 1)) {
+
+			if ($scope.view !== Views.HOME) {
+				console.log('changing to home view');
+
+				$scope.view = Views.HOME;
+			}
+
+			return;
+		}
+
+		var pairStrings = currentHash.substring(1).split(';');
+
+		var hash = {
+			'category' : null,
+			'propertyIndex' : null,
+			'page' : null
+		};
+
+		pairStrings.forEach(function(pairString){
+			var pair = pairString.split('=');
+			hash[pair[0]] = pair[1];
+		});
+
+		hash['page'] = parseInt(hash['page']);
+		if (isNaN(hash['page']) == true)
+			hash['page'] = null;
+
+		// specific property selected
+		//
+		if (hash['propertyIndex'] !== null) {
+
+			var category = hash['category'];
+			var propertyIndex = hash['propertyIndex'];
+			var property = $scope.model.propertiesForCategory(category)[propertyIndex];
+
+			if (($scope.view !== Views.PROPERTY) || (property !== $scope.model.selectedProperty)) {
+				
+				console.log('selecting property ' + property.name);
+
+				$scope.model.selectProperty(property);
+			} 
+
+			return;
+		}
+		// else is category
+		//
+		else if (hash['category'] !== null) {
+
+			var category = hash['category'];
+			var page = hash['page'];
+
+			// $scope.model.propertiesPageNumber.toString() !== page)s
+
+			if (
+				($scope.view !== Views.CATEGORY) 
+				|| 
+				(category !== $scope.model.selectedCategory) 
+				|| 
+				($scope.model.propertiesPageNumber !== page)
+				) {
+				
+				if ($scope.view !== Views.CATEGORY) {
+					$scope.view = Views.CATEGORY;
+				}
+
+				if ($scope.model.selectedCategory !== category) {
+					$scope.model.selectCategory(category);
+				}
+				
+				if (page !== null) {
+					if ($scope.model.propertiesPageNumber !== page)
+						$scope.model.setPropertiesPageNumber(page);
+				}
+			} 
+
+			return;
+		}
+	};
+
+	$scope.windowHash = window.location.hash; 
+	$scope.windowHashWatcher = function() {
+
+		var hash = window.location.hash;
+		if (hash !== $scope.windowHash) {
+			
+			var oldHash = $scope.windowHash;
+			$scope.windowHash = hash;
+
+			$scope.respondToWindowHashChange(oldHash, hash);
+		}
+	};
+	$scope.registerWindowHashWatcher = function() {
+		$interval($scope.windowHashWatcher, 200);
+	};
 
 	$rootScope.$on(Event.DEBUG_ERROR, function(evt, error) {
 		$scope.globalDebug(error);
@@ -137,11 +264,6 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 		var href = $scope.mailToHref(contactsForCategory[0]['email'], $scope.model.selectedProperty['name']);
 		window.open(href, '_blank');
-	};
-
-	$scope.viewStandDetail = function(stand) {
-		$scope.model.selectStand(stand);
-		$scope.modalController.openModal();
 	};
 
 	// -----------------------------------------------------------------
@@ -211,9 +333,21 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$interval($scope.rotateHomeImageSrcIndex, 5000);
 
+	// ------------------------------------------------------
+
+	$scope.selectNextPropertyInCategory = function() {
+		$scope.model.selectNextPropertyInCategory();
+		$scope.updateWindowHashForCurrentlySelectedProperty();
+	};
+	$scope.selectPreviousPropertyInCategory = function() {
+		$scope.model.selectPreviousPropertyInCategory();
+		$scope.updateWindowHashForCurrentlySelectedProperty();
+	};
+
 	// -----------------------------------------------------------------
 	// INIT
 
 	$scope.loadDataModel();
 	$timeout($scope.init_twitter_widget, 500);
+	$scope.registerWindowHashWatcher();
 };

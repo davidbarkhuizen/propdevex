@@ -172,10 +172,18 @@ function DataModel(siteUrlRoot) {
 	that.propertiesForCategory = function(category) {
 		
 		var matches = [];
-		that.properties.forEach(function(p){
-			if (p.category == category)
-				matches.push(p);
-		});
+
+		if (category !== 'sold'){
+			that.properties.forEach(function(p){
+				if ((p.category == category) && (p.sold == false))
+					matches.push(p);
+			});
+		} else {
+			that.properties.forEach(function(p){
+				if (p.sold == true)
+					matches.push(p);
+			});
+		}
 
 		return matches;
 	};
@@ -274,7 +282,6 @@ function DataModel(siteUrlRoot) {
 
 		var s = latStr + lonStr;
 		var url = 'http://maps.google.com/maps?z=12&t=k&q=loc:' + s;
-		console.log(url);
 
 		return url;
 	};
