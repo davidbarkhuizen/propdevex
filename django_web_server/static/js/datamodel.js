@@ -193,7 +193,7 @@ function DataModel(siteUrlRoot) {
 
 	// PROPERTIES - PAGING
 
-	that.propertiesPerPage = 3;
+	that.propertiesPerPage = 6;
 	that.propertiesPageNumber = 1;
 
 	that.setPropertiesPageNumber = function(num) {

@@ -90,9 +90,9 @@
     		<div>
 	    		<span style='font-size:1.5em;'>Location</span>
 	    		<br/>
-	    		&middot;&nbsp;{{ model.selectedProperty.shortLocation }}
+	    		<span style='margin-left:2px;'>{{ model.selectedProperty.shortLocation }}</span>
 	    		<br/>
-	    		&middot;&nbsp;{{ model.selectedProperty.longLocation }}
+	    		<span style='margin-left:2px;'>{{ model.selectedProperty.longLocation }}</span>
     		</div>
 			<div ng-if='model.propertyHasArea(model.selectedProperty);'>
 	    		<br/>
@@ -114,7 +114,11 @@
 				</div>
 			</div>
 			<br/>
-			<div class='green-button'>FOR SALES / PRICING CLICK HERE</div>
+
+			<a href='#' ng-click="enquireAfterPriceOfSelectedProperty();">
+				<div class='green-button'>FOR SALES / PRICING CLICK HERE</div>
+			</a>
+
     	</div>
 
     	<div style='clear:both;'>
