@@ -1,5 +1,5 @@
 <div id='ContactBar'>
-	<div style="width:100%;" class='dark-grey-background'>
+	<div style="width:100%;color:#B8B8B8;" class='dark-grey-background'>
 
 		<div class='contact unselectable' style='width:100%;'>
 
@@ -8,13 +8,15 @@
 			<!-- ICONS -->
 			<span style='float:left;margin-right:10px;'>
 		  		<img
-		  			style='margin-top:5px;margin-bottom:5px;'
+		  			class=''
+		  			style='margin-top:5px;margin-bottom:5px;'					
 					ng-src="/static/image/icon-fb.png"
 					ng-click="openFacebook();"
 					/>
 			</span>
 			<span style='float:left'>
 		  		<img
+		  			class=''
 		  			style='margin-top:5px;margin-bottom:5px;margin-right:10px'
 					ng-src="/static/image/icon-twitter.png"
 					ng-click="openTwitter();"
@@ -22,6 +24,7 @@
 			</span>
 			<span style='float:left'>
 		  		<img
+		  			class=''
 		  			style='margin-top:5px;margin-bottom:5px;'
 					ng-src="/static/image/icon-linkedin.png"
 					ng-click="openLinkedIn();"
@@ -30,11 +33,11 @@
 
 			<!-- BEGIN REVERSE ORDER ////////////////////////////////////// -->
 
-		  	<span style='float:right;margin-right:100px;' class='grey-text'>
+		  	<span style='float:right;margin-right:100px;'>
 		  		{{ model.contacts[0].email }}
 		  	</span>
 
-		  	<span style='float:right' class='grey-text bold'>
+		  	<span style='float:right' class='bold'>
 		  		Email:&nbsp;
 		  	</span>
 
@@ -53,11 +56,11 @@
 		  		&nbsp;&nbsp;&nbsp;
 		  	</span>
 
-			<span style='float:right' class='grey-text'>
+			<span style='float:right'>
 		  		{{ model.contacts[0].phone }}
 		  	</span>
 
-		  	<span style='float:right' class='grey-text bold'>
+		  	<span style='float:right' class='bold'>
 		  		Phone:&nbsp;
 		  	</span>
 

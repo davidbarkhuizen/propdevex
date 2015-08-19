@@ -125,17 +125,23 @@ Very light Grey:
 	color: white !important;
 }
 
-.grey-text {
-	color: #676767 !important;
-}
-
 .tail-bar-text {
 	color: 747474 !important;
+}
+
+
+.grey {
+	color:grey;
+}
+
+.grey-text {
+	color: #676767 !important;
 }
 
 .light-grey {
 	color: #f5f5f5 !important;
 }
+
 
 .green {
 	color: #a0bf14 !important;

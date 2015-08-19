@@ -17,19 +17,7 @@ function DataModel(siteUrlRoot) {
 	// --------------------------------------------------
 	// MODEL FIELDS
 
-	that.categories = ["commercial","industrial","residential","business","hotel","retail","investment","agricultural"];
-
-	that.categoryViews = [
-		{ category: "commercial", view: Views.COMMERCIAL },
-		{ category: "industrial", view: Views.INDUSTRIAL },
-		{ category: "residential", view: Views.RESIDENTIAL },
-		{ category: "business", view: Views.BUSINESS },
-		{ category: "hotel", view: Views.HOTEL },
-		{ category: "retail", view: Views.RETAIL },
-		{ category: "investment", view: Views.INVESTMENT },
-		{ category: "agricultural", view: Views.AGRICULTURAL },
-		{ category: "sold", view: Views.SOLD },
-	];
+	that.categories = ["commercial","industrial","residential","business","hospitality","retail","investment","agricultural"];
 
 	that.contacts = [{
 		"name" : "",
@@ -76,24 +64,6 @@ function DataModel(siteUrlRoot) {
 		return function( item ) {
 			return item.category === categoryName;
 		};
-	};
-
-	that.viewForCategory = function(category) {
-		for(var i = 0; i < that.categoryViews.length; i++)
-			if (that.categoryViews[i].category == category)
-				return that.categoryViews[i].view;
-	};
-
-	that.categoryForView = function(view) {
-		for(var i = 0; i < that.categoryViews.length; i++)
-			if (that.categoryViews[i].view == view)
-				return that.categoryViews[i].category;
-	};
-
-	that.getPropertyCategoryViews = function() {
-		var views = [];
-		that.categoryViews.forEach(function(x){ views.push(x.view); });
-		return views;
 	};
 
 	// --------------------------------------------------
@@ -176,6 +146,25 @@ function DataModel(siteUrlRoot) {
 		that.selectedPropertyImageIndex = 0;
 		that.selectedSubProperty = null;
 	};
+
+	// --------------------------------------------------
+	// CONTACT PROPERTY ACCESSORS
+
+	that.contactsForCategory = function(category) {
+
+		var contactsForCategory = [];
+		that.contacts.forEach(function(contact){
+			if (contact.categories.indexOf(category) !== -1) {
+				contactsForCategory.push(contact);
+			}
+		});
+
+		if (contactsForCategory.length == 0) {
+			contactsForCategory.push(that.contacts[0]);
+		}
+
+		return contactsForCategory;
+	}
 
 	// --------------------------------------------------
 	// PROPERTY PROPERTY ACCESSORS

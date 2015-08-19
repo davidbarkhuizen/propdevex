@@ -90,14 +90,13 @@
     		<div>
 	    		<span style='font-size:1.5em;'>Location</span>
 	    		<br/>
-	    		<span style='margin-left:2px;'>{{ model.selectedProperty.shortLocation }}</span>
-	    		<br/>
-	    		<span style='margin-left:2px;'>{{ model.selectedProperty.longLocation }}</span>
-	    		<br/>
-	    		<br/>
-	    		<a href='http://maps.google.com/maps?z=12&t=k&q=loc:-26.08715+28.02632' target='_blank'>
-					<div class='green-button'>GOOGLE MAPS</div>
-				</a>
+	    		<div style='margin-left:2px;'>{{ model.selectedProperty.shortLocation }}</div>
+	    		<div style='margin-left:2px;'>{{ model.selectedProperty.longLocation }}</div>
+	    		<div style='margin-top:5px;'>
+		    		<a href='http://maps.google.com/maps?z=12&t=k&q=loc:-26.08715+28.02632' target='_blank'>
+						<div class='green-button'>GOOGLE MAPS</div>
+					</a>
+				</div>
 			</a>
     		</div>
 			<div ng-if='model.propertyHasArea(model.selectedProperty);'>
@@ -120,11 +119,24 @@
 				</div>
 			</div>
 			<br/>
+			<div class='grey-text'>
+				<div style='font-size:1.5em;'>Contact</div>		
 
-			<a href='#' ng-click="enquireAfterPriceOfSelectedProperty();">
-				<div class='green-button'>FOR SALES / PRICING CLICK HERE</div>
-			</a>
+				<div>
+		  			<span class='bold'>Email:&nbsp;</span>
+					<span>{{ model.contactsForCategory(model.selectedProperty.category)[0].email }}</span>
+				</div>
+				<div>
+		  			<span class='bold'>Phone:&nbsp;</span>
+					<span>{{ model.contactsForCategory(model.selectedProperty.category)[0].phone }}</span>
+				</div>
 
+				<div style='margin-top:5px;'>
+					<a href='#' ng-click="enquireAfterPriceOfSelectedProperty();">
+						<div class='green-button'>FOR SALES / PRICING CLICK HERE</div>
+					</a>
+				</div>
+			</div>
     	</div>
 
     	<div style='clear:both;'>

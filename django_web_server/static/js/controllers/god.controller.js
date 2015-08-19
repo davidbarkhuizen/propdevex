@@ -133,18 +133,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.enquireAfterPriceOfSelectedProperty = function() {
 
-		var category = $scope.model.selectedProperty['category'];
-
-		var contactsForCategory = [];
-		$scope.model.contacts.forEach(function(contact){
-			if (contact.categories.indexOf(category) !== -1) {
-				contactsForCategory.push(contact);
-			}
-		});
-
-		if (contactsForCategory.length == 0) {
-			contactsForCategory.push($scope.model.contacts[0]);
-		}
+		var contactsForCategory = $scope.model.contactsForCategory($scope.model.selectedProperty.category);
 
 		var href = $scope.mailToHref(contactsForCategory[0]['email'], $scope.model.selectedProperty['name']);
 		window.open(href, '_blank');
@@ -163,11 +152,11 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	}
 
 	$scope.openFacebook = function() {
-		$scope.openUrlInNewWindow('https://www.facebook.com');
+		$scope.openUrlInNewWindow('https://www.facebook.com/frprop');
 	};
 
 	$scope.openTwitter = function() {
-		$scope.openUrlInNewWindow('https://www.twitter.com');
+		$scope.openUrlInNewWindow('https://twitter.com/FRprop');
 	};
 
 	$scope.openLinkedIn = function() {

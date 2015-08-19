@@ -21,7 +21,7 @@ CATEGORY_NAMES = [
 	'industrial',
 	'residential',
 	'business',
-	'hotel',
+	'hospitality',
 	'retail',
 	'investment',
 	'agricultural'

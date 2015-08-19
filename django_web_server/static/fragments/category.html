@@ -57,13 +57,14 @@
 					padding-bottom:10px;'
 				class='drop-shadow'>
 				<div>
-					<img 
-						style='width:324px;height:200px;'
-						ng-src="{{model.dataImageUrl(property.images[0])}}"
-						title={{property.name}}
-						alt={{property.name}}
-						ng-click='viewProperty(property);'
-						/>
+					<a href='#' ng-click='viewProperty(property);'>
+						<img 
+							style='width:324px;height:200px;'
+							ng-src="{{model.dataImageUrl(property.images[0])}}"
+							title={{property.name}}
+							alt={{property.name}}							
+							/>
+					</a>
 				</div>
 				
 				<div
