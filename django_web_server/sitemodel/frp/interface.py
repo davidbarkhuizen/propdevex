@@ -177,8 +177,8 @@ def render_site_model(site_token):
 			'description': [],
 			'shortLocation': db_prop.shortLocation,
 			'longLocation': db_prop.longLocation,
-			'latitude': db_prop.latitude,
-			'longitude': db_prop.longitude,
+			'latitude': float(str(db_prop.latitude)) if db_prop.latitude is not None else None,
+			'longitude': float(str(db_prop.longitude)) if db_prop.longitude is not None else None,
 
 			'images' : [],
 			'subproperties' : []

@@ -1,3 +1,5 @@
+import logging
+
 from ftplib import FTP
 import os
 
@@ -43,6 +45,7 @@ class FtpClient(object):
 				print('creating ' + tail)
 				self.ftp.cwd('/' + sub_folder)
 				self.ftp.mkd(tail)
+				logging.info('mkdir ' + tail)
 
 	# def upload_text_file(self, source_path, dest_path, ignore_if_same_size = True):
 
@@ -66,24 +69,26 @@ class FtpClient(object):
 
 	def upload_bin_file(self, source_path, dest_path, ignore_if_same_size = True):
 
-		print('upload bin from {0} to {1}'.format(source_path, dest_path))
+		logging.info('source {0} dest {1}'.format(source_path, dest_path))
 
 		self.create_folder_path(dest_path)
 
-		source_size = os.path.getsize(source_path)
+		source_file_size = os.path.getsize(source_path)
 
 		try:
-			dest_file_size = self.ftp.size(dest_path)
-		except:
+			dest_file_size = self.ftp.size('/' + dest_path)
+		except Exception as e:
+			logging.info('does not exist')
 			dest_file_size = 0
 
-		if ignore_if_same_size and (source_size == dest_file_size):
-			print(source_path + ' - unchanged, ignoring')
-			return
-
+		if source_file_size == dest_file_size:
+			if ignore_if_same_size: 
+				logging.info(dest_path + ' - unchanged in size, ignoring')
+				return
+			
 		with open(source_path, 'rb') as source_bin_file:
 			resp = self.ftp.storbinary("STOR " + '/' + dest_path, source_bin_file, 1024)
-			print('uploaded')
+			logging.info(dest_path + ' uploaded')
 
 	def close(self):
 		if self.ftp:

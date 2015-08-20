@@ -61,7 +61,7 @@ class FRP_PropertyImage(models.Model):
 		app_label = 'server'
 
 	property		= models.ForeignKey(FRP_Property, null=False)	
-	file 			= models.FileField(upload_to=IMAGE_ROOT, null=True)
+	file 			= models.FileField(upload_to=IMAGE_ROOT, null=False)
 	isprimary 		= models.BooleanField(null=False, default=False)
 
 class FRP_SubProperty(models.Model):
@@ -76,7 +76,7 @@ class FRP_SubProperty(models.Model):
 	sold 			= models.BooleanField(null=False, default=False)
 
 	name 			= models.CharField(max_length=1024, unique=False, null=True)
-	description 	= models.TextField(null=True)
+	description 	= models.TextField(null=True, blank=True)
 	areaSQM			= models.IntegerField(null=True, blank=True)
 
 	def __str__(self):
@@ -90,5 +90,5 @@ class FRP_SubPropertyImage(models.Model):
 		app_label = 'server'
 
 	subproperty 	= models.ForeignKey(FRP_SubProperty, null=False)	
-	file 			= models.FileField(upload_to=IMAGE_ROOT, null=True)
+	file 			= models.FileField(upload_to=IMAGE_ROOT, null=False)
 	isprimary 		= models.BooleanField(null=False, default=False)
