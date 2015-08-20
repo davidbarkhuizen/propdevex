@@ -77,14 +77,6 @@ function DataModel(siteUrlRoot) {
 	that.selectProperty = function(property) {
 		that.selectedProperty = property;
 		that.selectedPropertyImageIndex = 0;
-
-		if (property.sold == false) {
-			that.selectCategory(property.category);
-		}
-		else {
-			if (that.selectedCategory !== 'sold')
-				that.selectedCategory = 'sold';
-		}
 	};
 
 	that.selectNextPropertyInCategory = function() {

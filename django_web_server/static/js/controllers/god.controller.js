@@ -76,9 +76,14 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	};
 
 	$scope.updateWindowHashForCurrentlySelectedProperty = function() {
+
+		var category = (property.sold == false)
+			? property.category
+			: "sold";
+
 		var property = $scope.model.selectedProperty;
-		var propertyIndex = $scope.model.propertiesForCategory(property.category).indexOf(property);
-		var windowHash = '#category=' + property.category + ';propertyIndex=' + propertyIndex.toString();
+		var propertyIndex = $scope.model.propertiesForCategory(category).indexOf(property);
+		var windowHash = '#category=' + category + ';propertyIndex=' + propertyIndex.toString();
 		window.location.hash = windowHash;
 	};
 
@@ -92,6 +97,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		$scope.model.cancelSelection();
 		$scope.view = Views.CATEGORY; 
 		$scope.model.selectCategory('sold');
+		$scope.model.setPropertiesPageNumber(1);
 		$scope.updateWindowHashForCurrentlySelectedCategory();
 	};
 
@@ -152,9 +158,11 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 			if (($scope.view !== Views.PROPERTY) || (property !== $scope.model.selectedProperty)) {
 				
-				console.log('selecting property ' + property.name);
+				if ($scope.view !== Views.PROPERTY)
+					$scope.view = Views.PROPERTY;
 
-				$scope.model.selectProperty(property);
+				if (property !== $scope.model.selectedProperty)
+					$scope.model.selectProperty( $scope.model.propertiesForCategory(category)[propertyIndex]);
 			} 
 
 			return;
