@@ -32,6 +32,14 @@
 					href=''
 					ng-class="(model.selectedCategory == 'sold') ? 'nav-active' : 'nav-inactive'"
 					>Sold</a>
+
+				<a
+					href=''
+					ng-click="gotoContactView();"
+					ng-class="(view == Views.CONTACT) ? 'nav-active' : 'nav-inactive'"
+					>
+					Contact Us
+				</a>
 		  	</span>
 		</div>
 

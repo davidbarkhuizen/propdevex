@@ -45,6 +45,13 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		return ($scope.view === view);
 	};
 
+	$scope.gotoContactView = function() {
+		$scope.model.cancelSelection();
+
+		window.location.hash = '#category=' + 'contact';
+		$scope.view = Views.CONTACT; 
+	};
+
 	$scope.gotoHomeView = function() {
 		$scope.model.cancelSelection();
 
@@ -114,7 +121,10 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 			case Views.SOLD:
 				$scope.gotoSoldView();
 				break;
-		}
+			case Views.CONTACT:
+				$scope.gotoContactView();
+				break;
+			}
 	});
 
 	$scope.respondToWindowHashChange = function(previousHash, currentHash) {
@@ -169,9 +179,17 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		else if (hash['category'] !== null) {
 
 			var category = hash['category'];
-			var page = hash['page'];
 
-			// $scope.model.propertiesPageNumber.toString() !== page)s
+			if (category == 'home'){
+				$scope.view = Views.HOME;
+				return;
+			}
+			else if (category == 'contact') {
+				$scope.view = Views.CONTACT;
+				return;
+			}
+
+			var page = hash['page'];
 
 			if (
 				($scope.view !== Views.CATEGORY) 
