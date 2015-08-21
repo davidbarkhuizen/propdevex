@@ -22,8 +22,8 @@ class FRP_Contact(models.Model):
 		app_label = 'server'
 
 	name 			= models.CharField(max_length=1024, unique=True, null=False)
-	phone 			= models.CharField(max_length=1024, unique=True, null=False)
-	email 			= models.CharField(max_length=1024, unique=True, null=False)
+	phone 			= models.CharField(max_length=1024, null=False)
+	email 			= models.CharField(max_length=1024, null=False)
 	categories 		= models.ManyToManyField(FRP_Category, null=True, blank=True)
 
 	def __str__(self):

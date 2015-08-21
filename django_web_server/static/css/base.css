@@ -370,3 +370,7 @@ div.tailbar-blurb-header span {
 .invisible {
 	visibility: hidden;
 }
+
+.contact-bar-background {
+	background-color: #404040;
+}

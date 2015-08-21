@@ -1,33 +1,36 @@
 <div id='ContactBar'>
 	<div style="width:100%;">
-		<div class='contact unselectable dark-grey-background light-grey' style='width:100%;'>
+		<div class='contact unselectable contact-bar-background bold' 
+			style='width:100%;color:#a3a3a3'>
 
 			<span style='width:100px;'></span>
 
 			<!-- ICONS -->
 			<span style='float:left;margin-right:10px;'>
-		  		<img
-		  			class=''
-		  			style='margin-top:5px;margin-bottom:5px;'					
-					ng-src="/static/image/icon-fb.png"
-					ng-click="openFacebook();"
-					/>
+				<a href='' style='margin-top:5px;margin-bottom:5px;' ng-click="openFacebook();">
+			  		<img
+			  			class=''		  								
+						ng-src="/static/image/icon-fb.png"
+						/>
+				</a>
 			</span>
 			<span style='float:left'>
-		  		<img
-		  			class=''
-		  			style='margin-top:5px;margin-bottom:5px;margin-right:10px'
-					ng-src="/static/image/icon-twitter.png"
-					ng-click="openTwitter();"
-					/>
+		  		<a href='' ng-click='openTwitter();'>
+			  		<img
+			  			class=''
+			  			style='margin-top:5px;margin-bottom:5px;margin-right:10px'
+						ng-src="/static/image/icon-twitter.png"						
+						/>
+				</a>
 			</span>
 			<span style='float:left'>
-		  		<img
-		  			class=''
-		  			style='margin-top:5px;margin-bottom:5px;'
-					ng-src="/static/image/icon-linkedin.png"
-					ng-click="openLinkedIn();"
-					/>
+				<a href='' ng-click="openLinkedIn();">
+			  		<img
+			  			class=''
+			  			style='margin-top:5px;margin-bottom:5px;'
+						ng-src="/static/image/icon-linkedin.png"					
+						/>
+				</a>
 			</span>
 
 			<!-- BEGIN REVERSE ORDER ////////////////////////////////////// -->

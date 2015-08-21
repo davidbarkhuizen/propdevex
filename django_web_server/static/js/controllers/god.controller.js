@@ -288,7 +288,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	};
 
 	$scope.openLinkedIn = function() {
-		$scope.openUrlInNewWindow('https://www.linkedin.com');
+		// $scope.openUrlInNewWindow('https://www.linkedin.com');
 	};
 
 	// -----------------------------------------------------------------

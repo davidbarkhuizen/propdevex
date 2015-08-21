@@ -73,7 +73,7 @@ def populate_datamodel():
 			
 			for category in contact['categories']:
 				db_category = FRP_Category.objects.get(name=category)
-				db_contact.categories.add(category)
+				db_contact.categories.add(db_category)
 				db_contact.save()
 
 	# PROPERTIES BY CATEGORY
