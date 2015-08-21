@@ -61,7 +61,7 @@
 					href=''
 					style='display: table-cell;vertical-align:middle;padding-right:10px;'
 					ng-class='(model.selectedProperty.images.length > 1) ? "" : "invisible"'
-					ng-click='model.selectPreviousPropertyImage();'>
+					ng-click='model.selectPreviousPropertyImage(sub);'>
 					<img ng-src="/static/image/arrow-left.png"/>
 				</a>
 				<img 
@@ -190,14 +190,30 @@
 				</span>
 			</div>
 
-			<div ng-if='sub.images.length > 0'>
-				<img 
-					style='width:606px;height:380px;margin-top:15px;'
-					ng-src="{{ model.dataImageUrl(sub.images[0]) }}"
-					title="{{ sub.name }}"
-					alt="{{ sub.name }}"
-					ng-click=''
+			<div ng-if='sub.images.length > 0' style='margin-top:15px;'>
+				<div style='display: table;'>
+					<a
+						href=''
+						style='display: table-cell;vertical-align:middle;padding-right:10px;'
+						ng-class='(sub.images.length > 1) ? "" : "invisible"'
+						ng-click='model.selectPreviousImageForSubProperty();'>
+						<img ng-src="/static/image/arrow-left.png"/>
+					</a>
+					<img 
+						style='display: table-cell;vertical-align:middle;width:606px;height:380px;'
+						ng-src="{{ model.dataImageUrl(model.selectedImageForSubProperty(sub)) }}"
+						title="{{ sub.name }}"
+						alt="{{ sub.name }}"
+						ng-click=''
 					/>
+					<a
+						href=''
+						style='display: table-cell;vertical-align:middle;padding-left:10px;'
+						ng-class='(sub.images.length > 1) ? "" : "invisible"'
+						ng-click='model.selectNextImageForSubProperty(sub);'>
+						<img ng-src="/static/image/arrow-right.png"/>
+					</a>
+				</div>
 			</div>
 
 			<div ng-if='((sub.description.length > 0) && (sub.description[0].length !== 0))'>
