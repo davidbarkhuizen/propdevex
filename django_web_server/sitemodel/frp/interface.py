@@ -16,22 +16,35 @@ SITE_TOKEN = 'frp'
 USER_EDITABLE_MODEL_NAMES = [ 'frp_contact', 'frp_property', 'frp_property_image', 'frp_sub_property', 'frp_sub_property_image']
 SITE_USER_NAMES = [ 'frpjenny', 'frpmelissa' ]
 
-CATEGORY_NAMES = [
-	'commercial',
-	'industrial',
-	'residential',
-	'business',
-	'hospitality',
-	'retail',
-	'investment',
-	'agricultural'
-	]
+IMPORT_ROOT_LOCATION = settings.SITE_DATA_IMPORT_ROOT_FOLDER + SITE_TOKEN + '/'
+
+def load_as_json(file_name):
+
+	path = IMPORT_ROOT_LOCATION + file_name 
+	
+	d = None
+	json_str = None
+	try:
+		with open(path, 'rt') as source_file:
+			json_str = source_file.read()
+			d = json.loads(json_str)
+	except Exception as e:
+		print('error loading JSON file @ {0}'.format(path))
+		print(e)
+		print(json_str)
+		raise e
+
+	return d
 
 def populate_model_constants():
 
-	# category
+	if len(FRP_Category.objects.all()) > 0:		
+		return
 
-	for category_name in CATEGORY_NAMES:
+	# categories
+
+	categories = load_as_json('categories.json')
+	for category_name in categories['categories']:
 		
 		if FRP_Category.objects.filter(name=category_name).exists():
 			continue
@@ -41,36 +54,37 @@ def populate_model_constants():
 
 def populate_datamodel():
 
-	print('FRP = populate_datamodel')
-
 	import_root_location = settings.SITE_DATA_IMPORT_ROOT_FOLDER + SITE_TOKEN + '/'
 
-	#if len(FRP_Contact.objects.all()) > 0:		
-	#	return
+	# CONTACTS
+	#
+	if len(FRP_Contact.objects.all()) == 0:		
 
+		contacts = load_as_json('contacts.json')
+
+		for i in range(len(contacts['contacts'])):
+			contact = contacts['contacts'][i]
+
+			db_contact = FRP_Contact(name=contact['name'], 
+				email=contact['email'],
+				phone=contact['phone']
+				)
+			db_contact.save()
+			
+			for category in contact['categories']:
+				db_category = FRP_Category.objects.get(name=category)
+				db_contact.categories.add(category)
+				db_contact.save()
+
+	# PROPERTIES BY CATEGORY
+	#
 	for category in FRP_Category.objects.all():
-
-		# CONTACT
-
-		name = random_str(8)
-		email = random_str(8) + '@' + random_str(8) + '.com'  
-		phone = random_str(8)
-		
-		db_contact = FRP_Contact(name=name, email=email,phone=phone)
-		db_contact.save()
-		db_contact.categories.add(category)
-		db_contact.save()
 
 		# PROPERTIES
 
-		to_import = None
 		try:
-			with open(import_root_location + category.name + '.json', 'rt') as source_file:
-				json_str = source_file.read()
-				to_import = json.loads(json_str)
+			to_import = load_as_json(category.name + '.json')
 		except IOError as e:
-			print(e)
-			print('no source file found for category {0}'.format(category.name))
 			continue
 
 		for prop in to_import['properties']:			
@@ -105,20 +119,7 @@ def populate_datamodel():
 
 				db_subproperty.save()		
 
-				print('subprop ', db_subproperty.name)		
-
 				if ('images' in sub_prop.keys()):
-
-					print('sub_prop[images]')
-					print(sub_prop['images'])
-
-					print('dir(sub_prop)')
-					print(dir(sub_prop))
-
-					if len(sub_prop['images']) > 0:
-						print('has images')
-					else:
-						print('no image')
 
 					for k in range(len(sub_prop['images'])):
 
@@ -136,9 +137,6 @@ def populate_datamodel():
 							db_sub_property_image.isprimary = True
 
 						db_sub_property_image.save()
-
-				else:
-					print('no images')
 
 def render_site_model(site_token):
 	
