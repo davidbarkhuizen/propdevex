@@ -57,27 +57,26 @@
 	<div style='width:100%;position:relative;'>
 		<div style='margin-left:83px;margin-top:15px;float:left;'>
 			<div style='display: table;'>
-				<div>
-					<img 
-						ng-click='model.selectPreviousPropertyImage();'
-						style='display: table-cell;vertical-align:middle;margin-right:10px;'
-						ng-src="/static/image/arrow-left.png"
-						ng-class='(model.selectedProperty.images.length > 1) ? "" : "invisible"'/>
-					<img 
-						style='
-							display: table-cell;vertical-align:middle;
-							width:606px;height:380px;'
-						ng-src="{{ model.dataImageUrl(model.getSelectedPropertyImage()) }}"
-						title="{{ model.selectedProperty.name }}"
-						alt="{{ model.selectedProperty.name }}"
-						ng-click=''
-					/>
-					<img 
-						ng-click='model.selectNextPropertyImage();'
-						style='display: table-cell;vertical-align:middle;margin-left:10px;'
-						ng-src="/static/image/arrow-right.png"
-						ng-class='(model.selectedProperty.images.length > 1) ? "" : "invisible"'/>
-				</div>
+				<a
+					href=''
+					style='display: table-cell;vertical-align:middle;padding-right:10px;'
+					ng-class='(model.selectedProperty.images.length > 1) ? "" : "invisible"'
+					ng-click='model.selectPreviousPropertyImage();'>
+					<img ng-src="/static/image/arrow-left.png"/>
+				</a>
+				<img 
+					style='display: table-cell;vertical-align:middle;width:606px;height:380px;'
+					ng-src="{{ model.dataImageUrl(model.getSelectedPropertyImage()) }}"
+					title="{{ model.selectedProperty.name }}"
+					alt="{{ model.selectedProperty.name }}"
+					ng-click=''
+				/>
+				<a href=''
+					ng-click='model.selectNextPropertyImage();'
+					ng-class='(model.selectedProperty.images.length > 1) ? "" : "invisible"'/
+					style='display: table-cell;vertical-align:middle;padding-left:10px;'>
+					<img ng-src="/static/image/arrow-right.png">
+				</a>
 			</div>
     	</div>
     	<div

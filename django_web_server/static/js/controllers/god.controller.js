@@ -77,11 +77,12 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.updateWindowHashForCurrentlySelectedProperty = function() {
 
+		var property = $scope.model.selectedProperty;
+
 		var category = (property.sold == false)
 			? property.category
 			: "sold";
 
-		var property = $scope.model.selectedProperty;
 		var propertyIndex = $scope.model.propertiesForCategory(category).indexOf(property);
 		var windowHash = '#category=' + category + ';propertyIndex=' + propertyIndex.toString();
 		window.location.hash = windowHash;
@@ -118,13 +119,9 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.respondToWindowHashChange = function(previousHash, currentHash) {
 
-		console.log('respondToWindowHashChange');
-
 		if ((currentHash == null) || (currentHash.length <= 1)) {
 
 			if ($scope.view !== Views.HOME) {
-				console.log('changing to home view');
-
 				$scope.view = Views.HOME;
 			}
 
