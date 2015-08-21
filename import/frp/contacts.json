@@ -2,10 +2,22 @@
 	"contacts" : [
 
 		{
-			"name" : "jenny roeland",
-			"phone" : "067-123-4567",
-			"email" : "jenny@frprop.com",
+			"name" : "enquiries",
+			"phone" : "081 367 0767",
+			"email" : "enquiry@frprop.com",
 			"categories" : []
+		}
+		,{
+			"name" : "Ernst Kuhlmann",
+			"phone" : "083 258 1909",
+			"email" : "ernst@frprop.com",
+			"categories" : ["hospitality", "retail"]
+		}
+		,{
+			"name" : "Jenny Rose",
+			"phone" : "081 367 0767",
+			"email" : "jenny@frprop.com",
+			"categories" : ["residential", "industrial", "business", "investment", "agricultural"]
 		}
 	]
 }
