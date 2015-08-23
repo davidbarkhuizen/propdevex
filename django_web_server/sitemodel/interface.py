@@ -274,7 +274,8 @@ def init(site_token):
 	create_site(interface.name, interface.token)
 	add_create_site_users(interface.token, interface.user_names)
 	create_auth_group_permissions(interface.token, interface.user_editable_model_names)
-	add_site_users_to_auth_group(interface.token)
+	# this is not working ... ?
+	#add_site_users_to_auth_group(interface.token)
 
 def populate_model_constants(site_token): 
 
