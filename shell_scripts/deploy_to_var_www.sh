@@ -5,7 +5,7 @@ sudo mkdir /var/www/sdmm/media/frp
 sudo mkdir /var/www/sdmm/media/frp/image
 sudo mkdir /var/www/sdmm/media/frp/json
 
-sudo cp ../config.json.template /var/www/sdmm/config.json
+sudo cp ../config.json.template /var/www/sdmm/config.json.template
 
 sudo cp -R ../django_web_server /var/www/sdmm/django_web_server
 

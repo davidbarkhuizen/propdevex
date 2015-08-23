@@ -13,7 +13,7 @@ from sitemodel.frp.model import  FRP_Category, FRP_Contact, FRP_Property, FRP_Pr
 
 SITE_NAME = 'FisherRoelandProperty' 
 SITE_TOKEN = 'frp'
-USER_EDITABLE_MODEL_NAMES = [ 'frp_contact', 'frp_property', 'frp_property_image', 'frp_sub_property', 'frp_sub_property_image']
+USER_EDITABLE_MODEL_NAMES = [ 'frp_contact', 'frp_property', 'frp_subproperty']
 SITE_USER_NAMES = [ 'frpjenny', 'frpmelissa' ]
 
 IMPORT_ROOT_LOCATION = settings.SITE_DATA_IMPORT_ROOT_FOLDER + SITE_TOKEN + '/'
