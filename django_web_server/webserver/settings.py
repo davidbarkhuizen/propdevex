@@ -26,7 +26,7 @@ WSGI_APPLICATION = 'webserver.wsgi.application'
 
 # DIRECTORIES -------------------------------------------------------
 
-MEDIA_ROOT = '/home/david/code/propdevex/github/media/'
+MEDIA_ROOT = '/var/www/sdmm/media/'
 MEDIA_URL = '/media/'
 
 # django 1.6
