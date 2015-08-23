@@ -3,8 +3,6 @@ from django.conf.urls import url
 from ctrl import sites
 
 urlpatterns = [
-		url(r'', sites.get),
-
 		url(r'^admin/sites/init', sites.init),
 		url(r'^admin/sites/populate_datamodel', sites.populate_datamodel),
 
