@@ -1,89 +1,231 @@
 <div
 	id='PropertyFragment'
-	ng-show='showView(Views.PROPERTY)'
-	style='vertical-align:middle;float:middle;'
+	ng-show='view == Views.PROPERTY'
+	style='width:100%;padding-bottom:15px;'
 	>
+	<div style='width:100%; position: relative;'>
 
-	<br/>
+		<!-- section background image -->
+		<div style='
+		    z-index:1;
+		    top:0;
+		    left:0;
+		    width:100%;'>
 
-	<div>
-		<a href="#" ng-click='model.selectPreviousPropertyInCategory()'>
-			&#8592;
-			<!-- <img ng-src="/static/img/icon/button_black_prev.cut.20.png"/> -->
-		</a>	
-		&nbsp;
-		<span class='FRP-grey'>
-			{{ model.propertyNumberInCategory(model.selectedProperty) }} of {{ model.propertiesForCategory(model.selectedProperty.category).length }}  {{ model.selectedProperty.category }}
-		</span>
-		&nbsp;
-		<a href="#" ng-click='model.selectNextPropertyInCategory()'>
-			<!-- <img ng-src="/static/img/icon/button_black_next.cut.20.png"/> -->
-			&#8594;
-		</a>
-	</div>
-	<div class='header'>
-		{{ model.selectedProperty.name }}
-	</div>
-	<div class='FRP-green'>
-		{{ model.selectedProperty.title }}
-	</div>
-	<div>
-		<a href="#"
-			ng-click='enquireAfterPriceOfSelectedProperty()'
-			class='underline'
-			style='color:green;'>
-			enquire after price
-		</a>
-	</div>
+	    	<img style='
+				width:100%;
+				display:block;'
 
-	<div>
-
-		<br/>
-
-		<div class='float-left margin-left-20 margin-right-20'>
-			<img
-				ng-src="{{ model.udfSrcForSelectedProperty() }}"
-				alt="UDF"
-				width='400px'
-				height='400px'
-				 />
+				ng-src="/static/image/header-category.jpg"/>
 		</div>
 
-		<div class='margin-right-20' style='text-align:left;'>
-			
-			<br/>
+		<!-- text overlay -->
+    	<div
+    		class='category-header-image-overlay-text light-grey unselectable'
+    		style='z-index:2;'> <!-- margin-left:100px; -->
 
-			<div>
-				<div class='FRP-grey'>
-				 	Description
+    			<div style='padding-left:100px;display:table;height:100%;'>
+	    			<div style='vertical-align: middle;display: table-cell;height:100%;'>
+		    			<span style='font-size:2em;'>
+			    			<span style='text-transform:capitalize;'>
+			    				{{ model.selectedProperty.name }}, {{ model.selectedProperty.shortLocation }}
+		    				</span>
+		    			</span>
+		    			<br/>
+		    			<a
+		    				style='color:white !important;'
+		    				ng-click='selectPreviousPropertyInCategory();' class='bold'>
+		    				&laquo;
+		    			</a>
+		    			<span>
+		    				{{ model.propertiesForCategory(model.selectedCategory).indexOf(model.selectedProperty) + 1 }} 
+		    				of 
+		    				{{ model.propertiesForCategory(model.selectedCategory).length }} 
+		    				{{ model.selectedCategory }}
+		    				properties	
+		    			</span>
+		    			<a 
+			    			style='color:white !important;'
+			    			ng-click='selectNextPropertyInCategory();' class='bold'>
+		    				&raquo;
+		    			</a>
+		    		</div>
+	    		</div>
+    	</div>
+	</div>
+
+	<div style='width:100%;position:relative;'>
+		<div style='margin-left:83px;margin-top:15px;float:left;'>
+			<div style='display: table;'>
+				<a
+					href=''
+					style='display: table-cell;vertical-align:middle;padding-right:10px;'
+					ng-class='(model.selectedProperty.images.length > 1) ? "" : "invisible"'
+					ng-click='model.selectPreviousPropertyImage(sub);'>
+					<img ng-src="/static/image/arrow-left.png"/>
+				</a>
+				<img 
+					style='display: table-cell;vertical-align:middle;width:606px;height:380px;'
+					ng-src="{{ model.dataImageUrl(model.getSelectedPropertyImage()) }}"
+					title="{{ model.selectedProperty.name }}"
+					alt="{{ model.selectedProperty.name }}"
+					ng-click=''
+				/>
+				<a href=''
+					ng-click='model.selectNextPropertyImage();'
+					ng-class='(model.selectedProperty.images.length > 1) ? "" : "invisible"'/
+					style='display: table-cell;vertical-align:middle;padding-left:10px;'>
+					<img ng-src="/static/image/arrow-right.png">
+				</a>
+			</div>
+    	</div>
+    	<div
+    		class='grey-text drop-shadow justify unselectable'
+    		style='float:left;
+    			margin-top:17px;margin-left:25px;
+    			width:35%;
+    			padding-left:15px;padding-top:15px;padding-bottom:15px;padding-right:15px;
+    			'>
+    		<div>
+	    		<span style='font-size:1.5em;'>Location</span>
+	    		<br/>
+	    		<div style='margin-left:2px;'>{{ model.selectedProperty.shortLocation }}</div>
+	    		<div style='margin-left:2px;'>{{ model.selectedProperty.longLocation }}</div>
+	    		<div ng-if='model.propertyHasGPSCoOrdinates(model.selectedProperty)' 
+	    			style='margin-top:5px;'>
+		    		<a
+		    			href='{{ model.geoLocURL(model.selectedProperty); }}'
+		    			target='_blank'>
+						<div class='green-button'>GOOGLE MAPS</div>
+					</a>
 				</div>
-				<div class='list fixed-height-150'>
-					<ul>
-						<li ng-repeat="para in model.selectedProperty.description">
-							{{ para }}
-						</li>
-					<ul>
+			</a>
+    		</div>
+			<div ng-if='model.propertyHasArea(model.selectedProperty);'>
+	    		<br/>
+				<span style='font-size:1.5em;'>Size</span>
+				<br/>
+				<span>
+					{{ model.propertyAreaHaText(model.selectedProperty) }}&nbsp;
+				</span>
+				<span>
+					&nbsp;({{ model.propertyAreaSqmText(model.selectedProperty) }})
+				</span>
+			</div>
+			<div ng-if='model.selectedProperty.subproperties.length > 0'>
+				<br/>
+				<span style='font-size:1.5em;'>Items</span>
+				<br/>
+				<div ng-repeat='sub in model.selectedProperty.subproperties'>
+			    &middot;&nbsp;{{ sub.name }}
 				</div>
 			</div>
-			
 			<br/>
-			
-			<div>
-				<div class='FRP-grey'>
-					Stands ({{ model.selectedProperty.stands.length }})
+			<div class='grey-text'>
+				<div style='font-size:1.5em;'>Contact</div>		
+
+				<div>
+		  			<span class='bold'>Email:&nbsp;</span>
+					<span>{{ model.contactsForCategory(model.selectedProperty.category)[0].email }}</span>
 				</div>
-				<div class='list fixed-height-150'>
-					<ul>
-						<li ng-repeat="stand in model.selectedProperty.stands">
-							<a
-								class='underline'
-								href="#"
-								ng-click="viewStandDetail(stand);">{{ model.summaryForStand(stand) }}</a>
-						</li>
-					<ul>
+				<div>
+		  			<span class='bold'>Phone:&nbsp;</span>
+					<span>{{ model.contactsForCategory(model.selectedProperty.category)[0].phone }}</span>
+				</div>
+
+				<div style='margin-top:5px;'>
+					<a href='' ng-click="enquireAfterPriceOfSelectedProperty();">
+						<div class='green-button'>FOR SALES / PRICING CLICK HERE</div>
+					</a>
+				</div>
+			</div>
+    	</div>
+
+    	<div style='clear:both;'>
+		</div>
+	</div>
+
+	<div
+		ng-if='(model.selectedProperty.description.length > 0) && (model.selectedProperty.description[0] !=="")'
+		class='unselectable'
+		style='float:left;'>
+
+		<div style='font-size:2.5em;margin-left:100px;margin-top:15px;'>
+			<span style='color:#a0bf14;'>Situation & Description</span>
+		</div>
+		<div class='justify grey-text'
+			style='width:70%;margin-left:100px;margin-bottom:25px;margin-top:10px;'>
+			<ul>
+				<li ng-repeat='line in model.selectedProperty.description'>
+					{{ line }}
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div style='clear:both;'>
+	</div>
+
+	<div ng-if="model.selectedProperty.subproperties.length > 0"
+		class='grey-text justify'
+		style='margin-left:100px;width:60%;'
+		>
+		<div 
+			ng-repeat='sub in model.selectedProperty.subproperties'
+			style='margin-bottom:30px;padding-left:15px;padding-top:15px;padding-right:15px;padding-bottom:15px;'
+			class='drop-shadow'>
+			
+			<div
+				style='font-size:1.5em;'
+				class='green'>
+				{{ sub.name }}
+			</div>
+
+			<div ng-if='model.propertyHasArea(sub);'>
+				<span>
+					{{ model.propertyAreaHaText(sub) }}&nbsp;
+				</span>
+				<span>
+					&nbsp;({{ model.propertyAreaSqmText(sub) }})
+				</span>
+			</div>
+
+			<div ng-if='sub.images.length > 0' style='margin-top:15px;'>
+				<div style='display: table;'>
+					<a
+						href=''
+						style='display: table-cell;vertical-align:middle;padding-right:10px;'
+						ng-class='(sub.images.length > 1) ? "" : "invisible"'
+						ng-click='model.selectPreviousImageForSubProperty();'>
+						<img ng-src="/static/image/arrow-left.png"/>
+					</a>
+					<img 
+						style='display: table-cell;vertical-align:middle;width:606px;height:380px;'
+						ng-src="{{ model.dataImageUrl(model.selectedImageForSubProperty(sub)) }}"
+						title="{{ sub.name }}"
+						alt="{{ sub.name }}"
+						ng-click=''
+					/>
+					<a
+						href=''
+						style='display: table-cell;vertical-align:middle;padding-left:10px;'
+						ng-class='(sub.images.length > 1) ? "" : "invisible"'
+						ng-click='model.selectNextImageForSubProperty(sub);'>
+						<img ng-src="/static/image/arrow-right.png"/>
+					</a>
+				</div>
+			</div>
+
+			<div ng-if='((sub.description.length > 0) && (sub.description[0].length !== 0))'>
+				<br/>
+				<ul>
+					<li ng-repeat='line in sub.description'>
+						{{ line }}
+					</li>
 				</ul>
-			</div>
+			<div>			
 		</div>
-
 	</div>
+
+
 </div>

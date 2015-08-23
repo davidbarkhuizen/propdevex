@@ -7,3 +7,5 @@ creds.json
 
 media/*.*
 media/*
+
+django_web_server/static/data/*

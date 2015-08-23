@@ -1,11 +1,9 @@
 var PropDevExControllers = angular.module('PropDevExControllers', []);
 
-var commonDependencies = [ '$rootScope', '$scope', '$http', '$timeout']; 
+var commonDependencies = [ '$rootScope', '$scope', '$http', '$timeout', '$interval']; 
 
 var controllers = [
 	['GodController', [GodController]],
-	['ModalController', [ModalController]],
-	['SocialController', [SocialController]],
 ];
 
 controllers.forEach(function(ctrl) { 

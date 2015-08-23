@@ -1,6 +1,23 @@
-function DataModel(urlRoot) {
+function DataModel(siteUrlRoot) {
 
 	var that = this;
+
+	that.dataRootUrl = function() {
+		return siteUrlRoot + 'data/';
+	}
+
+	that.url = function() {
+		return that.dataRootUrl() + "datamodel.json";
+	};
+
+	that.dataImageUrl = function(imageFileName) {
+		return that.dataRootUrl() + imageFileName;
+	};
+
+	// --------------------------------------------------
+	// MODEL FIELDS
+
+	that.categories = ["commercial","industrial","residential","business","hospitality","retail","investment","agricultural"];
 
 	that.contacts = [{
 		"name" : "",
@@ -9,76 +26,39 @@ function DataModel(urlRoot) {
 		"categories" : []
 	}];
 
-	// --------------------------------------------------
-	// PROPERTY PROPERTY ACCESSORS
-
-	that.udfSrc = function(property) {
-		return urlRoot + 'data/' + property.udf;
-	};
-
-	that.udfSrcForSelectedProperty = function() {
-		
-		return (that.selectedProperty !== null)
-			? that.udfSrc(that.selectedProperty)
-			: '';
-	};
-
-	that.standPropertyNumber = function(stand) {
-
-		if ((stand === null) || (stand === undefined))
-			return;
-
-		var property = this.properties.first(function(p){
-
-			return (p['stands'].indexOf(stand) !== -1); 
-		});
-
-		return property.stands.indexOf(stand) + 1;
-	};
-
-	that.standAreaText = function(stand) {
-		
-		if ((stand === null) || (stand === undefined))
-			return '';
-
-		var s = '';
-
-		if ((stand.areaSQM !== null)  && (stand.areaSQM !== 0)) {
-			s = s + (stand.areaSQM / 10000).toFixed(2) + ' ha';
-			s = s + ' (' + stand.areaSQM.toFixed(0) + ' sqm)';
-		}
-
-		return s;
-	};
-
-	that.summaryForStand = function(stand) {
-
-		var s = "";
-
-		if ((stand.name !== null) && (stand.name !== undefined) && (stand.name !== ''))
-			s = s + stand.name + ': '
-
-		s = s + that.standAreaText(stand);
-
-		if (stand.units !== null)
-			s = s + ' x ' + stand.units
-
-		return s;
-	};
-
-	// --------------------------
-
 	that.properties = [];
 
-	that.selectedStand = null;
-	that.selectStand = function(stand) {
-		that.selectedStand = stand;
+	// --------------------------------------------------
+	// BIND MODEL
+
+	var bound = false;
+	
+	that.isBound = function() {
+		return bound;
 	};
 
-	that.selectedProperty = null;
-	that.selectProperty = function(property) {
-		that.selectedProperty = property;
+	that.bind = function(jsonResp) {
+
+		// properties
+
+		that.properties.length = 0;
+
+		jsonResp.properties.forEach(function(property){
+			that.properties.push(property);
+		});
+
+		// contacts
+
+		that.contacts.length = 0;
+		jsonResp.contacts.forEach(function(contact){
+			that.contacts.push(contact);
+		});
+
+		bound = true;
 	};
+
+	// --------------------------------------------------
+	// CATEGORIES
 
 	that.categoryMatch = function(categoryName) {	
 		return function( item ) {
@@ -86,113 +66,290 @@ function DataModel(urlRoot) {
 		};
 	};
 
-	that.categoryViews = [
-		{ category: "commercial", view: Views.COMMERCIAL },
-		{ category: "industrial", view: Views.INDUSTRIAL },
-		{ category: "residential", view: Views.RESIDENTIAL },
-		{ category: "business", view: Views.BUSINESS },
-		{ category: "hotel", view: Views.HOTEL },
-		{ category: "retail", view: Views.RETAIL },
-		{ category: "investment", view: Views.INVESTMENT },
-		{ category: "sold", view: Views.SOLD },
-	];
+	// --------------------------------------------------
 
-	that.viewForCategory = function(category) {
-		for(var i = 0; i < that.categoryViews.length; i++)
-			if (that.categoryViews[i].category == category)
-				return that.categoryViews[i].view;
+	that.selectedCategory = null;
+	that.selectCategory = function(category) {
+		that.selectedCategory = category;
 	};
 
-
-	that.categoryForView = function(view) {
-		for(var i = 0; i < that.categoryViews.length; i++)
-			if (that.categoryViews[i].view == view)
-				return that.categoryViews[i].category;
+	that.selectedProperty = null;
+	that.selectProperty = function(property) {
+		that.selectedProperty = property;
+		that.selectedPropertyImageIndex = 0;
 	};
 
-	that.getPropertyCategoryViews = function() {
-		var views = [];
-		that.categoryViews.forEach(function(x){ views.push(x.view); });
-		return views;
+	that.selectNextPropertyInCategory = function() {
+
+		var properties = that.propertiesForCategory(that.selectedCategory);
+
+		if ((properties.length == 0) || (properties.length == 1))
+			return;
+
+		var index = properties.indexOf(that.selectedProperty);
+		index = index + 1;
+		if (index === properties.length)
+			index = 0;
+
+		that.selectProperty(properties[index]); 
 	};
+
+	that.selectPreviousPropertyInCategory = function() {
+
+		var properties = that.propertiesForCategory(that.selectedCategory);
+
+		if ((properties.length === 0) || (properties.length === 1)){
+			return;
+		}
+
+		var index = properties.indexOf(that.selectedProperty);
+		index = index - 1;
+		if (index === -1) {
+			index = properties.length - 1;
+		}
+
+		that.selectProperty(properties[index]); 
+	};
+
+	that.selectedSubProperty = null;
+	that.selectSubProperty = function(subProperty) {
+		that.selectedSubProperty = subProperty;
+	};
+
+	that.selectedPropertyImageIndex = 0;
+	that.getSelectedPropertyImage = function() {
+
+		if ((that.selectedProperty === null) || (that.selectedProperty.images.length == 0))
+			return null;
+
+		return that.selectedProperty.images[that.selectedPropertyImageIndex];
+	};
+
+	that.selectNextPropertyImage = function() {
+
+		that.selectedPropertyImageIndex = that.selectedPropertyImageIndex + 1;
+		if (that.selectedPropertyImageIndex >= that.selectedProperty.images.length)
+			that.selectedPropertyImageIndex = 0;
+	};
+
+	that.selectPreviousPropertyImage = function() {
+
+		that.selectedPropertyImageIndex = that.selectedPropertyImageIndex - 1;
+		if (that.selectedPropertyImageIndex < 0)
+			that.selectedPropertyImageIndex = that.selectedProperty.images.length - 1;
+	};
+
+	that.cancelSelection = function() {
+		that.selectedCategory = null;
+		that.selectedProperty = null;
+		that.selectedPropertyImageIndex = 0;
+		that.selectedSubProperty = null;
+	};
+
+	// --------------------------------------------------
+	// CONTACT PROPERTY ACCESSORS
+
+	that.contactsForCategory = function(category) {
+
+		var contactsForCategory = [];
+		that.contacts.forEach(function(contact){
+			if (contact.categories.indexOf(category) !== -1) {
+				contactsForCategory.push(contact);
+			}
+		});
+
+		if (contactsForCategory.length == 0) {
+			contactsForCategory.push(that.contacts[0]);
+		}
+
+		return contactsForCategory;
+	}
+
+	// --------------------------------------------------
+	// PROPERTY PROPERTY ACCESSORS
 
 	that.propertiesForCategory = function(category) {
 		
 		var matches = [];
-		that.properties.forEach(function(p){
-			if (p.category == category)
-				matches.push(p);
-		});
+
+		if (category !== 'sold'){
+			that.properties.forEach(function(p){
+				if ((p.category == category) && (p.sold == false))
+					matches.push(p);
+			});
+		} else {
+			that.properties.forEach(function(p){
+				if (p.sold == true)
+					matches.push(p);
+			});
+		}
 
 		return matches;
 	};
 
-	that.propertyNumberInCategory = function(property) {
+	// PROPERTIES - PAGING
 
-		if ((property === undefined) || (property === null))
-			return;
+	that.propertiesPerPage = 6;
+	that.propertiesPageNumber = 1;
 
-		return 1 + that.propertiesForCategory(property.category).indexOf(property);
+	that.setPropertiesPageNumber = function(num) {
+		that.propertiesPageNumber = num;
+	};
+	
+	that.propertiesForCategoryPageNumbers = function(category) {
+		var numbers = [];
+		var count = that.propertiesForCategoryPageCount(category);
+		for (var i = 0; i < count; i++) {
+			numbers.push(i + 1);
+		}
+
+		return numbers;
 	};
 
-	that.shiftSelectedPropertyInCategory = function(shift) {
-		if (that.selectedProperty == null)
-			return;
+	that.propertiesForCategoryPageCount = function(category) {
 
-		var category = that.selectedProperty.category;
-		var properties = that.propertiesForCategory(category);
+		var itemCount = that.propertiesForCategory(category).length;
 
-		var currentIndex =  properties.indexOf(that.selectedProperty);
-		if (currentIndex == -1)
-			return;
+		var pageCount = Math.floor(itemCount / that.propertiesPerPage);
 
-		var idx = currentIndex + shift;
-		if (idx < 0)
-			idx = idx + properties.length;
-		if (idx >= properties.length)
-			idx = idx - properties.length;
+		if (itemCount % that.propertiesPerPage !== 0)
+			pageCount = pageCount + 1;
 
-		that.selectedProperty = properties[idx];
+		return pageCount;
 	};
 
-	that.selectPreviousPropertyInCategory = function() {
-		that.shiftSelectedPropertyInCategory(-1);
-	};
-	that.selectNextPropertyInCategory = function() {
-		that.shiftSelectedPropertyInCategory(1);
-	};
-
-	// --------------------------------------------------
-
-	that.shiftSelectedPropertyStand = function(shift) {
+	that.propertiesForCategoryPaged = function(category) {
 		
-		if ((that.selectedProperty === undefined) || (that.selectedProperty === null))
-			return;
+		var all = that.propertiesForCategory(category);
 
-		if ((that.selectedStand === undefined) || (that.selectedStand === null))
-			return;
+		var start = (that.propertiesPageNumber - 1) * that.propertiesPerPage;
 
-		var currentIndex = that.selectedProperty.stands.indexOf(that.selectedStand);
-		if (currentIndex == -1)
-			return;
+		var page = [];
+		for (var i = start; (i < start + that.propertiesPerPage) && (i < all.length); i++)
+			page.push(all[i]);
 
-		var idx = currentIndex + shift;
-		if (idx < 0)
-			idx = idx + that.selectedProperty['stands'].length;
-		if (idx >= that.selectedProperty['stands'].length)
-			idx = idx - that.selectedProperty['stands'].length;
-
-		that.selectedStand = that.selectedProperty.stands[idx];
-	};
-
-	that.selectPreviousStandForProperty = function() {
-		that.shiftSelectedPropertyStand(-1);
-	};
-	that.selectNextStandForProperty = function() {
-		that.shiftSelectedPropertyStand(1);
+		return page;
 	};
 
 
+	that.propertyHasArea = function(property) {
 
+		if ((property == null) || (property.areaSQM === null))
+			return false;
 
+		return true;
+	};
+
+	that.propertyAreaSqmText = function(property) {
+
+		if (that.propertyHasArea(property) == false)
+			return '';
+
+		return property.areaSQM.toLocaleString() + ' m²';
+	};
+
+	that.propertyAreaHaText = function(property) {
+
+		if ((property === null) || (property == undefined))
+			return '';
+
+		if (that.propertyHasArea(property) == false)
+			return '';
+
+		return (property.areaSQM / 10000).toFixed(2) + ' ha';
+	};
+
+	that.propertyAreaText = function(property) {
+		return that.propertyAreaHaText() + ' (' + that.propertyAreaSQMText() + ')';
+	};
+
+	that.geoLocURL = function(property) {
+
+		var latStr = property.latitude.toFixed(4);
+
+		if (property.latitude < 0)
+			latStr = '-' + latStr;
+		else		
+			latStr = '+' + latStr;
+
+		var lonStr = property.longitude.toFixed(4);
+
+		if (property.longitude < 0)
+			lonStr = '-' + lonStr;
+		else		
+			lonStr = '+' + lonStr;
+
+		var s = latStr + lonStr;
+		var url = 'http://maps.google.com/maps?z=12&t=k&q=loc:' + s;
+
+		return url;
+	};
+
+	that.propertyHasGPSCoOrdinates = function(property) {
+
+		if (property === null)
+			return false;
+
+		var lat = parseFloat(property.latitude);
+		var lon = parseFloat(property.longitude);
+
+		if (isNaN(lat) || isNaN(lon))
+			return false;
+
+		return true;
+	};
+
+	that.selectedSubPropertyImage = {};
+	that.selectImageForSubPropertyByIndex = function(subproperty, index) {
+		var key = JSON.stringify(subproperty);
+		that.selectedSubPropertyImage[key] = subproperty.images[index];
+	};
+	that.selectedImageForSubProperty = function(subproperty) {
+
+		if (
+			(subproperty === null) 
+			|| (subproperty === undefined) 
+			|| (subproperty.images === null) 
+			|| (subproperty.images === undefined)
+			|| (subproperty.images.length == 0)
+			)
+			return null;
+
+		var key = JSON.stringify(subproperty);
+		if (!(key in that.selectedSubPropertyImage)) {
+			that.selectImageForSubPropertyByIndex(subproperty, 0);
+		}
+
+		return that.selectedSubPropertyImage[key]; 
+	};
+
+	that.selectNextImageForSubProperty = function(subproperty) {
+
+		var currentlySelected =  that.selectedImageForSubProperty(subproperty);
+
+		if (currentlySelected == null)
+			return;
+
+		var index = subproperty.images.indexOf(currentlySelected);
+		index = index + 1;
+		if (index >= subproperty.images.length)
+			index = 0;
+
+		that.selectImageForSubPropertyByIndex(subproperty, index);
+	};
+
+	that.selectPreviousImageForSubProperty = function(subproperty) {
+
+		var currentlySelected =  that.selectedImageForSubProperty(subproperty);
+
+		if (currentlySelected == null)
+			return;
+
+		var index = subproperty.images.indexOf(currentlySelected);
+		index = index - 1 ;
+		if (index < 0)
+			index = subproperty.images.length - 1;
+
+		that.selectImageForSubPropertyByIndex(subproperty, index);
+	};
 }

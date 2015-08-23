@@ -1,14 +1,23 @@
 {% load admin_static %}{% load firstof from future %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-<title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
-{% block extrastyle %}{% endblock %}
-<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
-{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
-<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
-{% block extrahead %}{% endblock %}
-{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+	<title>Site Data Model Manager</title>
+	<link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
+	{% block extrastyle %}{% endblock %}
+	<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
+	{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+	
+	<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";
+	</script>
+	
+	{% block extrahead %}{% endblock %}
+	{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+		
+	<script type="text/javascript">		
+		setInterval(function(){
+			window.location.reload(true);
+		} , 5000);
+	</script>
 </head>
 {% load i18n %}
 
@@ -42,8 +51,8 @@
 				</div>
 
 				<div>
-				{% if last_updated_at %}
-					site.last_updated_at
+				{% if site.last_updated_at %}
+					last updated at {{ site.last_updated_at }} ({{ site.update_log_message }})
 				{% else %}			
 					never updated
 				{% endif %}
@@ -81,17 +90,12 @@
 </body>
 </html>
 
-
-<!-- <html>
-	<title>Site Data Model Manager</title>
+<html>
+	
 	<head>
-		<script type="text/javascript">		
-			setInterval(function(){
-				window.location.reload(true);
-			} , 5000);
-		</script>
+
 	</head>
 	<body>
 		
 	</body>
-</html> -->
+</html>

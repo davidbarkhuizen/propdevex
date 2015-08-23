@@ -1,0 +1,127 @@
+<div
+	id='CategoryFragment'
+	ng-show='view == Views.CATEGORY'
+	style='width:100%'
+	>
+	<div style='width:100%; position: relative;'>
+
+		<!-- section background image -->
+		<div style='
+		    z-index:1;
+		    top:0;
+		    left:0;
+		    width:100%;'>
+
+	    	<img style='
+				width:100%;
+				display:block;'
+				ng-src="/static/image/header-category.jpg"/>
+		</div>
+
+		<!-- text overlay -->
+    	<div
+    		class='category-header-image-overlay-text light-grey unselectable'
+    		style='z-index:2;'> <!-- margin-left:100px; -->
+
+    			<div style='padding-left:100px;display:table;height:100%;'>
+	    			<div style='vertical-align: middle;display: table-cell;height:100%;'>
+		    			<span style='font-size:2em;'>
+			    			<span style='text-transform:capitalize;'>
+			    				{{ model.selectedCategory }}
+		    				</span>
+		    				properties
+		    			</span>
+		    			<br/>
+						<span ng-if='model.propertiesForCategory(model.selectedCategory).length == 0'>
+		    				none
+		    			</span>
+						<span ng-if='model.propertiesForCategory(model.selectedCategory).length == 1'>
+		    				1 property
+		    			</span>
+		    			<span ng-if='model.propertiesForCategory(model.selectedCategory).length > 1'>
+		    				{{ model.propertiesForCategory(model.selectedCategory).length }} properties
+		    			</span>
+		    		</div>
+	    		</div>
+    	</div>
+	</div>
+
+	<!-- PROPERTIES -->
+	<div class='unselectable' style='padding-left:100px;'>
+		<div style='width:100%;' class='unselectable'>
+			<div ng-repeat='property in model.propertiesForCategoryPaged(model.selectedCategory)'
+				style='float:left;
+					margin-right:25px;margin-top:25px;
+					width:324px;
+					padding-bottom:10px;'
+				class='drop-shadow'>
+				<div>
+					<a href='' ng-click='viewProperty(property);'>
+						<img 
+							style='width:324px;height:200px;'
+							ng-src="{{model.dataImageUrl(property.images[0])}}"
+							title={{property.name}}
+							alt={{property.name}}							
+							/>
+					</a>
+				</div>
+				
+				<div
+					class='grey-text ellipsis'
+					style='font-size:1.5em;width:314px;padding-left:10px;'
+					title='{{ property.name }}'
+					>
+					{{ property.name }}
+				</div>
+				
+				<div
+					style='width:324px;padding-left:10px;'
+					class='grey-text'
+					>
+					{{ property.shortLocation }}
+				</div>
+
+				<div ng-if='model.propertyHasArea(property)' style='padding-left:10px;'>
+					<span
+						class='light-green bold'						 
+						style='width:324px;font-size:1.5em;'>
+						{{ model.propertyAreaHaText(property) }}
+					</span>
+					<span
+						class='light-green'						 
+						style='width:324px;font-size:1.0em;'>
+						&nbsp;({{ model.propertyAreaSqmText(property) }})
+					</span>
+				</div>
+				<div ng-if='model.propertyHasArea(property) == false'
+					style='padding-left:5px;'>
+					<span
+						class='white bold'						 
+						style='width:324px;font-size:1.5em;'>
+						none
+					</span>
+				</div>
+				<div style='margin-left:10px;'>
+					<a href='' ng-click="viewProperty(property);">
+						<div class='green-button'>MORE INFO</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style='clear:both;margin-bottom:25px;'>
+	</div>
+	
+	<div
+		class='grey-text'
+		style='font-size:1.5em;margin-left:100px;margin-bottom:25px;'>
+		<a
+			href=''
+			ng-repeat='num in model.propertiesForCategoryPageNumbers(model.selectedCategory)'
+			ng-class='(num == model.propertiesPageNumber) ? "green underline" : ""'
+			style='margin-right:10px;'
+			ng-click='setPropertiesPageNumber(num);'
+			>{{ num }}</a>
+	</div>
+</div>

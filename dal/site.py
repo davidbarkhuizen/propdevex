@@ -1,3 +1,5 @@
+import logging
+
 def get_ids_of_sites_marked_for_update(db):
 
 	sql = 'select id from site where update = true;'
@@ -16,10 +18,11 @@ def get_ftp_credentials_for_site(db, id):
 	"""returns { host, port, user, password, upload_root }"""
 
 	sql = '''
-	select ftp_host, ftp_port, ftp_user, ftp_password, ftp_upload_root
+	select ftp_host, ftp_port, ftp_user, ftp_password, ftp_upload_root, name
 	from site
 	where id = {0}'''.format(id)
 
+	site_name = None
 	ftp_creds = None
 	connection = db()
 	try:
@@ -29,10 +32,11 @@ def get_ftp_credentials_for_site(db, id):
 			"user" : row[2],
 			"password" : row[3],
 			"upload_root" : row[4] }
+		site_name = row[5]
 	finally:
 		connection.close()
 
-	return ftp_creds
+	return ftp_creds, site_name
 
 def get_text_uploads_for_site(db, id):
 	"""returns [ { source_path, destination_path } ]"""
@@ -91,5 +95,7 @@ def mark_site_as_updated(db, id, msg):
 	connection = db()
 	try:
 		connection.execute(sql)
+	except Exception as e:
+		print(e)
 	finally:
 		connection.close()

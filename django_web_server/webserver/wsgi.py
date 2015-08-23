@@ -1,13 +1,15 @@
-"""
-WSGI config for webserver project.
+'''
 
-It exposes the WSGI callable as a module-level variable named ``application``.
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
-"""
+import django.core.handlers.wsgi
 
-import os
+application = django.core.handlers.wsgi.WSGIHandler()
+'''
+
+import os, sys
+
+sys.path.append('/var/www/sdmm/django_web_server/')
+#os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "webserver.settings")
 
 from django.core.wsgi import get_wsgi_application

@@ -57,12 +57,16 @@ class BinaryUpload(models.Model):
 from sitemodel.frp.model import FRP_Contact
 from sitemodel.frp.model import FRP_Category
 from sitemodel.frp.model import FRP_Property
-from sitemodel.frp.model import FRP_Stand
+from sitemodel.frp.model import FRP_PropertyImage
+from sitemodel.frp.model import FRP_SubProperty
+from sitemodel.frp.model import FRP_SubPropertyImage
 
 __all__ = [ 
 	# FRP FisherRoelandProperties
     'FRP_Contact',
     'FRP_Category',
     'FRP_Property',
-    'FRP_Stand',
+    'FRP_PropertyImage',
+    'FRP_SubProperty',
+    'FRP_SubPropertyImage',
 ]
