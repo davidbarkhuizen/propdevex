@@ -19,6 +19,16 @@
 
 				<a
 					href=''
+					ng-click="gotoContactView();"
+					ng-class="(view == Views.CONTACT) ? 'nav-active' : 'nav-inactive'"
+					>
+					Contact Us
+				</a>
+
+				<br/>
+
+				<a
+					href=''
 					ng-repeat='category in model.categories'
 					ng-click="gotoCategoryView(category);"
 					style='text-transform:capitalize;'
@@ -32,14 +42,6 @@
 					href=''
 					ng-class="(model.selectedCategory == 'sold') ? 'nav-active' : 'nav-inactive'"
 					>Sold</a>
-
-				<a
-					href=''
-					ng-click="gotoContactView();"
-					ng-class="(view == Views.CONTACT) ? 'nav-active' : 'nav-inactive'"
-					>
-					Contact Us
-				</a>
 		  	</span>
 		</div>
 
