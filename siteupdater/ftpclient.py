@@ -35,14 +35,14 @@ class FtpClient(object):
 		for i in range(len(path_components)):
 			
 			sub_folder = '/'.join(path_components[:i]) 
-			to_create = '/'.join(path_components[:i+1])
+			to_create = '/' + '/'.join(path_components[:i+1])
 			tail = path_components[i]
 			
 			try:
-				self.ftp.cwd('/' + to_create)
+				self.ftp.cwd(to_create)
 			except Exception:
-				print('folder @ ' + to_create + ' DNE!')
-				print('creating ' + tail)
+				logging.info('folder @ ' + to_create + ' DNE!')
+				logging.info('creating ' + tail)
 				self.ftp.cwd('/' + sub_folder)
 				self.ftp.mkd(tail)
 				logging.info('mkdir ' + tail)

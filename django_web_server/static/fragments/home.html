@@ -62,12 +62,14 @@
 		</div>
 
 		<div style='margin-left:100px;width:80%;' class='unselectable'>
-			<div>				
-				<img ng-repeat='category in model.categories'
-					style='margin-right:25px;margin-bottom:15px;'
-					ng-src="{{ '/static/image/category_tiles/' + category + '.jpg'}}"
-					ng-click='gotoCategoryView(category);'
-					/>
+			<div>		
+				<a href=''>		
+					<img ng-repeat='category in model.categories'
+						style='margin-right:25px;margin-bottom:15px;'
+						ng-src="{{ '/static/image/category_tiles/' + category + '.jpg'}}"
+						ng-click='gotoCategoryView(category);'
+						/>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -144,7 +146,11 @@
 							Email Address
 						</span>
 						<br/>
-						{{ model.contacts[0].email }}
+						<a 
+							class='grey-text'
+							href=''
+							ng-click='emailPrimaryContact();'
+							>{{ model.contacts[0].email }}</a>
 					</div>
 
 					<br/>

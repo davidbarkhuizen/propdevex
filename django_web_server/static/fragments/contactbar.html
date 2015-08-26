@@ -38,7 +38,9 @@
 			<!-- BEGIN REVERSE ORDER ////////////////////////////////////// -->
 
 		  	<span style='float:right;margin-right:100px;'>
-		  		{{ model.contacts[0].email }}
+		  		<a href='' 
+		  			style='color:#a3a3a3;'
+		  			ng-click='emailPrimaryContact();'>{{ model.getPrimaryContact().email }}</a>
 		  	</span>
 
 		  	<span style='float:right' class='bold'>
@@ -61,7 +63,7 @@
 		  	</span>
 
 			<span style='float:right'>
-		  		{{ model.contacts[0].phone }}
+		  		{{ model.getPrimaryContact().phone }}
 		  	</span>
 
 		  	<span style='float:right' class='bold'>

@@ -24,7 +24,9 @@ class FRP_Contact(models.Model):
 	name 			= models.CharField(max_length=1024, unique=True, null=False)
 	phone 			= models.CharField(max_length=1024, null=False)
 	email 			= models.CharField(max_length=1024, null=False)
-	categories 		= models.ManyToManyField(FRP_Category, null=True, blank=True)
+	categories 		= models.ManyToManyField(FRP_Category, blank=True)
+	isprimary 		= models.BooleanField(null=False, default=False)
+	iscc 			= models.BooleanField(null=False, default=False)
 
 	def __str__(self):
 		return self.name

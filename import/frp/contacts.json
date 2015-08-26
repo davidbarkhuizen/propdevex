@@ -5,19 +5,25 @@
 			"name" : "enquiries",
 			"phone" : "081 367 0767",
 			"email" : "enquiry@frprop.com",
-			"categories" : []
+			"categories" : [],
+			"isprimary" : true,
+			"iscc" : false
 		}
 		,{
 			"name" : "Ernst Kuhlmann",
 			"phone" : "083 258 1909",
 			"email" : "ernst@frprop.com",
-			"categories" : ["hospitality", "retail"]
+			"categories" : ["hospitality", "retail"],
+			"isprimary" : false,
+			"iscc" : false
 		}
 		,{
 			"name" : "Jenny Rose",
 			"phone" : "081 367 0767",
 			"email" : "jenny@frprop.com",
-			"categories" : ["residential", "industrial", "business", "investment", "agricultural"]
+			"categories" : ["residential", "industrial", "business", "investment", "agricultural"],
+			"isprimary" : false,
+			"iscc" : true
 		}
 	]
 }

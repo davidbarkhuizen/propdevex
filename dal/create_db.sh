@@ -21,7 +21,13 @@ then
 
 	echo 'initiating ORM db initialization...'
 	cd ../django_web_server
-	sudo python manage.py syncdb
+	python manage.py makemigrations server
+	python manage.py migrate
+
+	echo "from django.contrib.auth.models import User; 
+User.objects.create_superuser('root', 'sdmm@gmail.com', 'password')
+" | python ../django_web_server/manage.py shell
+
 	echo 'synced.'
 else
 	echo 'aborted'

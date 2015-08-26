@@ -65,9 +65,13 @@ def populate_datamodel():
 		for i in range(len(contacts['contacts'])):
 			contact = contacts['contacts'][i]
 
+			print(contact)
+
 			db_contact = FRP_Contact(name=contact['name'], 
 				email=contact['email'],
-				phone=contact['phone']
+				phone=contact['phone'],
+				isprimary=contact['isprimary'],
+				iscc=contact['iscc']
 				)
 			db_contact.save()
 			
@@ -154,7 +158,9 @@ def render_site_model(site_token):
 		contact = { 'name' : db_contact.name,
 			'phone' : db_contact.phone,
 			'email' : db_contact.email,
-			'categories' : []
+			'categories' : [],
+			'isprimary' : db_contact.isprimary,
+			'iscc' : db_contact.iscc
 			}
 		
 		for db_category in db_contact.categories.all():

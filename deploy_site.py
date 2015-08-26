@@ -36,8 +36,6 @@ def connect():
 		logging.info('failed to establish a connection to the database: {0}'.format(str(e)))
 		return None
 
-	return get_new_db_connection
-
 def run():
 
 	get_new_db_connection = connect()

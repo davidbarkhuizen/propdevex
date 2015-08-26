@@ -278,8 +278,16 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	// -----------------------------------------------------------------
 
-	$scope.mailToHref = function(toAddr, subject) {
-		return 'mailto:' + toAddr + '?Subject=' + encodeURIComponent(subject);
+	$scope.mailToHref = function(toAddr, subject, cc) {
+
+		var url = 'mailto:' + toAddr + '?Subject=' + encodeURIComponent(subject);
+		
+		if ((cc !== undefined) && (cc !== '') && (cc.length > 3))
+			url = url + '&cc=' + encodeURIComponent(cc);
+
+		console.log(url);
+
+		return url;
 	};
 
 	$scope.enquireAfterPriceOfSelectedProperty = function() {
@@ -287,6 +295,17 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		var contactsForCategory = $scope.model.contactsForCategory($scope.model.selectedProperty.category);
 
 		var href = $scope.mailToHref(contactsForCategory[0]['email'], $scope.model.selectedProperty['name']);
+		window.open(href, '_blank');
+	};
+
+	$scope.emailPrimaryContact = function() {
+
+		var contact = $scope.model.getPrimaryContact();
+		var cc = $scope.model.getCCContact()
+
+		var subject = 'Enquiry';
+
+		var href = $scope.mailToHref(contact['email'], subject, cc.email);
 		window.open(href, '_blank');
 	};
 

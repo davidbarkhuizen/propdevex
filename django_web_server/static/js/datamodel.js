@@ -149,6 +149,30 @@ function DataModel(siteUrlRoot) {
 	// --------------------------------------------------
 	// CONTACT PROPERTY ACCESSORS
 
+	that.getPrimaryContact = function() {
+
+		var contact = that
+			.contacts
+			.first(function(x){ return (x.isprimary == true); });
+
+		if (contact === undefined)
+			contact = that.contacts[0];
+
+		return contact;
+	};
+
+	that.getCCContact = function() {
+
+		var contact = that
+			.contacts
+			.first(function(x){ return (x.iscc == true); });
+
+		if (contact === undefined)
+			contact = that.contacts[0];
+
+		return contact;
+	};
+
 	that.contactsForCategory = function(category) {
 
 		var contactsForCategory = [];
