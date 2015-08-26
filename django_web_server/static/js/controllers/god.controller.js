@@ -292,9 +292,11 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.enquireAfterPriceOfSelectedProperty = function() {
 
-		var contactsForCategory = $scope.model.contactsForCategory($scope.model.selectedProperty.category);
+		var contact = $scope.model.contactsForCategory($scope.model.selectedProperty.category)[0];
+		var cc = $scope.model.getCCContact();
+		var subject = $scope.model.selectedProperty['name'];
 
-		var href = $scope.mailToHref(contactsForCategory[0]['email'], $scope.model.selectedProperty['name']);
+		var href = $scope.mailToHref(contact['email'], subject, cc);
 		window.open(href, '_blank');
 	};
 

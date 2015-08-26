@@ -1,3 +1,12 @@
+.hover-glow:hover { 
+	-moz-box-shadow: 0 0 10px #ccc; 
+	-webkit-box-shadow: 0 0 10px #ccc; 
+	box-shadow: 0 0 10px #ccc; 
+}
+
+/* --------------------------------------------------------------------------------- */
+
+
 @import url("/static/css/fonts.css");
 
 /* selected element does not have outline */
@@ -203,22 +212,6 @@ div.nav span {
 
 div.nav a {
   margin-right:15px;
-}
-
-/* ---------------------------- */
-
-div.contact {
-  display: table;
-}
-
-div.contact img {
-  vertical-align: middle;
-  display: table-cell;
-}
-
-div.contact span {
-  vertical-align: middle;
-  display: table-cell;
 }
 
 /* ---------------------------- */
