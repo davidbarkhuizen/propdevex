@@ -296,7 +296,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		var cc = $scope.model.getCCContact();
 		var subject = $scope.model.selectedProperty['name'];
 
-		var href = $scope.mailToHref(contact['email'], subject, cc);
+		var href = $scope.mailToHref(contact['email'], subject, cc.email);
 		window.open(href, '_blank');
 	};
 
