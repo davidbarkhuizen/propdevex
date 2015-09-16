@@ -1,0 +1,15 @@
+User-agent: googlebot
+Allow: /robots.html
+Disallow: /static/
+Disallow: /index.html
+
+User-agent: bingbot
+Allow: /robots.html
+Disallow: /static/
+Disallow: /index.html
+
+User-agent: yahoo
+Allow: /robots.html
+Disallow: /static/
+Disallow: /index.html
+

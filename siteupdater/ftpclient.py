@@ -14,7 +14,8 @@ class FtpClient(object):
 		self.ac = ac
 
 		self.ftp = FTP()
-		self.ftp.connect(self.host, self.port)
+		self.ftp.connect(self.host, int(self.port))
+		logging.info('{0} {1} {2}'.format(type(self.user), type(self.pwd), type(self.ac))
 		self.ftp.login(self.user, self.pwd, self.ac)
 
 	def __enter__(self):

@@ -1,0 +1,18 @@
+
+OSError at /admin/sites/populate_datamodel
+
+[Errno 13] Permission denied: '/var/www/sdmm/media/frp/image/zwavelpoort_geolocation.jpg'
+
+in response to 403 on attempt to upload media
+$ sudo chmod -R a+w media
+
+UPGRADE DJANGO
+
+sudo apt-get install python-setuptools
+sudo easy_install --upgrade django
+
+// -------------------------------------
+
+python manage.py makemigrations server
+python manage.py syncdb
+s
