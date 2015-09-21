@@ -42,7 +42,7 @@ class FRP_Property(models.Model):
 
 	sold 			= models.BooleanField(null=False, default=False)
 
-	name 			= models.CharField(max_length=1024, unique=True, null=False)
+	name 			= models.CharField(max_length=1024, unique=False, null=False)
 	areaSQM 		= models.IntegerField(null=True, blank=True)
 	description 	= models.TextField(null=True, blank=True)
 	
