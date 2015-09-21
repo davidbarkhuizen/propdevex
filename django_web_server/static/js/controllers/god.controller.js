@@ -327,7 +327,7 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	};
 
 	$scope.openLinkedIn = function() {
-		// $scope.openUrlInNewWindow('https://www.linkedin.com');
+		$scope.openUrlInNewWindow('http://www.linkedin.com/company/10080815?trk=tyah&trkInfo=clickedVertical%3Acompany%2CclickedEntityId%3A10080815%2Cidx%3A1-1-1%2CtarId%3A1442464963753%2Ctas%3Afisher%20roela');
 	};
 
 	// -----------------------------------------------------------------
