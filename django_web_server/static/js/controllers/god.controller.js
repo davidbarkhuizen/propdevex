@@ -45,6 +45,10 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		return ($scope.view === view);
 	};
 
+	$scope.gotoIframeView = function() {
+		$scope.view = Views.IFRAME; 
+	};
+
 	$scope.gotoContactView = function() {
 		$scope.model.cancelSelection();
 
@@ -217,7 +221,29 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		}
 	};
 
-	$scope.windowHash = window.location.hash; 
+	$scope.windowHash = '';
+	$scope.initWindowHash = function() {
+
+		var hash = window.location.hash;
+
+		if (hash.substring(0,2) === '##') {
+		
+			var url = hash.substring(2);
+			window.location.hash = '';
+
+			window.open(url, 'iframe');
+			$scope.gotoIframeView();
+		} 
+		else {
+			$scope.windowHash = hash;	
+		}
+
+		// www.frprop.com/
+
+		'http://localhost:8000/static/index.html##http://www.sapropertynews.co.za/residential-property/item/18164-things-to-consider-before-buying-an-investment-property'
+	};
+	$scope.initWindowHash();
+	 
 	$scope.windowHashWatcher = function() {
 
 		var hash = window.location.hash;
