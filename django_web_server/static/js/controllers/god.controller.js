@@ -46,6 +46,8 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	};
 
 	$scope.gotoIframeView = function() {
+		$scope.model.cancelSelection();
+
 		$scope.view = Views.IFRAME; 
 	};
 
@@ -54,6 +56,13 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 		window.location.hash = '#category=' + 'contact';
 		$scope.view = Views.CONTACT; 
+	};
+
+	$scope.gotoAboutView = function() {
+		$scope.model.cancelSelection();
+
+		window.location.hash = '#category=' + 'about';
+		$scope.view = Views.ABOUT; 
 	};
 
 	$scope.gotoHomeView = function() {
@@ -190,6 +199,10 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 			}
 			else if (category == 'contact') {
 				$scope.view = Views.CONTACT;
+				return;
+			}
+			else if (category == 'about') {
+				$scope.view = Views.ABOUT;
 				return;
 			}
 

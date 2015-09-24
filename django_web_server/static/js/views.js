@@ -5,5 +5,6 @@ var Views = Object.freeze({
 	PROPERTY		: guid(),
 	SOLD			: guid(),
 	CONTACT			: guid(),
-	IFRAME			: guid()
+	IFRAME			: guid(),
+	ABOUT           : guid()
 });	

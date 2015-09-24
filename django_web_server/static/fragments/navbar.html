@@ -19,10 +19,18 @@
 
 				<a
 					href=''
+					ng-click="gotoAboutView();"
+					ng-class="(view == Views.ABOUT) ? 'nav-active' : 'nav-inactive'"
+					>
+					About Us
+				</a>
+
+				<a
+					href=''
 					ng-click="gotoContactView();"
 					ng-class="(view == Views.CONTACT) ? 'nav-active' : 'nav-inactive'"
 					>
-					Contact Us
+					Contact
 				</a>
 
 				<br/>
