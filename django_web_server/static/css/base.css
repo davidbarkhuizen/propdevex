@@ -366,3 +366,12 @@ div.tailbar-blurb-header span {
 .contact-bar-background {
 	background-color: #404040;
 }
+
+.text100 {
+	font-size:1em;
+}
+.text150 {
+	font-size:1.5em;
+}.text200 {
+	font-size:2em;
+}
