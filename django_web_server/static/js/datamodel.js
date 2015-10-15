@@ -119,7 +119,7 @@ function DataModel(siteUrlRoot) {
 	that.selectedPropertyImageIndex = 0;
 	that.getSelectedPropertyImage = function() {
 
-		if ((that.selectedProperty === null) || (that.selectedProperty.images.length == 0))
+		if ((that.selectedProperty === undefined) || (that.selectedProperty === null) || (that.selectedProperty.images.length == 0))
 			return null;
 
 		return that.selectedProperty.images[that.selectedPropertyImageIndex];
@@ -197,10 +197,12 @@ function DataModel(siteUrlRoot) {
 		var matches = [];
 
 		if (category !== 'sold'){
+
 			that.properties.forEach(function(p){
 				if ((p.category == category) && (p.sold == false))
 					matches.push(p);
 			});
+
 		} else {
 			that.properties.forEach(function(p){
 				if (p.sold == true)
@@ -311,7 +313,7 @@ function DataModel(siteUrlRoot) {
 
 	that.propertyHasGPSCoOrdinates = function(property) {
 
-		if (property === null)
+		if ((property === null) || (property === undefined))
 			return false;
 
 		var lat = parseFloat(property.latitude);
