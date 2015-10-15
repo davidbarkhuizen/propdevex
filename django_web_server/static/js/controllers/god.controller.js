@@ -174,6 +174,10 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 		if (hash['propertyIndex'] !== null) {
 
 			var category = hash['category'];
+			if ($scope.model.selectedCategory !== category) {
+				$scope.model.selectCategory(category);
+			}
+
 			var propertyIndex = parseInt(hash['propertyIndex']);
 
 			var property = $scope.model.propertiesForCategory(category)[propertyIndex];
