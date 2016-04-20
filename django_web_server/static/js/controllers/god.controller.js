@@ -11,6 +11,10 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.model = new DataModel(siteRoot);
 
+	$scope.decodeURI = function(encoded) {
+		return decodeURI(encoded);
+	}
+
 	$scope.loadDataModel = function() {
 
 		var request = 
