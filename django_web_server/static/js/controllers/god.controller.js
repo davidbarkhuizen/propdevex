@@ -7,6 +7,16 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 	var siteRoot = '/static/';
 
 	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+	$scope.deUnderscore = function (underscored) {
+
+		return underscored
+			.split('_')
+			.map(function(w){ return w[0].toUpperCase() + w.substring(1); })
+			.join(' ');
+	};
+
+	// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 	// DATA MODEL 
 
 	$scope.model = new DataModel(siteRoot);

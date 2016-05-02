@@ -63,7 +63,7 @@
 				<a href="" 
 					ng-click='gotoCategoryView(category)'
 					ng-class="(model.selectedCategory == category) ? 'nav-active' : 'nav-inactive'">
-					{{ category }}
+					{{ deUnderscore(category) }}
 					<span ng-show='model.propertiesForCategory(category).length > 0'>
 						&nbsp;({{ model.propertiesForCategory(category).length }})
 					</span>

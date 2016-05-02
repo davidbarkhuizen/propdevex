@@ -42,7 +42,7 @@
 					style='text-transform:capitalize;'
 					ng-class="((view == Views.CATEGORY) && (model.selectedCategory == category)) ? 'nav-active' : 'nav-inactive'"
 					>
-					{{ category }}
+					{{ deUnderscore(category) }}
 				</a>
 
 				<a
