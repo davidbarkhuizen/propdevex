@@ -10,6 +10,9 @@ function GodController($rootScope, $scope, $http, $timeout, $interval) {
 
 	$scope.deUnderscore = function (underscored) {
 
+		if ((underscored === undefined) || (underscored === null))
+			return ''; 
+
 		return underscored
 			.split('_')
 			.map(function(w){ return w[0].toUpperCase() + w.substring(1); })
