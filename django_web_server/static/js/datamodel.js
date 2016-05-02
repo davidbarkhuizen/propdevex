@@ -17,7 +17,7 @@ function DataModel(siteUrlRoot) {
 	// --------------------------------------------------
 	// MODEL FIELDS
 
-	that.categories = ["commercial","industrial","residential","business","hospitality","retail","investment","agricultural", "to let"];
+	that.categories = ["commercial","industrial","residential","business","hospitality","retail","investment","agricultural", "to_let"];
 
 	that.contacts = [{
 		"name" : "",
