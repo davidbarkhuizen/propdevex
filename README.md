@@ -1,4 +1,7 @@
-Site Data Model Manager
-2015 david.barkhuizen@gmail.com
+# Site Data Model Manager
+2015 - 2016  
+david.barkhuizen@gmail.com  
 
-django / python / postgresql
+CMS = django / python / postgresql  
+Site = angular.js 1  
+

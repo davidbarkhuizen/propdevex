@@ -1,0 +1,66 @@
+<div
+	id='Contact'
+	ng-show='showView(Views.CONTACT)'
+	style='width:100%;'
+	>
+	<!-- BLURB -->
+	<div class='unselectable' style='margin-bottom:50px;'>
+		<div
+			class='frp-font'
+			style='font-size:2.5em;padding-top:50px;text-align:center;'>
+			<span class='vomit-green'>FISHER ROELAND</span>
+			<br/>
+			<span class='grey-text'>ATTORNEYS &amp; CONVEYANCERS</span>
+		</div>
+
+		<div style='
+				text-align:center;
+				margin-left:100px;
+				margin-right:100px;'
+			class='grey-text'>
+
+			<br/>
+
+			<div>
+				<span style='font-size:1.5em;'>
+					Office Address
+				</span>
+				<br/>
+				157 Lipizzaner Road, Beaulieu, Midrand, 1684
+			</div>
+
+			<br/>
+
+			<div>
+				<span style='font-size:1.5em;'>
+					Phone Number
+				</span>
+				<br/>
+				{{ model.contacts[0].phone }}
+			</div>
+
+			<br/>
+
+			<div>
+				<span style='font-size:1.5em;'>
+					Email Address
+				</span>
+				<br/>
+				<a href='' class='grey-text' ng-click='emailPrimaryContact()'
+					>{{ model.contacts[0].email }}</a>
+			</div>
+
+			<br/>
+
+			<div>
+				<span style='font-size:1.5em;'>
+					Office Hours
+				</span>
+				<br/>
+				Monday - Friday
+				<br/>
+				09:00 - 17:00
+			</div>
+		</div>
+	</div>
+</div>

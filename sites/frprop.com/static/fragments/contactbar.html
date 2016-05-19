@@ -1,0 +1,34 @@
+<div id='ContactBar'>
+	<div style="width:100%;display:table;">
+		<div class='unselectable contact-bar-background bold' 
+			style='height:40px;width:100%;color:#a3a3a3;vertical-align:middle;display:table-cell;'>
+
+			<div style='float:left;margin-left:100px;'>
+		  		<a href='' style='margin-right:10px' ng-click='openTwitter();'>
+			  		<img ng-src="/static/image/twitter_transparent_24.png"/>
+				</a>	
+
+				<a href='' ng-click="openFacebook();" style='margin-right:10px'>
+			  		<img ng-src="/static/image/facebook_transparent_24.png"/>
+				</a>		
+
+				<a href='' ng-click="openLinkedIn();" >
+			  		<img ng-src="/static/image/linkedin_transparent_24.png"/>
+				</a>
+			</div>
+
+			<div style='float:right;margin-right:100px;'>
+				<span>Email:</span>
+				<a href='' 
+		  			style='color:#a3a3a3;'
+		  			ng-click='emailPrimaryContact();'>{{ model.getPrimaryContact().email }}</a>
+				&middot;
+				<span>Phone:</span>
+				<span>{{ model.getPrimaryContact().phone }}</span>
+			</div>
+
+			<div style='clear:both;'>
+			</div>
+		</div>
+	</div>
+</div>

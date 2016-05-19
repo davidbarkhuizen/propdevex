@@ -1,0 +1,203 @@
+<div
+	id='Home'
+	ng-show='showView(Views.HOME)'
+	style='width:100%;'
+	>
+
+	<!-- SLIDE SHOW WITH HEADER TEXT OVERLAY -->
+	<div style='width:100%; position: relative;'>
+
+		<div style='
+		    z-index:1;
+		    top:0;
+		    left:0;
+		    width:100%;
+		    height:100%;'>
+
+	    	<img style='
+				width:100%;
+				height:100%;
+				display:block;'
+
+				ng-src="{{homeImageSrc();}}"/>
+		</div>
+
+		<div style='position:absolute;
+		    z-index:2;
+		    top:0;
+		    left:0;
+		    width:100%;
+		    height:100%;
+		    background-color:#000000;
+		    opacity: 0.5;'>
+		</div>
+
+    	<div
+    		class='image-overlay-text light-grey unselectable'
+    		style='text-align:center;vertical-align: middle;z-index:3;'>
+	    		<span style='font-size:2em;'>    			
+    			Welcome To
+    		</span>
+    		<br/>
+    		<br/>
+    		<span class='frp-font' style='font-size:3em;'>
+    			FISHER ROELAND
+    		</span>
+    		<br/>
+    		<span class='frp-font' style='font-size:3em;'>
+    			ATTORNEYS &amp; CONVEYANCERS
+    		</span>
+    		<hr style='width:50%;height:2px;color:#a1be14;background-color:#a1be14;border:none;'/>
+    		<span style='font-size:1.5em;font-weight:bold;'>
+    		</span>
+    	</div>
+	</div>
+
+	<!-- CATEGORIES -->
+	<div class='light-grey-background unselectable'>
+
+		<div style='font-size:2.5em;margin-left:100px;padding-top:20px;'>
+			<span class='vomit-green'>What are you</span>
+			<span class='grey-text'>looking for ?</span>
+		</div>
+		<div class='justify'
+			style='width:70%;margin-left:100px;margin-bottom:25px;margin-top:25px;'>
+			In today’s highly competitive property development market, it takes something truly unique to stand out from the crowd. Too often, property developers interpret the term “development” as a noun, whilst forgetting that as a verb, it means a state of growth and advancement. This is where Fisher Roeland comes in.
+		</div>
+
+		<!--
+		<div style='margin-left:100px;width:80%;' class='unselectable'>
+			<div>		
+				<a href=''>		
+					<img ng-repeat='category in model.categories'
+						style='margin-right:25px;margin-bottom:15px;'
+						ng-src="{{ '/static/image/category_tiles/' + category + '.jpg'}}"
+						ng-click='gotoCategoryView(category);'
+						/>
+				</a>
+			</div>
+		</div>
+		-->
+
+		<br/>
+		<br/>
+	</div>
+
+	<!-- BLURB -->
+	<div class='unselectable' style='margin-bottom:50px;'>
+		<div
+			class='frp-font'
+			style='font-size:2.5em;margin-left:100px;padding-top:50px;margin-bottom:50px;'>
+			<span class='vomit-green'>FISHER ROELAND</span>
+			<span class='grey-text'>ATTORNEYS &amp; CONVEYANCERS</span>
+		</div>
+
+		<div class='three-column-container grey-text'
+			style='margin-left:100px;padding-top:20px;'>
+			
+			<div class='column column1' style='margin-right:20px;'>
+				<img style='display:block;' ng-src="/static/image/icon-gears.png"/>
+
+				<div style='margin-top:15px;'>
+					<div style='font-size:2em;'>
+						Our Portfolio
+					</div>
+					<div class='justify' style='margin-top:15px;'>
+						<p>
+						As of September 2015, Fisher Roeland Attorneys &amp; Conveyancers has just sealed a lucrative deal for 20 prime properties in the biggest land sale transaction in Linbro Park, cementing Fisher Roeland as the area experts.</p>
+						<p>The secret behind Fisher Roeland Attorneys &amp; Conveyancers’ successful acquisition of this groundbreaking deal can be attributed to their excellent networking skills and impeccable strategic planning, which allowed them to package the properties to be irresistible to serious developers.</p>
+						<p>Furthermore, an impressive 45 additional properties, with a book value of over R1 Billion, are currently in the process of signing up for the company’s personal approach to property development.</p>
+						<p>The hospitality industry lies very close to the heart of Fisher Roeland Attorneys &amp; Conveyancers' passion for people and property development. With over 15 hotels already on its books, Fisher Roeland Attorneys &amp; Conveyancers is on the fast track to becoming the name to trust and industry expert in hotel and leisure property.</p>
+					</div>
+				</div>
+
+				<div style='margin-top:15px;'>
+					<div style='font-size:2em;'>
+						Our Approach
+					</div>
+					<div class='justify' style='margin-top:15px;'>
+						<p>
+						Fisher Roeland Attorneys &amp; Conveyancers is committed to so much more than creating value for the property development industry. The extra mile is never too far.</p>
+						<p>The company works closely with Town Planners to establish the envisioned outcome based on the Urban Development Framework for the relevant area. Our unique ability to package large tracts of land to appeal to major developers allows us to then match prospective buyers with the property that best suits their needs, budget and brand personality.</p>
+					</div>
+				</div>
+
+				<div style='margin-top:15px;'>
+					<div style='font-size:2em;'>
+						Our Future
+					</div>
+					<div class='justify' style='margin-top:15px;'>
+						<p>
+						Thanks to a proactive approach to packaging and promoting prime property, Fisher Roeland Attorneys &amp; Conveyancers is expanding exponentially, with an exciting expansion into other Southern African countries already in the pipeline.</p>
+						<p>Aside from the existing offices in Sandton and Cape Town, the first international Fisher Roeland Attorneys &amp; Conveyancers office will also be established in Europe in 2016, in order to facilitate up close and personal collaborations with foreign investors and developers who are interested in expanding their business into the African market.</p>
+						<p>Keep watching this space for more.</p>
+					</div>
+				</div>
+			</div>
+
+			<!--
+ 			<div class='column column2' style='margin-right:20px;'>
+				<img style='display:block;' ng-src="/static/image/icon-people.png"/>
+				<div style='height:69px;'></div>
+			</div>
+			-->
+
+			<div class='column column2' style='margin-right:20px;'>
+				<img style='display:block;margin:auto;' ng-src="/static/image/icon-marker.png"/>
+			
+				<div style='text-align:center;'>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Office Address
+						</span>
+						<br/>
+						<span>157 Lipizzaner Road</span>
+						<br/> 
+						<span>Beaulieu, Midrand</span>
+						<br/>
+						<span>1684</span>
+					</div>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Phone Number
+						</span>
+						<br/>
+						{{ model.contacts[0].phone }}
+					</div>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Email Address
+						</span>
+						<br/>
+						<a 
+							class='grey-text'
+							href=''
+							ng-click='emailPrimaryContact();'
+							>{{ model.contacts[0].email }}</a>
+					</div>
+
+					<br/>
+
+					<div>
+						<span style='font-size:1.5em;'>
+							Office Hours
+						</span>
+						<br/>
+						Monday - Friday
+						<br/>
+						09:00 - 17:00
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,90 @@
+
+
+Client Tasks
+------------
+
+Create External Social Media Presence & Provide Links
+- LinkedIn Profile, e.g. https://www.linkedin.com/company/10080815?trk=tyah&trkInfo=clickedVertical%3Acompany%2CclickedEntityId%3A10080815%2Cidx%3A1-1-1%2CtarId%3A1442464963753%2Ctas%3Afisher%20roela
+- FaceBook Page, e.g. https://web.facebook.com/frprop?_rdr
+- Twitter Account, e.g. https://twitter.com/FRprop
+
+Graphical Site Content - from Rozier
+------------------------------------
+
+- Primary Company Logo
+e.g logo.png
+
+- Home Page SlideShow
+-- at least 3 photographic images
+
+Contact Detail
+--------------
+- Office Address
+- Phone Number
+- Email Address
+- Office Hours
+
+Home Page Copy
+--------------
+
+- Our Portfolio -> change to 'Our Practice'
+e.g.
+>>>
+As of September 2015, Fisher Roeland Attorneys has just sealed a lucrative deal for 20 prime properties in the biggest land sale transaction in Linbro Park, cementing Fisher Roeland as the area experts.
+
+The secret behind Fisher Roeland Attorneys’ successful acquisition of this groundbreaking deal can be attributed to their excellent networking skills and impeccable strategic planning, which allowed them to package the properties to be irresistible to serious developers.</p>
+
+Furthermore, an impressive 45 additional properties, with a book value of over R1 Billion, are currently in the process of signing up for the company’s personal approach to property development.
+
+The hospitality industry lies very close to the heart of Fisher Roeland Attorneys' passion for people and property development. With over 15 hotels already on its books, Fisher Roeland Attorneys is on the fast track to becoming the name to trust and industry expert in hotel and leisure property.
+<<<
+
+- Our Approach
+e.g
+>>>
+Fisher Roeland Attorneys is committed to so much more than creating value for the property development industry. The extra mile is never too far.
+
+The company works closely with Town Planners to establish the envisioned outcome based on the Urban Development Framework for the relevant area. Our unique ability to package large tracts of land to appeal to major developers allows us to then match prospective buyers with the property that best suits their needs, budget and brand personality.
+<<<
+
+- Our Future
+e.g.
+>>>
+Thanks to a proactive approach to packaging and promoting prime property, Fisher Roeland Attorneys is expanding exponentially, with an exciting expansion into other Southern African countries already in the pipeline.
+
+Aside from the existing offices in Sandton and Cape Town, the first international Fisher Roeland Attorneys office will also be established in Europe in 2016, in order to facilitate up close and personal collaborations with foreign investors and developers who are interested in expanding their business into the African market.
+
+Keep watching this space for more.
+<<<
+
+About Us Copy & Photos
+----------------------
+
+- Why We Started
+e.g. Fisher Roeland Attorneys & Conveyancers & Conveyancers was founded in 2013 as a joint venture between Jennifer Rose and Lisa Roeland after identifying a need in the market to fuse a passion for property development with a passion for people. 
+
+-  Base of operations 
+-- Location Blurb
+e.g. Based in Linbro Park, Sandton and operating throughout most of South Africa’s major cities, Fisher Roeland Attorneys & Conveyancers & Conveyancers’ innovative approach and dedication to service excellence almost instantly established the company as experts and the preferred partner for developments in highly sought-after locations. 
+-- GPS Co-Ordinates of Office
+--- for google maps integration
+
+- Infographic
+-- e.g. about_us_infographic.png
+-- source from graphic designer (Rozier)
+
+-- Our Team --> maybe change to 'The Partners' and 'The Team' ?
+
+for each person
+- list qualifications
+- 3 - 5 paragraphs of spiel
+- professional photograph - head / head and shoulders
+
+Common Footer Copy
+------------------
+
+- Mision Statement
+e.g. 'To provide a uniquely personal approach to property development and hospitality for the industries and consumers alike, by growing and advancing the property redevelopment market, the hospitality and leisure industry, individual lives and surrounding communities.'
+
+- Vision Statement
+e.g. 'To become the preferred partner in the Southern African property development and hospitality market through our passion for people, property and our commitment to service excellence.'

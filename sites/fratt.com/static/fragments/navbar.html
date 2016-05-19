@@ -1,0 +1,67 @@
+<div id='NavBar'>
+	<div style="width:100%;" class='light-grey-background'>
+
+		<div class='nav unselectable' style='padding-left:100px;'>
+			<span>
+		  		<img
+					ng-src="/static/image/logo.png"
+					alt="Fisher Roeland Attorneys &amp; Conveyancers" />
+			</span>
+		  	<span style='padding-left:50px;'>
+
+				<a
+					href=''
+					ng-click="gotoHomeView();"
+					ng-class="(view == Views.HOME) ? 'nav-active' : 'nav-inactive'"
+					>
+					Home
+				</a>
+
+				<a
+					href=''
+					ng-click="gotoAboutView();"
+					ng-class="(view == Views.ABOUT) ? 'nav-active' : 'nav-inactive'"
+					>
+					About Us
+				</a>
+
+				<a
+					href=''
+					ng-click="gotoPeopleView();"
+					ng-class="(view == Views.PEOPLE) ? 'nav-active' : 'nav-inactive'"
+					>
+					People
+				</a>
+
+				<a
+					href=''
+					ng-click="gotoContactView();"
+					ng-class="(view == Views.CONTACT) ? 'nav-active' : 'nav-inactive'"
+					>
+					Contact
+				</a>
+
+				<!--
+				<br/>
+
+				<a
+					href=''
+					ng-repeat='category in model.categories'
+					ng-click="gotoCategoryView(category);"
+					style='text-transform:capitalize;'
+					ng-class="((view == Views.CATEGORY) && (model.selectedCategory == category)) ? 'nav-active' : 'nav-inactive'"
+					>
+					{{ deUnderscore(category) }}
+				</a>
+
+				<a
+					ng-click="gotoSoldView();"
+					href=''
+					ng-class="(model.selectedCategory == 'sold') ? 'nav-active' : 'nav-inactive'"
+					>Sold</a>
+				-->
+		  	</span>
+		</div>
+
+	</div>
+</div>
